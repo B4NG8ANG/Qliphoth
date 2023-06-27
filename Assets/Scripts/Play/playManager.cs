@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class titleManager : MonoBehaviour
+public class playManager : MonoBehaviour
 {
     private AudioSource audioSource;
 
@@ -11,4 +11,5 @@ public class titleManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         audioSource.Play();   
     }
+    
 }

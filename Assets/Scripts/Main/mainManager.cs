@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class titleManager : MonoBehaviour
+public class mainManager : MonoBehaviour
 {
     private AudioSource audioSource;
 
