@@ -9,6 +9,7 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
     public float shrinkAmount;  // 크기 감소량
     public GameObject judgementLine;  // 판정선 오브젝트
     public GameObject normalNote; // 노트 오브젝트
+    public GameObject judgementTextTest; // 판정 텍스트 오브젝트
 
     
     void Start()
@@ -16,7 +17,6 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
         
     }
 
-   
     void Update()
     {
         // 크기를 감소시킴
@@ -26,30 +26,64 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
         judgementLine.transform.localScale = newScale;
     }
 
+    // 노트 터치
     public void OnPointerDown(PointerEventData eventData)
     {
-        // 터치가 시작될 때 처리
-        //Destroy(normalNote);
+        
+        Collider2D judgementLineCollider = judgementLine.GetComponent<Collider2D>();
 
-       // 터치한 UI 요소
-        GameObject clickedObject = eventData.pointerCurrentRaycast.gameObject;
-
-        // UI 요소와 겹치는 모든 UI 요소들의 이름 출력
-        GraphicRaycaster raycaster = clickedObject.GetComponentInParent<GraphicRaycaster>();
-        if (raycaster != null)
+        if (judgementLineCollider != null)
         {
-            PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
-            pointerEventData.position = eventData.position;
+            // 충돌한 Collider를 저장할 배열
+            Collider2D[] overlappingJudgementColliders = new Collider2D[10]; 
 
-            // UI 요소와 겹치는 모든 UI 요소들 검색
-            List<RaycastResult> results = new List<RaycastResult>();
-            raycaster.Raycast(pointerEventData, results);
+            ContactFilter2D contactFilter = new ContactFilter2D().NoFilter();
 
-            foreach (RaycastResult result in results)
+            int count = judgementLineCollider.OverlapCollider(contactFilter, overlappingJudgementColliders);
+
+            // 부모를 가진 콜라이더들만 검사
+            int validCount = 0;
+            for (int i = 0; i < count; i++)
             {
-                GameObject overlappingObject = result.gameObject;
-                Debug.Log("Overlapping UI Element: " + overlappingObject.name);
+                Collider2D overlappingCollider = overlappingJudgementColliders[i];
+                if (overlappingCollider.transform.parent == judgementLine.transform.parent)
+                {
+                    Debug.Log("good");
+                    overlappingJudgementColliders[validCount] = overlappingCollider;
+                    //Debug.Log("Overlapping UI Element: " + overlappingJudgementColliders[validCount]);
+                    validCount++;
+                }
+
             }
+
+
+            // if(count == 2)
+            // {
+            //     Debug.Log("Dead");
+            //     judgementTextTest.GetComponent<Text>().text = "Dead";
+            // }
+
+            // 판정선과 겹치는 콜라이더의 개수에 따라 판정
+            if(validCount == 2 || validCount == 3)
+            {
+                Debug.Log("Early Choice");
+                judgementTextTest.GetComponent<Text>().text = "Early Choice";
+            }
+            
+            else if(validCount == 4)
+            {
+                Debug.Log("Alive");
+                judgementTextTest.GetComponent<Text>().text = "Alive";
+            }
+
+            else if(validCount == 5)
+            {
+                Debug.Log("Late Choice");
+                judgementTextTest.GetComponent<Text>().text = "Late Choice";
+            }
+
+            Destroy(normalNote);
+            
         }
         
     }
