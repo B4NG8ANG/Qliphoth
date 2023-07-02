@@ -10,11 +10,12 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
     public GameObject judgementLine;  // 판정선 오브젝트
     public GameObject normalNote; // 노트 오브젝트
     public GameObject judgementTextTest; // 판정 텍스트 오브젝트
+    public float delayInSeconds = 3f; // 노트 삭제 시간
 
     
     void Start()
     {
-        
+        Invoke("RemoveObject", delayInSeconds);
     }
 
     void Update()
@@ -41,7 +42,7 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
 
             int count = judgementLineCollider.OverlapCollider(contactFilter, overlappingJudgementColliders);
 
-            // 부모를 가진 콜라이더들만 검사
+            // 같은 부모를 가진 콜라이더들만 검사
             int validCount = 0;
             for (int i = 0; i < count; i++)
             {
@@ -87,4 +88,10 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
         }
         
     }
+
+    private void RemoveObject()
+    {
+        Destroy(normalNote); // 현재 오브젝트를 삭제합니다.
+    }
+
 }
