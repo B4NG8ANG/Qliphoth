@@ -6,31 +6,81 @@ using UnityEngine.UI;
 
 public class JudgementManager : MonoBehaviour, IPointerDownHandler
 {
-    public float shrinkAmount;  // 크기 감소량
+    public Vector3 judgementLineStartScale; // 판정선 시작 크기
+    public Vector3 judgementLineTargetScale; // 판정선 목표 크기
+    public float judgementLineComingDuration; // 판정선 감소 애니메이션 시간
+    private float startTime; // 스크립트 시작 시간
+    private Transform judgementLineTransform; // 판정선 transform
+
     public GameObject judgementLine;  // 판정선 오브젝트
-    public GameObject normalNote; // 노트 오브젝트
+    public GameObject note; // 노트 오브젝트
     public GameObject judgementTextTest; // 판정 텍스트 오브젝트
-    public float delayInSeconds = 3f; // 노트 삭제 시간
+    public float noteDeletingTime; // 노트 삭제 시간
 
     
     void Start()
     {
-        Invoke("RemoveObject", delayInSeconds);
+        Invoke("RemoveObject", noteDeletingTime);
+
+        // 판정선 transform 저장
+        judgementLineTransform = judgementLine.transform;
+
+        // 시작 시간 저장
+        startTime = Time.time; 
     }
 
     void Update()
     {
-        // 크기를 감소시킴
-        Vector3 newScale = judgementLine.transform.localScale - new Vector3(shrinkAmount, shrinkAmount, 0f);
+        // 경과 시간 계산
+        float elapsedTime = Time.time - startTime;
+        // 시간 비율 (0 ~ 1) 
+        float t = Mathf.Clamp01(elapsedTime / judgementLineComingDuration); 
+
+        // 시작 크기에서 목표 크기로 보간
+        Vector3 currentScale = Vector3.Lerp(judgementLineStartScale, judgementLineTargetScale, t);
 
         // 크기를 적용
-        judgementLine.transform.localScale = newScale;
+        judgementLineTransform.localScale = currentScale;
+
+        /*
+        // 애니메이션이 종료되면 스크립트 비활성화
+        if (t >= 1f)
+        {
+            enabled = false;
+        }
+        */
+        
     }
 
     // 노트 터치
     public void OnPointerDown(PointerEventData eventData)
     {
+        float touchElapsedTime = Time.time - startTime;
+        Debug.Log(touchElapsedTime);
+
+        if(touchElapsedTime < 0.46f)
+        {
+            //judgementTextTest.GetComponent<Text>().text = "Early Choice";
+            Destroy(note);
+        }
+        else if(touchElapsedTime >= 0.46f && touchElapsedTime <= 0.54f)
+        {
+            //judgementTextTest.GetComponent<Text>().text = "Alive";
+            Destroy(note);
+        }
+        else if(touchElapsedTime > 0.54f && touchElapsedTime <= 0.8f)
+        {
+            //judgementTextTest.GetComponent<Text>().text = "Late Choice";
+            Destroy(note);
+        }
+        else if(touchElapsedTime > 0.8f)
+        {
+            //judgementTextTest.GetComponent<Text>().text = "Dead";
+            Destroy(note);
+        }
         
+
+        /*
         Collider2D judgementLineCollider = judgementLine.GetComponent<Collider2D>();
 
         if (judgementLineCollider != null)
@@ -82,16 +132,19 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
                 Debug.Log("Late Choice");
                 judgementTextTest.GetComponent<Text>().text = "Late Choice";
             }
+            
 
             Destroy(normalNote);
             
         }
+        */
         
     }
 
     private void RemoveObject()
     {
-        Destroy(normalNote); // 현재 오브젝트를 삭제합니다.
+        //judgementTextTest.GetComponent<Text>().text = "Dead";
+        Destroy(note); // 현재 오브젝트를 삭제합니다.
     }
 
 }
