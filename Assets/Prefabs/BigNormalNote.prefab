@@ -133,7 +133,7 @@ MonoBehaviour:
   judgementLineComingDuration: 0.5
   judgementLine: {fileID: 2709004668412549087}
   note: {fileID: 2709004669037707904}
-  judgementTextTest: {fileID: 0}
+  judgementTextTest: {fileID: 3570491538436745395, guid: 659057aef55bb7d4391ea706926ea26a, type: 3}
   noteDeletingTime: 1
 --- !u!1 &2709004669289313133
 GameObject:

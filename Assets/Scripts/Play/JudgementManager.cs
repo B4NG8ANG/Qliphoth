@@ -14,7 +14,7 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
 
     public GameObject judgementLine;  // 판정선 오브젝트
     public GameObject note; // 노트 오브젝트
-    public GameObject judgementTextTest; // 판정 텍스트 오브젝트
+    GameObject judgementTextTest; // 판정 텍스트 오브젝트
     public float noteDeletingTime; // 노트 삭제 시간
 
     
@@ -24,6 +24,9 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
 
         // 판정선 transform 저장
         judgementLineTransform = judgementLine.transform;
+
+        
+        judgementTextTest = GameObject.Find("JudgementTextTest");
 
         // 시작 시간 저장
         startTime = Time.time; 
@@ -60,22 +63,22 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
 
         if(touchElapsedTime < 0.46f)
         {
-            //judgementTextTest.GetComponent<Text>().text = "Early Choice";
+            judgementTextTest.GetComponent<Text>().text = "Early Choice";
             Destroy(note);
         }
         else if(touchElapsedTime >= 0.46f && touchElapsedTime <= 0.54f)
         {
-            //judgementTextTest.GetComponent<Text>().text = "Alive";
+            judgementTextTest.GetComponent<Text>().text = "Alive";
             Destroy(note);
         }
         else if(touchElapsedTime > 0.54f && touchElapsedTime <= 0.8f)
         {
-            //judgementTextTest.GetComponent<Text>().text = "Late Choice";
+            judgementTextTest.GetComponent<Text>().text = "Late Choice";
             Destroy(note);
         }
         else if(touchElapsedTime > 0.8f)
         {
-            //judgementTextTest.GetComponent<Text>().text = "Dead";
+            judgementTextTest.GetComponent<Text>().text = "Dead";
             Destroy(note);
         }
         
@@ -143,7 +146,7 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
 
     private void RemoveObject()
     {
-        //judgementTextTest.GetComponent<Text>().text = "Dead";
+        judgementTextTest.GetComponent<Text>().text = "Dead";
         Destroy(note); // 현재 오브젝트를 삭제합니다.
     }
 
