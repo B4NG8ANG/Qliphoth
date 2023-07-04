@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class JudgementManager : MonoBehaviour, IPointerDownHandler
+public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public Vector3 judgementLineStartScale; // 판정선 시작 크기
     public Vector3 judgementLineTargetScale; // 판정선 목표 크기
@@ -25,7 +25,6 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
         // 판정선 transform 저장
         judgementLineTransform = judgementLine.transform;
 
-        
         judgementTextTest = GameObject.Find("JudgementTextTest");
 
         // 시작 시간 저장
@@ -39,10 +38,10 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
         // 시간 비율 (0 ~ 1) 
         float t = Mathf.Clamp01(elapsedTime / judgementLineComingDuration); 
 
-        // 시작 크기에서 목표 크기로 보간
+        // 판정선 시작 크기에서 목표 크기로 보간
         Vector3 currentScale = Vector3.Lerp(judgementLineStartScale, judgementLineTargetScale, t);
 
-        // 크기를 적용
+        // 판정선 크기를 적용 (작아짐)
         judgementLineTransform.localScale = currentScale;
 
         /*
@@ -64,29 +63,39 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
         if(touchElapsedTime < 0.45f)
         {
             judgementTextTest.GetComponent<Text>().text = "Early Choice";
-            Destroy(note);
+            //Destroy(note);
         }
         else if(touchElapsedTime >= 0.45f && touchElapsedTime <= 0.55f)
         {
             judgementTextTest.GetComponent<Text>().text = "Alive";
-            Destroy(note);
+            //Destroy(note);
         }
         else if(touchElapsedTime > 0.55f && touchElapsedTime <= 0.8f)
         {
             judgementTextTest.GetComponent<Text>().text = "Late Choice";
-            Destroy(note);
+            //Destroy(note);
         }
         else if(touchElapsedTime > 0.8f)
         {
             judgementTextTest.GetComponent<Text>().text = "Dead";
-            Destroy(note);
+            //Destroy(note);
         }
+        
+        // 롱노트 차는 애니메이션 재생
         
     }
 
-    private void RemoveNote()
+    public void OnPointerUp(PointerEventData eventData)
     {
         judgementTextTest.GetComponent<Text>().text = "Dead";
+        Destroy(note);
+    }
+
+
+
+    private void RemoveNote()
+    {
+        judgementTextTest.GetComponent<Text>().text = "Alive";
         Destroy(note); // 현재 오브젝트를 삭제합니다.
     }
 
