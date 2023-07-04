@@ -61,17 +61,17 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
         float touchElapsedTime = Time.time - startTime;
         Debug.Log(touchElapsedTime);
 
-        if(touchElapsedTime < 0.46f)
+        if(touchElapsedTime < 0.45f)
         {
             judgementTextTest.GetComponent<Text>().text = "Early Choice";
             Destroy(note);
         }
-        else if(touchElapsedTime >= 0.46f && touchElapsedTime <= 0.54f)
+        else if(touchElapsedTime >= 0.45f && touchElapsedTime <= 0.55f)
         {
             judgementTextTest.GetComponent<Text>().text = "Alive";
             Destroy(note);
         }
-        else if(touchElapsedTime > 0.54f && touchElapsedTime <= 0.8f)
+        else if(touchElapsedTime > 0.55f && touchElapsedTime <= 0.8f)
         {
             judgementTextTest.GetComponent<Text>().text = "Late Choice";
             Destroy(note);

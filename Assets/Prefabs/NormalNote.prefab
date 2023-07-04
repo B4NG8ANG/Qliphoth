@@ -417,5 +417,4 @@ MonoBehaviour:
   judgementLineComingDuration: 0.5
   judgementLine: {fileID: 4892002281709806970}
   note: {fileID: 8578745033515395190}
-  judgementTextTest: {fileID: 6326848175247004874, guid: 659057aef55bb7d4391ea706926ea26a, type: 3}
   noteDeletingTime: 1

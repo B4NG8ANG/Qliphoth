@@ -66,6 +66,78 @@ public class playManager : MonoBehaviour
             return;
         }
 
+
+
+        else if(noteCreatTime >= 1.13f && noteCount == 3)
+        {
+            GameObject note = Instantiate(normalNote, new Vector3(-250,200,0), normalNote.transform.rotation);
+            note.transform.SetParent(notePanel.transform, false);
+            noteCount += 1;
+            return;
+        }
+
+        else if(noteCreatTime >= 1.3f && noteCount == 4)
+        {
+            GameObject note = Instantiate(normalNote, new Vector3(-500,200,0), normalNote.transform.rotation);
+            note.transform.SetParent(notePanel.transform, false);
+            noteCount += 1;
+            return;
+        }
+
+
+        
+        else if(noteCreatTime >= 1.5f && noteCount == 5)
+        {
+            GameObject note = Instantiate(normalNote, new Vector3(600,200,0), normalNote.transform.rotation);
+            note.transform.SetParent(notePanel.transform, false);
+            noteCount += 1;
+            return;
+        }
+
+
+
+        else if(noteCreatTime >= 1.8f && noteCount == 6)
+        {
+            GameObject note = Instantiate(normalNote, new Vector3(0,-300,0), normalNote.transform.rotation);
+            note.transform.SetParent(notePanel.transform, false);
+            noteCount += 1;
+            return;
+        }
+
+        else if(noteCreatTime >= 1.9f && noteCount == 7)
+        {
+            GameObject note = Instantiate(normalNote, new Vector3(-250,-300,0), normalNote.transform.rotation);
+            note.transform.SetParent(notePanel.transform, false);
+            noteCount += 1;
+            return;
+        }
+
+        else if(noteCreatTime >= 2.0f && noteCount == 8)
+        {
+            GameObject note = Instantiate(normalNote, new Vector3(-500,-300,0), normalNote.transform.rotation);
+            note.transform.SetParent(notePanel.transform, false);
+            noteCount += 1;
+            return;
+        }
+
+        else if(noteCreatTime >= 2.6f && noteCount == 9)
+        {
+            GameObject note = Instantiate(normalNote, new Vector3(-250,100,0), normalNote.transform.rotation);
+            note.transform.SetParent(notePanel.transform, false);
+            noteCount += 1;
+            return;
+        }
+
+        else if(noteCreatTime >= 2.63f && noteCount == 10)
+        {
+            GameObject note = Instantiate(normalNote, new Vector3(-500,100,0), normalNote.transform.rotation);
+            note.transform.SetParent(notePanel.transform, false);
+            noteCount += 1;
+            return;
+        }
+
+
+
       
     }
     

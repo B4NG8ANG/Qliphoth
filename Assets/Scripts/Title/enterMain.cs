@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class titleSceneChanger : MonoBehaviour
+public class enterMain : MonoBehaviour
 {
     public void onTitleClick()
     {
