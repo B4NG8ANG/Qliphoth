@@ -36,6 +36,7 @@ public class playManager : MonoBehaviour
     void Update()
     {
         FractureRay();
+
     }
 
     void FractureRay()
