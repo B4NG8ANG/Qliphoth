@@ -349,9 +349,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 678844603}
-  - component: {fileID: 678844604}
+  - component: {fileID: 678844605}
   m_Layer: 5
-  m_Name: FlickNote
+  m_Name: SlideNote
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -380,7 +380,7 @@ RectTransform:
   m_AnchoredPosition: {x: 323, y: -13}
   m_SizeDelta: {x: 375, y: 375}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &678844604
+--- !u!114 &678844605
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -389,7 +389,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 678844602}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 454400b619035304fad46d531fdfa511, type: 3}
+  m_Script: {fileID: 11500000, guid: f1ac5d87b73f238409115ac22cae8e4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   judgementLineStartScale: {x: 1, y: 1, z: 0}
@@ -397,8 +397,7 @@ MonoBehaviour:
   judgementLineComingDuration: 0.5
   judgementLine: {fileID: 1922582213}
   note: {fileID: 678844602}
-  noteDeletingTime: 3
-  touched: 0
+  noteDeletingTime: 1
 --- !u!224 &728836681 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5059351443664629948, guid: cd5ad9e92c90e3046904f3daf197e24b, type: 3}
@@ -1649,7 +1648,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &597759259069574902
 MonoBehaviour:
   m_ObjectHideFlags: 0

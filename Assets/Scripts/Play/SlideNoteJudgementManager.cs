@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class JudgementManager : MonoBehaviour, IPointerDownHandler
+public class SlideNoteJudgementManager : MonoBehaviour, IDragHandler
 {
     public Vector3 judgementLineStartScale; // 판정선 시작 크기
     public Vector3 judgementLineTargetScale; // 판정선 목표 크기
@@ -29,7 +29,8 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
         judgementTextTest = GameObject.Find("JudgementTextTest");
 
         // 시작 시간 저장
-        startTime = Time.time; 
+        startTime = Time.time;
+
     }
 
     void Update()
@@ -55,8 +56,7 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
         
     }
 
-    // 노트 터치
-    public void OnPointerDown(PointerEventData eventData)
+    public void OnDrag(PointerEventData eventData)
     {
         float touchElapsedTime = Time.time - startTime;
         Debug.Log(touchElapsedTime);
