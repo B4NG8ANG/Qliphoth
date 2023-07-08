@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class SlideNoteJudgementManager : MonoBehaviour, IDragHandler
+public class SlideNoteJudgementManager : MonoBehaviour, IPointerEnterHandler
 {
     public Vector3 judgementLineStartScale; // 판정선 시작 크기
     public Vector3 judgementLineTargetScale; // 판정선 목표 크기
@@ -56,7 +56,7 @@ public class SlideNoteJudgementManager : MonoBehaviour, IDragHandler
         
     }
 
-    public void OnDrag(PointerEventData eventData)
+    public void OnPointerEnter(PointerEventData eventData)
     {
         float touchElapsedTime = Time.time - startTime;
         Debug.Log(touchElapsedTime);
