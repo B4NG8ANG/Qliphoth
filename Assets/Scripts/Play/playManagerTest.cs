@@ -13,6 +13,8 @@ public class playManagerTest : MonoBehaviour
     public GameObject bigNormalNote;
     public GameObject normalNote;
     public GameObject smallNormalNote;
+    public GameObject longNote;
+    public GameObject slideNote;
 
     // 노트가 보일 패널
     public GameObject notePanel;
