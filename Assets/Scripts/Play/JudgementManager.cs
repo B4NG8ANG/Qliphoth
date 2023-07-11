@@ -25,7 +25,6 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
         // 판정선 transform 저장
         judgementLineTransform = judgementLine.transform;
 
-        
         judgementTextTest = GameObject.Find("JudgementTextTest");
 
         // 시작 시간 저장
@@ -37,7 +36,7 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
         // 경과 시간 계산
         float elapsedTime = Time.time - startTime;
         // 시간 비율 (0 ~ 1) 
-        float t = Mathf.Clamp01(elapsedTime / judgementLineComingDuration); 
+        float t = Mathf.Clamp01(elapsedTime / judgementLineComingDuration);
 
         // 판정선을 시작 크기에서 목표 크기로 보간
         Vector3 currentScale = Vector3.Lerp(judgementLineStartScale, judgementLineTargetScale, t);
@@ -64,30 +63,29 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
         if(touchElapsedTime < 0.45f)
         {
             judgementTextTest.GetComponent<Text>().text = "Early Choice";
-            Destroy(note);
+            gameObject.SetActive(false);
         }
         else if(touchElapsedTime >= 0.45f && touchElapsedTime <= 0.55f)
         {
             judgementTextTest.GetComponent<Text>().text = "Alive";
-            Destroy(note);
+            gameObject.SetActive(false);
         }
         else if(touchElapsedTime > 0.55f && touchElapsedTime <= 0.8f)
         {
             judgementTextTest.GetComponent<Text>().text = "Late Choice";
-            Destroy(note);
+            gameObject.SetActive(false);
         }
         else if(touchElapsedTime > 0.8f)
         {
             judgementTextTest.GetComponent<Text>().text = "Dead";
-            Destroy(note);
+            gameObject.SetActive(false);
         }
-        
     }
 
     private void RemoveNote()
     {
         judgementTextTest.GetComponent<Text>().text = "Dead";
-        Destroy(note); // 현재 오브젝트를 삭제합니다.
+        gameObject.SetActive(false); // 현재 오브젝트를 삭제합니다.
     }
 
 }
