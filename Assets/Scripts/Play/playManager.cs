@@ -34,13 +34,13 @@ public class playManager : MonoBehaviour
 
     Dictionary<int, string[]> Fracture_Ray = new Dictionary<int, string[]>()
     {
-        // {노트 순서(key값) , new string[]{노트가 생성될 시각, 노트가 생성될 vector3 좌표, 노트 번호, 동타 여부}}
+        // {노트 순서(key값) , new string[]{노트 종류, 노트가 생성될 시각, 노트가 생성될 vector3 좌표, 노트 번호, 동타 여부, 롱 노트인 경우 지속시간}}
 
-        {1, new string[]{"1.0", "(0,200,0)", "1", "false"}},
-        {2, new string[]{"1.2", "(300,300,0)", "2", "false"}},
-        {3, new string[]{"1.5", "(-100,0,0)", "3", "true"}},
-        {4, new string[]{"1.5", "(500,0,0)", "4", "true"}},
-        {5, new string[]{"2", "(700,200,0)", "5", "false"}},
+        {1, new string[]{"normalNote", "1.0", "(0,200,0)", "1", "false", ""}},
+        {2, new string[]{"longNote", "1.2", "(300,300,0)", "2", "false", "2.0"}},
+        {3, new string[]{"normalNote", "1.5", "(-100,0,0)", "3", "true", ""}},
+        {4, new string[]{"normalNote", "1.5", "(500,0,0)", "4", "true", ""}},
+        {5, new string[]{"normalNote", "2", "(700,200,0)", "5", "false", ""}},
         {6, null}
         
     };
@@ -70,10 +70,22 @@ public class playManager : MonoBehaviour
 
         if(isPlaying)
         {
-            if(noteCreatTime >= float.Parse(Fracture_Ray[noteCount][0]) - JUDGEMENTTIME + tuneTiming && noteCount == int.Parse(Fracture_Ray[noteCount][2]))
+            // 사전에 접근하여 알아낸 노트 생성 시간 - 0.5 + 싱크시간에 노트 생성
+            if(noteCreatTime >= float.Parse(Fracture_Ray[noteCount][1]) - JUDGEMENTTIME + tuneTiming && noteCount == int.Parse(Fracture_Ray[noteCount][3]))
             {
                 Debug.Log(noteCreatTime);
-                GameObject note = Instantiate(normalNote, StringToVector3(Fracture_Ray[noteCount][1]), normalNote.transform.rotation);
+
+                // 사전에 접근하여 노트의 종류 알아내기
+                string noteType = Fracture_Ray[noteCount][0];
+                GameObject noteTypeObject = (GameObject)GetType().GetField(noteType).GetValue(this);
+
+                // 노트의 종류가 롱 노트 일때, 사전에 접근하여 알아낸 지속시간 지정
+                if(noteType == "longNote")
+                {
+                    noteTypeObject.GetComponent<LongNoteJudgementManager>().noteDeletingTime = float.Parse(Fracture_Ray[noteCount][5]);
+                }
+
+                GameObject note = Instantiate(noteTypeObject, StringToVector3(Fracture_Ray[noteCount][2]), normalNote.transform.rotation);
                 note.transform.SetParent(notePanel.transform, false);
                 noteCount += 1;
             }
@@ -96,12 +108,23 @@ public class playManager : MonoBehaviour
             if(isPlaying)
             {
                 // 동타일때만 노트 생성
-                if(Fracture_Ray[noteCount][3] == "true")
+                if(Fracture_Ray[noteCount][4] == "true")
                 {
-                    if(noteCreatTime >= float.Parse(Fracture_Ray[noteCount][0]) - JUDGEMENTTIME + tuneTiming && noteCount == int.Parse(Fracture_Ray[noteCount][2]))
+                    if(noteCreatTime >= float.Parse(Fracture_Ray[noteCount][1]) - JUDGEMENTTIME + tuneTiming && noteCount == int.Parse(Fracture_Ray[noteCount][3]))
                     {
                         Debug.Log(noteCreatTime);
-                        GameObject note = Instantiate(normalNote, StringToVector3(Fracture_Ray[noteCount][1]), normalNote.transform.rotation);
+
+                        // 사전에 접근하여 노트의 종류 알아내기
+                        string noteType = Fracture_Ray[noteCount][0];
+                        GameObject noteTypeObject = (GameObject)GetType().GetField(noteType).GetValue(this);
+
+                        // 노트의 종류가 롱 노트 일때, 사전에 접근하여 알아낸 지속시간 지정
+                        if(noteType == "longNote")
+                        {
+                            noteTypeObject.GetComponent<LongNoteJudgementManager>().noteDeletingTime = float.Parse(Fracture_Ray[noteCount][5]);
+                        }
+
+                        GameObject note = Instantiate(noteTypeObject, StringToVector3(Fracture_Ray[noteCount][2]), normalNote.transform.rotation);
                         note.transform.SetParent(notePanel.transform, false);
                         noteCount += 1;
                     }

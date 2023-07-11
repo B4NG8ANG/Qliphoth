@@ -43,7 +43,7 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
         judgementLineTransform = judgementLine.transform;
 
         judgementTextTest = GameObject.Find("JudgementTextTest");
-        comboTest = GameObject.Find("ComboTest");
+        //comboTest = GameObject.Find("ComboTest");
 
         // 시작 시각 저장
         startTime = Time.time;
@@ -75,13 +75,11 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
         if(!touched && elapsedTime > noteDeletingTime)
         {
             judgementTextTest.GetComponent<Text>().text = "Dead";
-            Debug.Log("elapsedTime");
             Destroy(note);
         }
 
         if(touched && touchingTime >= noteDeletingTime)
         {
-            Debug.Log("touchingTime");
             judgementTextTest.GetComponent<Text>().text = "Alive";
             Destroy(note);
             return;
@@ -110,7 +108,7 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
                 combo = combo + 1;
                 
                 //Debug.Log(combo);
-                comboTest.GetComponent<Text>().text = combo.ToString();
+                //comboTest.GetComponent<Text>().text = combo.ToString();
                 prevCombingTime = Time.time - delayCombingTime;
             }
 
