@@ -7,23 +7,31 @@ using UnityEngine.UI;
 // with Goongam Goongam Goongam
 public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-    public Vector3 judgementLineStartScale; // 판정선 시작 크기
-    public Vector3 judgementLineTargetScale; // 판정선 목표 크기
-    public float judgementLineComingDuration; // 판정선 감소 애니메이션 시간
-    private float startTime; // 스크립트 시작 시각
-    private Transform judgementLineTransform; // 판정선 transform
+    // 판정선 시작, 목표 크기, 감소 애니메이션 지속 시간
+    public Vector3 judgementLineStartScale;
+    public Vector3 judgementLineTargetScale;
+    public float judgementLineComingDuration;
 
-    public GameObject judgementLine;  // 판정선 오브젝트
-    public GameObject note; // 노트 오브젝트
-    GameObject judgementTextTest; // 판정 텍스트 오브젝트
-    GameObject comboTest; // 콤보 테스트 오브젝트
-    public float noteDeletingTime; // 노트 삭제 시간
+    // 스크립트 시작 시각
+    private float startTime;
 
-    float startTouchTime = 0; // 노트가 터치된 시각
-    // float touchingTime 노트가 터치되고 있을때 지나가는 시간
-    // float combingTime 콤보가 올라가는 시간 간격
+    // 판정선 transform
+    private Transform judgementLineTransform; 
+
+    // 판정선, 노트, 판정 텍스트, 콤보 테스트 오브젝트
+    public GameObject judgementLine;
+    public GameObject note; 
+    GameObject judgementTextTest;
+    GameObject comboTest;
+
+    // 노트가 삭제되기까지 걸리는 시간 (노트 오브젝트 지속 시간)
+    public float noteDeletingTime;
+
+    // 노트가 최초로 터치된 시각
+    float startTouchTime = 0;
+
     float prevCombingTime; // 마지막으로 계산된 콤보가 올라간 시각
-    float touchElapsedTime; // 판정선이 생기고 난뒤 흐른 시간
+    float touchElapsedTime; // 판정선이 생기고 난 뒤 흐른 시간
 
     int combo = 0;
 
@@ -35,10 +43,6 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
     
     void Start()
     {
-        // 롱노트에서는 처리 안된 노트가 사라지게하는 Invoke문 필요 없음
-        // Invoke("RemoveNote", noteDeletingTime);
-        
-
         // 판정선 transform 저장
         judgementLineTransform = judgementLine.transform;
 
@@ -70,34 +74,36 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
         }
         */
 
+        // 노트가 터치되고 있을때 지나가는 시간
+        // 현재 시각에서 롱 노트를 처음 터치한 시각을 뺀 시각으로, 매 프레임마다 계산되어 늘어남
         float touchingTime = Time.time - startTouchTime;
 
+        // 터치가 한번도 되지 않은 상태로 롱노트 지속시간이 초과되면 Dead 판정 후 삭제
         if(!touched && elapsedTime > noteDeletingTime)
         {
             judgementTextTest.GetComponent<Text>().text = "Dead";
-            Destroy(note);
+            gameObject.SetActive(false);
         }
 
+        // 터치를 한번이라도 한 상태로 롱 노트 지속시간이 초과되면 Alive 판정 후 삭제
         if(touched && touchingTime >= noteDeletingTime)
         {
             judgementTextTest.GetComponent<Text>().text = "Alive";
-            Destroy(note);
+            gameObject.SetActive(false);
             return;
         }
 
+        // 터치를 한번이라도 한 상태에서 터치를 진행중인 시간이 0 이상일 경우 0.2초에 한번씩 콤보 적립
+        // 롱 노트에서 손을 뗐을 경우 OnPointerUp()이 호출 됐을것이고, 처음부터 한번도 터치하지 않았다면 그냥 현재 시각
         else if(touched && touchingTime > 0)
         {
-            // 콤보 고점 억제
+            // 롱노트 하나로 쌓을수 있는 콤보의 최대치 제한
             if(combo >= Mathf.FloorToInt((noteDeletingTime - 0.45f) / 0.2f - 1f))
             {
                 return;
             }
 
-            //Debug.Log(noteDeletingTime / 0.2f - 1f);
-
-            //judgementTextTest.GetComponent<Text>().text = "Alive";
-
-            // 콤보 쌓임
+            // 콤보가 추가되는 시각
             float combingTime = Time.time - prevCombingTime;
 
             // 콤보 시간 오차 값
@@ -131,22 +137,18 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
         if(touchElapsedTime < 0.45f)
         {
             judgementTextTest.GetComponent<Text>().text = "Early Choice";
-            //Destroy(note);
         }
         else if(touchElapsedTime >= 0.45f && touchElapsedTime <= 0.55f)
         {
             judgementTextTest.GetComponent<Text>().text = "Alive";
-            //Destroy(note);
         }
         else if(touchElapsedTime > 0.55f && touchElapsedTime <= 0.8f)
         {
             judgementTextTest.GetComponent<Text>().text = "Late Choice";
-            //Destroy(note);
         }
         else if(touchElapsedTime > 0.8f)
         {
             judgementTextTest.GetComponent<Text>().text = "Dead";
-            //Destroy(note);
         }
         
         // 롱노트 차는 애니메이션 재생
@@ -155,18 +157,8 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        Debug.Log("OnPointerUp");
         judgementTextTest.GetComponent<Text>().text = "Dead";
-        Destroy(note);
+        gameObject.SetActive(false);
     }
-
-
-    // 롱노트에서는 처리 안된 노트가 사라지게하는 Invoke문 필요 없음
-    // private void RemoveNote()
-    // {
-    //     judgementTextTest.GetComponent<Text>().text = "Alive";
-    //     Destroy(note); // 현재 오브젝트를 삭제합니다.
-    //     touched = false;
-    // }
 
 }
