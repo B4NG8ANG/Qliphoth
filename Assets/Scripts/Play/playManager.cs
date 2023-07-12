@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class playManager : MonoBehaviour
@@ -36,11 +37,14 @@ public class playManager : MonoBehaviour
     bool isPlaying;
 
     // 오브젝트 풀링하기 위해 프리팹으로 만드는 노트 오브젝트의 배열
-    public GameObject[] normalNotes;
-    public GameObject[] smallNormalNotes;
-    public GameObject[] bigNormalNotes;
-    public GameObject[] longNotes;
-    public GameObject[] slideNotes;
+    GameObject[] normalNotes;
+    GameObject[] smallNormalNotes;
+    GameObject[] bigNormalNotes;
+    GameObject[] longNotes;
+    GameObject[] slideNotes;
+
+    int combo = 0;
+    public Text comboText;
 
     // 노트가 가진 속성을 작성한 사전
     Dictionary<int, string[]> Fracture_Ray = new Dictionary<int, string[]>()
@@ -61,9 +65,12 @@ public class playManager : MonoBehaviour
         {11, new string[]{"normalNote", "12.0", "(700,600,0)", "11", "false", ""}},
         {12, new string[]{"normalNote", "13.0", "(700,700,0)", "12", "false", ""}},
         {13, null}
+
+        // {0, new string[]{"normalNote", "1.0", "(300,300,0)", "0", "false", ""}},
+        // {1, new string[]{"longNote", "2.0", "(700,700,0)", "1", "false", "10.0"}},
+        // {2, null}
         
     };
-
 
     void Start()
     {
@@ -295,6 +302,27 @@ public class playManager : MonoBehaviour
         return new Vector3(x, y, z);
     }
 
+    // 콤보를 추가하고, 초기화 하는 함수
+    public void AddCombo(bool notDead)
+    {
+        if(notDead)
+        {
+            combo += 1;
+        }
+        else if(!notDead)
+        {
+            combo = 0;
+        }
+
+        if(combo >= 1)
+        {
+            comboText.text = combo.ToString();
+        }
+        else if(combo < 1)
+        {
+            comboText.text = "";
+        }
+    }
     
     
 }

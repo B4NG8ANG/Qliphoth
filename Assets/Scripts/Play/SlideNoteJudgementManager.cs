@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class SlideNoteJudgementManager : MonoBehaviour, IPointerExitHandler
 {
+    // playManager 스크립트를 참조하기 위한 변수
+    private playManager playManagerScript;
+
     // 판정선 시작, 목표 크기, 감소 애니메이션 지속 시간
     public Vector3 judgementLineStartScale;
     public Vector3 judgementLineTargetScale;
@@ -34,11 +37,14 @@ public class SlideNoteJudgementManager : MonoBehaviour, IPointerExitHandler
         // 판정선 transform 저장
         judgementLineTransform = judgementLine.transform;
 
-        
+        // 판정 텍스트 오브젝트 저장 (임시)
         judgementTextTest = GameObject.Find("JudgementTextTest");
 
         // 시작 시간 저장
         startTime = Time.time;
+
+        // playManager라는 컴포넌트를 가진 오브젝트중 제일 처음 것을 찾고, 그 컴포넌트를 참조 
+        playManagerScript = FindObjectOfType<playManager>();
 
     }
 
@@ -67,6 +73,7 @@ public class SlideNoteJudgementManager : MonoBehaviour, IPointerExitHandler
         if(!touched && elapsedTime > noteDeletingTime)
         {
             judgementTextTest.GetComponent<Text>().text = "Dead";
+            playManagerScript.AddCombo(false);
             gameObject.SetActive(false);
         }
         
@@ -81,21 +88,25 @@ public class SlideNoteJudgementManager : MonoBehaviour, IPointerExitHandler
         if(touchElapsedTime < 0.45f)
         {
             judgementTextTest.GetComponent<Text>().text = "Early Choice";
+            playManagerScript.AddCombo(true);
             gameObject.SetActive(false);
         }
         else if(touchElapsedTime >= 0.45f && touchElapsedTime <= 0.55f)
         {
             judgementTextTest.GetComponent<Text>().text = "Alive";
+            playManagerScript.AddCombo(true);
             gameObject.SetActive(false);
         }
         else if(touchElapsedTime > 0.55f && touchElapsedTime <= 0.8f)
         {
             judgementTextTest.GetComponent<Text>().text = "Late Choice";
+            playManagerScript.AddCombo(true);
             gameObject.SetActive(false);
         }
         else if(touchElapsedTime > 0.8f)
         {
             judgementTextTest.GetComponent<Text>().text = "Dead";
+            playManagerScript.AddCombo(false);
             gameObject.SetActive(false);
         }
         

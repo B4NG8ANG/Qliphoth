@@ -740,7 +740,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 500
+  m_Text: 
 --- !u!222 &1768954666
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -903,11 +903,7 @@ MonoBehaviour:
   longNote: {fileID: 2003597080839982890, guid: 3e1825a411d3b0d428d2f80b8054abd0, type: 3}
   slideNote: {fileID: 5451865765748981291, guid: f3951e62cc24cbd4c81beedf2621c6f4, type: 3}
   notePanel: {fileID: 2011431507}
-  normalNotes: []
-  smallNormalNotes: []
-  bigNormalNotes: []
-  longNotes: []
-  slideNotes: []
+  comboText: {fileID: 1768954665}
 --- !u!1 &1998613355
 GameObject:
   m_ObjectHideFlags: 0
