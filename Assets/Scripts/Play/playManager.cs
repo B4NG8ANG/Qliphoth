@@ -55,7 +55,7 @@ public class playManager : MonoBehaviour
         {1, new string[]{"normalNote", "2.0", "(300,300,0)", "1", "false", ""}},
         {2, new string[]{"slideNote", "3.0", "(100,500,0)", "2", "false", ""}},
         {3, new string[]{"slideNote", "4.0", "(500,500,0)", "3", "false", ""}},
-        {4, new string[]{"longNote", "5.0", "(600,200,0)", "4", "false", "5.3"}},
+        {4, new string[]{"longNote", "5.0", "(600,200,0)", "4", "false", "1.0"}},
         {5, new string[]{"normalNote", "6.0", "(700,200,0)", "5", "false", ""}},
         {6, new string[]{"normalNote", "7.0", "(800,200,0)", "6", "false", ""}},
         {7, new string[]{"normalNote", "8.0", "(900,200,0)", "7", "false", ""}},
@@ -314,11 +314,11 @@ public class playManager : MonoBehaviour
             combo = 0;
         }
 
-        if(combo >= 1)
+        if(combo >= 2)
         {
             comboText.text = combo.ToString();
         }
-        else if(combo < 1)
+        else if(combo < 2)
         {
             comboText.text = "";
         }
