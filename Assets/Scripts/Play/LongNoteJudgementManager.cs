@@ -39,6 +39,9 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
     // 롱노트의 판정 상태를 저장 할 변수
     public string longNoteJudgement;
 
+    // 이펙트 이미지 테스트
+    public GameObject noteEffectTest;
+
 
 
     
@@ -55,6 +58,8 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
 
         // playManager라는 컴포넌트를 가진 오브젝트중 제일 처음 것을 찾고, 그 컴포넌트를 참조
         playManagerScript = FindObjectOfType<playManager>();
+
+        noteEffectTest.SetActive(false);
     }
 
     void Update()
@@ -83,7 +88,7 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
         {
             judgementTextTest.GetComponent<Text>().text = "Dead";
             playManagerScript.AddCombo(false);
-            gameObject.SetActive(false);
+            Invoke("RemoveNote", 0.3f);
         }
 
         // 롱 노트 지속시간이 초과되면 Alive 판정 후 삭제
@@ -91,7 +96,7 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
         {
             judgementTextTest.GetComponent<Text>().text = longNoteJudgement;
             playManagerScript.AddCombo(true);
-            gameObject.SetActive(false);
+            Invoke("RemoveNote", 0.3f);
             return;
         }
 
@@ -108,14 +113,17 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
         if(touchElapsedTime < 0.45f)
         {
             longNoteJudgement = "Early Choice";
+            noteEffectTest.SetActive(true);
         }
         else if(touchElapsedTime >= 0.45f && touchElapsedTime <= 0.55f)
         {
             longNoteJudgement = "Alive";
+            noteEffectTest.SetActive(true);
         }
         else if(touchElapsedTime > 0.55f && touchElapsedTime <= 0.8f)
         {
             longNoteJudgement = "Late Choice";
+            noteEffectTest.SetActive(true);
         }
         else if(touchElapsedTime > 0.8f)
         {
@@ -130,7 +138,11 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
     {
         judgementTextTest.GetComponent<Text>().text = "Dead";
         playManagerScript.AddCombo(false);
-        gameObject.SetActive(false);
+        Invoke("RemoveNote", 0.3f);
     }
 
+    private void RemoveNote()
+    {
+        gameObject.SetActive(false);
+    }
 }

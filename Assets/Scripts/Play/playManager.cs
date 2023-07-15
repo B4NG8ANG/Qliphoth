@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 public class playManager : MonoBehaviour
 {
@@ -25,7 +26,6 @@ public class playManager : MonoBehaviour
     public GameObject smallNormalNote;
     public GameObject longNote;
     public GameObject slideNote;
-    public GameObject noteEffect;
 
     // 노트가 보일 패널
     public GameObject notePanel;
@@ -44,6 +44,7 @@ public class playManager : MonoBehaviour
     GameObject[] longNotes;
     GameObject[] slideNotes;
     
+
     int combo = 0;
     public Text comboText;
 
@@ -53,11 +54,11 @@ public class playManager : MonoBehaviour
         // {노트 순서(key값) , new string[]{노트 종류, 노트가 생성될 시각, 노트가 생성될 vector3 좌표, 노트 번호, 동타 여부, 롱 노트인 경우 지속시간}}
 
         {0, new string[]{"normalNote", "1.0", "(100,300,0)", "0", "false", ""}},
-        {1, new string[]{"normalNote", "2.0", "(300,300,0)", "1", "false", ""}},
+        {1, new string[]{"smallNormalNote", "2.0", "(300,300,0)", "1", "false", ""}},
         {2, new string[]{"slideNote", "3.0", "(100,500,0)", "2", "false", ""}},
         {3, new string[]{"slideNote", "4.0", "(500,500,0)", "3", "false", ""}},
-        {4, new string[]{"longNote", "5.0", "(600,200,0)", "4", "false", "1.0"}},
-        {5, new string[]{"normalNote", "6.0", "(700,200,0)", "5", "false", ""}},
+        {4, new string[]{"longNote", "5.0", "(600,500,0)", "4", "false", "1.0"}},
+        {5, new string[]{"bigNormalNote", "6.0", "(900,200,0)", "5", "false", ""}},
         {6, new string[]{"normalNote", "7.0", "(800,200,0)", "6", "false", ""}},
         {7, new string[]{"normalNote", "8.0", "(900,200,0)", "7", "false", ""}},
         {8, new string[]{"normalNote", "9.0", "(900,300,0)", "8", "false", ""}},
@@ -86,11 +87,10 @@ public class playManager : MonoBehaviour
         // 시작 시간 저장
         startTime = Time.time;
 
-        // 곡이 진행중
+        // 곡이 진행중인지 확인하는 플래그
         isPlaying = true;
 
-        // 오브젝트 풀링 하기 위해 프리팹을 이용하여 노트들을 미리 생성
-        
+        // 오브젝트 풀링 하기 위해 프리팹을 이용하여 노트들을 미리 생성하고 배열로 저장
         normalNotes = new GameObject[500];
         for(int i = 0; i < 500; i++)
         {

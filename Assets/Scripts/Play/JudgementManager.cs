@@ -53,6 +53,8 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
 
         // playManager라는 컴포넌트를 가진 오브젝트중 제일 처음 것을 찾고, 그 컴포넌트를 참조 
         playManagerScript = FindObjectOfType<playManager>();
+
+        noteEffectTest.SetActive(false);
     }
 
     void Update()
@@ -82,10 +84,8 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
         {
             judgementTextTest.GetComponent<Text>().text = "Dead";
             playManagerScript.AddCombo(false);
-            gameObject.SetActive(false);
+            Invoke("RemoveNote", 0.3f);
         }
-
-        Debug.Log(gameObject.transform.position);
         
     }
 
@@ -100,33 +100,35 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
         {
             judgementTextTest.GetComponent<Text>().text = "Early Choice";
             playManagerScript.AddCombo(true);
-            gameObject.SetActive(false);
+            Invoke("RemoveNote", 0.3f);
+            noteEffectTest.SetActive(true);
         }
         else if(touchElapsedTime >= 0.45f && touchElapsedTime <= 0.55f)
         {
             judgementTextTest.GetComponent<Text>().text = "Alive";
             playManagerScript.AddCombo(true);
-            gameObject.SetActive(false);
+            Invoke("RemoveNote", 0.3f);
+            noteEffectTest.SetActive(true);
         }
         else if(touchElapsedTime > 0.55f && touchElapsedTime <= 0.8f)
         {
             judgementTextTest.GetComponent<Text>().text = "Late Choice";
             playManagerScript.AddCombo(true);
-            gameObject.SetActive(false);
-
-            GameObject noteEffectTestObject = Instantiate(noteEffectTest);
-            noteEffectTestObject.transform.position = gameObject.transform.position;
-            noteEffectTestObject.transform.SetParent(notePanel.transform, false);
-
-            
+            Invoke("RemoveNote", 0.3f);
+            noteEffectTest.SetActive(true);
         }
-        else if(touchElapsedTime > 0.8f)
-        {
-            judgementTextTest.GetComponent<Text>().text = "Dead";
-            playManagerScript.AddCombo(false);
-            gameObject.SetActive(false);
-        }
+        // else if(touchElapsedTime > 0.8f)
+        // {
+        //     judgementTextTest.GetComponent<Text>().text = "Dead";
+        //     playManagerScript.AddCombo(false);
+        //     Invoke("RemoveNote", 0.3f);
+        //     noteEffectTest.SetActive(true);
+        // }
     }
 
+    private void RemoveNote()
+    {
+        gameObject.SetActive(false);
+    }
 
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ScaleAnimation : MonoBehaviour
+public class noteTouchEffect : MonoBehaviour
 {
     public float scaleDuration = 2f; // 스케일 애니메이션의 지속 시간
     public float maxScale = 2f; // 최대 스케일
