@@ -31,6 +31,12 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
     // 터치를 했는지 감지하는 변수
     public bool touched = false;
 
+    // 이펙트 이미지 테스트
+    public GameObject noteEffectTest;
+
+    // 노트가 보일 패널
+    GameObject notePanel;
+
     
     void Start()
     {
@@ -39,6 +45,8 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
 
         // 판정 텍스트 오브젝트 저장 (임시)
         judgementTextTest = GameObject.Find("JudgementTextTest");
+
+        notePanel = GameObject.Find("NotePanel");
 
         // 시작 시간 저장
         startTime = Time.time;
@@ -76,6 +84,8 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
             playManagerScript.AddCombo(false);
             gameObject.SetActive(false);
         }
+
+        Debug.Log(gameObject.transform.position);
         
     }
 
@@ -103,6 +113,12 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
             judgementTextTest.GetComponent<Text>().text = "Late Choice";
             playManagerScript.AddCombo(true);
             gameObject.SetActive(false);
+
+            GameObject noteEffectTestObject = Instantiate(noteEffectTest);
+            noteEffectTestObject.transform.position = gameObject.transform.position;
+            noteEffectTestObject.transform.SetParent(notePanel.transform, false);
+
+            
         }
         else if(touchElapsedTime > 0.8f)
         {

@@ -347,3 +347,5 @@ MonoBehaviour:
   judgementLine: {fileID: 3676836465631263758}
   note: {fileID: 3676836465749018980}
   noteDeletingTime: 1
+  touched: 0
+  noteEffectTest: {fileID: 2915490538144860464, guid: d6de54c9b7de84a42ae2b59c8fc0fb12, type: 3}

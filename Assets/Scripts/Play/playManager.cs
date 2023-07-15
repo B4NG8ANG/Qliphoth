@@ -25,6 +25,7 @@ public class playManager : MonoBehaviour
     public GameObject smallNormalNote;
     public GameObject longNote;
     public GameObject slideNote;
+    public GameObject noteEffect;
 
     // 노트가 보일 패널
     public GameObject notePanel;
@@ -42,7 +43,7 @@ public class playManager : MonoBehaviour
     GameObject[] bigNormalNotes;
     GameObject[] longNotes;
     GameObject[] slideNotes;
-
+    
     int combo = 0;
     public Text comboText;
 
@@ -89,6 +90,7 @@ public class playManager : MonoBehaviour
         isPlaying = true;
 
         // 오브젝트 풀링 하기 위해 프리팹을 이용하여 노트들을 미리 생성
+        
         normalNotes = new GameObject[500];
         for(int i = 0; i < 500; i++)
         {
@@ -97,7 +99,7 @@ public class playManager : MonoBehaviour
             normalNotesGameObject.transform.SetParent(notePanel.transform, false);
             normalNotesGameObject.SetActive(false);
         }
-
+        
         smallNormalNotes = new GameObject[500];
         for(int i = 0; i < 500; i++)
         {
@@ -114,15 +116,6 @@ public class playManager : MonoBehaviour
             bigNormalNotes[i] = bigNormalNotesGameObject;
             bigNormalNotesGameObject.transform.SetParent(notePanel.transform, false);
             bigNormalNotesGameObject.SetActive(false);
-        }
-
-        normalNotes = new GameObject[500];
-        for(int i = 0; i < 500; i++)
-        {
-            GameObject normalNotesGameObject= Instantiate(normalNote);
-            normalNotes[i] = normalNotesGameObject;
-            normalNotesGameObject.transform.SetParent(notePanel.transform, false);
-            normalNotesGameObject.SetActive(false);
         }
 
         longNotes = new GameObject[500];
@@ -142,6 +135,7 @@ public class playManager : MonoBehaviour
             slideNotesGameObject.transform.SetParent(notePanel.transform, false);
             slideNotesGameObject.SetActive(false);
         }
+
 
     }
 
