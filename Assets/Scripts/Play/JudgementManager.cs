@@ -17,6 +17,9 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
     // 스크립트 시작 시각
     private float startTime;
 
+    // 스크립트 시작 후 경과 시간
+    private float elapsedTime;
+
     // 판정선 transform
     private Transform judgementLineTransform;
 
@@ -31,7 +34,7 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
     // 터치를 했는지 감지하는 변수
     public bool touched = false;
 
-    // 이펙트 이미지 테스트
+    // 이펙트 이미지
     public GameObject noteEffect;
 
     
@@ -55,7 +58,7 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
     void Update()
     {
         // 경과 시간 계산
-        float elapsedTime = Time.time - startTime;
+        elapsedTime = Time.time - startTime;
 
         // 시간 비율 (0 ~ 1) 
         float t = Mathf.Clamp01(elapsedTime / judgementLineComingDuration);
@@ -87,6 +90,12 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
     // 노트 터치
     public void OnPointerDown(PointerEventData eventData)
     {
+        // 노트 지속시간이 경과되면 터치 이벤트를 무시
+        if (elapsedTime >= noteDeletingTime)
+        {
+            return;
+        }
+
         touched = true;
         float touchElapsedTime = Time.time - startTime;
         //Debug.Log(touchElapsedTime);

@@ -17,6 +17,9 @@ public class SlideNoteJudgementManager : MonoBehaviour, IPointerExitHandler
     // 스크립트 시작 시각
     private float startTime;
 
+    // 스크립트 시작 후 경과 시간
+    private float elapsedTime;
+
     // 판정선 transform
     private Transform judgementLineTransform;
 
@@ -30,8 +33,8 @@ public class SlideNoteJudgementManager : MonoBehaviour, IPointerExitHandler
 
     // 터치를 했는지 감지하는 변수
     public bool touched = false;
-
     
+
     void Start()
     {
         // 판정선 transform 저장
@@ -51,7 +54,8 @@ public class SlideNoteJudgementManager : MonoBehaviour, IPointerExitHandler
     void Update()
     {
         // 경과 시간 계산
-        float elapsedTime = Time.time - startTime;
+        elapsedTime = Time.time - startTime;
+
         // 시간 비율 (0 ~ 1) 
         float t = Mathf.Clamp01(elapsedTime / judgementLineComingDuration); 
 
@@ -74,13 +78,19 @@ public class SlideNoteJudgementManager : MonoBehaviour, IPointerExitHandler
         {
             judgementTextTest.GetComponent<Text>().text = "Dead";
             playManagerScript.AddCombo(false);
-            gameObject.SetActive(false);
+            Invoke("RemoveNote", 0.3f);
         }
         
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        // 노트 지속시간이 경과되면 터치 이벤트를 무시
+        if (elapsedTime >= noteDeletingTime)
+        {
+            return;
+        }
+
         touched = true;
         float touchElapsedTime = Time.time - startTime;
         Debug.Log(touchElapsedTime);
@@ -89,19 +99,19 @@ public class SlideNoteJudgementManager : MonoBehaviour, IPointerExitHandler
         {
             judgementTextTest.GetComponent<Text>().text = "Early Choice";
             playManagerScript.AddCombo(true);
-            gameObject.SetActive(false);
+            Invoke("RemoveNote", 0.3f);
         }
         else if(touchElapsedTime >= 0.45f && touchElapsedTime <= 0.55f)
         {
             judgementTextTest.GetComponent<Text>().text = "Alive";
             playManagerScript.AddCombo(true);
-            gameObject.SetActive(false);
+            Invoke("RemoveNote", 0.3f);
         }
         else if(touchElapsedTime > 0.55f ) // && touchElapsedTime <= 0.8f)
         {
             judgementTextTest.GetComponent<Text>().text = "Late Choice";
             playManagerScript.AddCombo(true);
-            gameObject.SetActive(false);
+            Invoke("RemoveNote", 0.3f);
         }
         // else if(touchElapsedTime > 0.8f)
         // {
@@ -110,6 +120,11 @@ public class SlideNoteJudgementManager : MonoBehaviour, IPointerExitHandler
         //     gameObject.SetActive(false);
         // }
         
+    }
+
+    private void RemoveNote()
+    {
+        gameObject.SetActive(false);
     }
 
 }

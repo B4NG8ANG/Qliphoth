@@ -18,6 +18,9 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
     // 스크립트 시작 시각
     private float startTime;
 
+    // 스크립트 시작 후 경과 시간
+    private float elapsedTime;
+
     // 판정선 transform
     private Transform judgementLineTransform;
 
@@ -68,7 +71,7 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
     void Update()
     {
         // 경과 시간 계산
-        float elapsedTime = Time.time - startTime;
+        elapsedTime = Time.time - startTime;
         // 시간 비율 (0 ~ 1) 
         float t = Mathf.Clamp01(elapsedTime / judgementLineComingDuration); 
 
@@ -86,15 +89,15 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
         }
         */
 
-        // 터치가 한번도 되지 않은 상태로 0.8초가 지나면 Dead 판정 후 삭제
-        if(!touched && elapsedTime >= 0.8f)
+        // 터치가 한번도 되지 않은 상태로 롱 노트 지속시간이 초과되면 Dead 판정 후 삭제
+        if(!touched && elapsedTime >= noteDeletingTime)
         {
             judgementTextTest.GetComponent<Text>().text = "Dead";
             playManagerScript.AddCombo(false);
             Invoke("RemoveNote", 0.3f);
         }
 
-        // 롱 노트 지속시간이 초과되면 Alive 판정 후 삭제
+        // 터치가 한번이라도 된 채로 롱 노트 지속시간이 초과되면 Alive 판정 후 삭제
         else if(touched && elapsedTime >= noteDeletingTime && isLongNote)
         {
             // Invoke가 불러와지는 0.3초동안 실행되지 않도록 플래그 변경
@@ -112,8 +115,13 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
     // 노트 터치
     public void OnPointerDown(PointerEventData eventData)
     {
-        touchElapsedTime = Time.time - startTime;
+        // 노트 지속시간이 경과되면 터치 이벤트를 무시
+        if (elapsedTime >= noteDeletingTime)
+        {
+            return;
+        }
 
+        touchElapsedTime = Time.time - startTime;
         touched = true;
 
         if(touchElapsedTime < 0.45f)
@@ -126,18 +134,17 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
             longNoteJudgement = "Alive";
             noteEffect.SetActive(true);
         }
-        else if(touchElapsedTime > 0.55f && touchElapsedTime <= 0.8f)
+        else if(touchElapsedTime > 0.55f) // && touchElapsedTime <= 0.8f)
         {
             longNoteJudgement = "Late Choice";
             noteEffect.SetActive(true);
         }
-        else if(touchElapsedTime > 0.8f)
-        {
-            judgementTextTest.GetComponent<Text>().text = "Dead";
-            playManagerScript.AddCombo(false);
-        }
+        // else if(touchElapsedTime > 0.8f)
+        // {
+        //     judgementTextTest.GetComponent<Text>().text = "Dead";
+        //     playManagerScript.AddCombo(false);
+        // }
 
-        // 롱노트 차는 애니메이션 재생
     }
 
     public void OnPointerUp(PointerEventData eventData)
