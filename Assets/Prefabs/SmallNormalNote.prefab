@@ -197,7 +197,7 @@ MonoBehaviour:
   note: {fileID: 1084247638402067443}
   noteDeletingTime: 1
   touched: 0
-  noteEffectTest: {fileID: 7373052915857421676}
+  noteEffect: {fileID: 7373052915857421676}
 --- !u!1 &1084247638732069847
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,7 +417,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e8fc9d953bf7f3f4a9185bc764e31a06, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3dc2736c5af256f4f951c4cb2dea541b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

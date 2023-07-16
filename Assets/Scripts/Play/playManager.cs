@@ -49,6 +49,9 @@ public class playManager : MonoBehaviour
     public Text comboText;
 
     // 노트가 가진 속성을 작성한 사전
+    Dictionary<int, string[]> chart = new Dictionary<int, string[]>(){};
+
+    // 노트가 가진 속성을 작성한 사전
     Dictionary<int, string[]> Fracture_Ray = new Dictionary<int, string[]>()
     {
         // {노트 순서(key값) , new string[]{노트 종류, 노트가 생성될 시각, 노트가 생성될 vector3 좌표, 노트 번호, 동타 여부, 롱 노트인 경우 지속시간}}
@@ -136,6 +139,8 @@ public class playManager : MonoBehaviour
             slideNotesGameObject.SetActive(false);
         }
 
+        chart = Fracture_Ray;
+
 
     }
 
@@ -146,7 +151,7 @@ public class playManager : MonoBehaviour
         if(isPlaying)
         {
             // 사전에 접근하여 알아낸 노트 생성 시간 - 0.5 + 싱크시간에 노트 생성
-            if(noteCreatTime >= float.Parse(Fracture_Ray[noteCount][1]) - JUDGEMENTTIME + tuneTiming && noteCount == int.Parse(Fracture_Ray[noteCount][3]))
+            if(noteCreatTime >= float.Parse(chart[noteCount][1]) - JUDGEMENTTIME + tuneTiming && noteCount == int.Parse(Fracture_Ray[noteCount][3]))
             {
                 Debug.Log(noteCreatTime);
 

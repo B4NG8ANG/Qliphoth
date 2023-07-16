@@ -97,18 +97,18 @@ public class SlideNoteJudgementManager : MonoBehaviour, IPointerExitHandler
             playManagerScript.AddCombo(true);
             gameObject.SetActive(false);
         }
-        else if(touchElapsedTime > 0.55f && touchElapsedTime <= 0.8f)
+        else if(touchElapsedTime > 0.55f ) // && touchElapsedTime <= 0.8f)
         {
             judgementTextTest.GetComponent<Text>().text = "Late Choice";
             playManagerScript.AddCombo(true);
             gameObject.SetActive(false);
         }
-        else if(touchElapsedTime > 0.8f)
-        {
-            judgementTextTest.GetComponent<Text>().text = "Dead";
-            playManagerScript.AddCombo(false);
-            gameObject.SetActive(false);
-        }
+        // else if(touchElapsedTime > 0.8f)
+        // {
+        //     judgementTextTest.GetComponent<Text>().text = "Dead";
+        //     playManagerScript.AddCombo(false);
+        //     gameObject.SetActive(false);
+        // }
         
     }
 

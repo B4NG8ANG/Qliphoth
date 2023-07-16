@@ -33,14 +33,17 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
     float prevCombingTime; // 마지막으로 계산된 콤보가 올라간 시각
     float touchElapsedTime; // 판정선이 생기고 난 뒤 흐른 시간
 
-    // 터치가 되고 있는지 감지하는 변수
+    // 터치가 되고 있는지 감지하는 플래그 변수
     public bool touched = false;
+
+    // 롱 노트의 처리가 끝났는지 감지하는 플래그 변수
+    public bool isLongNote = true;
 
     // 롱노트의 판정 상태를 저장 할 변수
     public string longNoteJudgement;
 
     // 이펙트 이미지 테스트
-    public GameObject noteEffectTest;
+    public GameObject noteEffect;
 
 
 
@@ -59,7 +62,7 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
         // playManager라는 컴포넌트를 가진 오브젝트중 제일 처음 것을 찾고, 그 컴포넌트를 참조
         playManagerScript = FindObjectOfType<playManager>();
 
-        noteEffectTest.SetActive(false);
+        noteEffect.SetActive(false);
     }
 
     void Update()
@@ -83,7 +86,7 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
         }
         */
 
-        // 터치가 한번도 되지 않은 상태로 롱노트 지속시간이 초과되면 Dead 판정 후 삭제
+        // 터치가 한번도 되지 않은 상태로 0.8초가 지나면 Dead 판정 후 삭제
         if(!touched && elapsedTime >= 0.8f)
         {
             judgementTextTest.GetComponent<Text>().text = "Dead";
@@ -92,8 +95,11 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
         }
 
         // 롱 노트 지속시간이 초과되면 Alive 판정 후 삭제
-        else if(touched && elapsedTime >= noteDeletingTime)
+        else if(touched && elapsedTime >= noteDeletingTime && isLongNote)
         {
+            // Invoke가 불러와지는 0.3초동안 실행되지 않도록 플래그 변경
+            isLongNote = false;
+
             judgementTextTest.GetComponent<Text>().text = longNoteJudgement;
             playManagerScript.AddCombo(true);
             Invoke("RemoveNote", 0.3f);
@@ -113,17 +119,17 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
         if(touchElapsedTime < 0.45f)
         {
             longNoteJudgement = "Early Choice";
-            noteEffectTest.SetActive(true);
+            noteEffect.SetActive(true);
         }
         else if(touchElapsedTime >= 0.45f && touchElapsedTime <= 0.55f)
         {
             longNoteJudgement = "Alive";
-            noteEffectTest.SetActive(true);
+            noteEffect.SetActive(true);
         }
         else if(touchElapsedTime > 0.55f && touchElapsedTime <= 0.8f)
         {
             longNoteJudgement = "Late Choice";
-            noteEffectTest.SetActive(true);
+            noteEffect.SetActive(true);
         }
         else if(touchElapsedTime > 0.8f)
         {
@@ -139,6 +145,7 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
         judgementTextTest.GetComponent<Text>().text = "Dead";
         playManagerScript.AddCombo(false);
         Invoke("RemoveNote", 0.3f);
+        noteEffect.SetActive(false);
     }
 
     private void RemoveNote()

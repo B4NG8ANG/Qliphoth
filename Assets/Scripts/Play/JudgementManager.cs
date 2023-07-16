@@ -32,10 +32,7 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
     public bool touched = false;
 
     // 이펙트 이미지 테스트
-    public GameObject noteEffectTest;
-
-    // 노트가 보일 패널
-    GameObject notePanel;
+    public GameObject noteEffect;
 
     
     void Start()
@@ -46,15 +43,13 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
         // 판정 텍스트 오브젝트 저장 (임시)
         judgementTextTest = GameObject.Find("JudgementTextTest");
 
-        notePanel = GameObject.Find("NotePanel");
-
         // 시작 시간 저장
         startTime = Time.time;
 
         // playManager라는 컴포넌트를 가진 오브젝트중 제일 처음 것을 찾고, 그 컴포넌트를 참조 
         playManagerScript = FindObjectOfType<playManager>();
 
-        noteEffectTest.SetActive(false);
+        noteEffect.SetActive(false);
     }
 
     void Update()
@@ -94,28 +89,28 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
     {
         touched = true;
         float touchElapsedTime = Time.time - startTime;
-        Debug.Log(touchElapsedTime);
+        //Debug.Log(touchElapsedTime);
 
         if(touchElapsedTime < 0.45f)
         {
             judgementTextTest.GetComponent<Text>().text = "Early Choice";
             playManagerScript.AddCombo(true);
             Invoke("RemoveNote", 0.3f);
-            noteEffectTest.SetActive(true);
+            noteEffect.SetActive(true);
         }
         else if(touchElapsedTime >= 0.45f && touchElapsedTime <= 0.55f)
         {
             judgementTextTest.GetComponent<Text>().text = "Alive";
             playManagerScript.AddCombo(true);
             Invoke("RemoveNote", 0.3f);
-            noteEffectTest.SetActive(true);
+            noteEffect.SetActive(true);
         }
-        else if(touchElapsedTime > 0.55f && touchElapsedTime <= 0.8f)
+        else if(touchElapsedTime > 0.55f) // && touchElapsedTime <= 0.8f)
         {
             judgementTextTest.GetComponent<Text>().text = "Late Choice";
             playManagerScript.AddCombo(true);
             Invoke("RemoveNote", 0.3f);
-            noteEffectTest.SetActive(true);
+            noteEffect.SetActive(true);
         }
         // else if(touchElapsedTime > 0.8f)
         // {
