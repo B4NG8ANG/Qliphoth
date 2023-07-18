@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.EventSystems;
+using System;
 
 public class playManager : MonoBehaviour
 {
@@ -48,6 +49,13 @@ public class playManager : MonoBehaviour
     int combo = 0;
     public Text comboText;
 
+    // 총 점수, 노트 한 개당 점수, 점수가 작성될 Text 오브젝트
+    double score = 0;
+    double scorePerNote;
+    public Text scoreText;
+
+    
+
     // 여러 속성을 가진 노트들로 이루어진 사전 형태의 채보
     // {노트 순서(key값) , new string[]{노트 종류, 노트가 생성될 시각, 노트가 생성될 vector3 좌표, 노트 번호, 동타 여부, 롱 노트인 경우 지속시간}}
     Dictionary<int, string[]> chart = new Dictionary<int, string[]>(){};
@@ -57,24 +65,25 @@ public class playManager : MonoBehaviour
     {
         // {노트 순서(key값) , new string[]{노트 종류, 노트가 생성될 시각, 노트가 생성될 vector3 좌표, 노트 번호, 동타 여부, 롱 노트인 경우 지속시간}}
 
-        {0, new string[]{"normalNote", "1.0", "(100,300,0)", "0", "false", ""}},
-        {1, new string[]{"smallNormalNote", "2.0", "(300,300,0)", "1", "false", ""}},
-        {2, new string[]{"slideNote", "3.0", "(100,500,0)", "2", "false", ""}},
-        {3, new string[]{"slideNote", "4.0", "(500,500,0)", "3", "false", ""}},
-        {4, new string[]{"longNote", "5.0", "(600,500,0)", "4", "false", "1.0"}},
-        {5, new string[]{"bigNormalNote", "6.0", "(900,200,0)", "5", "false", ""}},
-        {6, new string[]{"normalNote", "7.0", "(800,200,0)", "6", "false", ""}},
-        {7, new string[]{"normalNote", "8.0", "(900,200,0)", "7", "false", ""}},
-        {8, new string[]{"normalNote", "9.0", "(900,300,0)", "8", "false", ""}},
-        {9, new string[]{"normalNote", "10.0", "(700,400,0)", "9", "false", ""}},
-        {10, new string[]{"slideNote", "11.0", "(800,500,0)", "10", "false", ""}},
-        {11, new string[]{"slideNote", "11.1", "(900,600,0)", "11", "false", ""}},
-        {12, new string[]{"slideNote", "11.2", "(1000,700,0)", "12", "false", ""}},
-        {13, null}
+        // {0, new string[]{"normalNote", "1.0", "(100,300,0)", "0", "false", ""}},
+        // {1, new string[]{"smallNormalNote", "2.0", "(300,300,0)", "1", "false", ""}},
+        // {2, new string[]{"slideNote", "3.0", "(100,500,0)", "2", "false", ""}},
+        // {3, new string[]{"slideNote", "4.0", "(500,500,0)", "3", "false", ""}},
+        // {4, new string[]{"longNote", "5.0", "(600,500,0)", "4", "false", "1.0"}},
+        // {5, new string[]{"bigNormalNote", "6.0", "(900,200,0)", "5", "false", ""}},
+        // {6, new string[]{"normalNote", "7.0", "(800,200,0)", "6", "false", ""}},
+        // {7, new string[]{"normalNote", "8.0", "(900,200,0)", "7", "false", ""}},
+        // {8, new string[]{"normalNote", "9.0", "(900,300,0)", "8", "false", ""}},
+        // {9, new string[]{"normalNote", "10.0", "(700,400,0)", "9", "false", ""}},
+        // {10, new string[]{"slideNote", "11.0", "(800,500,0)", "10", "false", ""}},
+        // {11, new string[]{"slideNote", "11.1", "(900,600,0)", "11", "false", ""}},
+        // {12, new string[]{"slideNote", "11.2", "(1000,700,0)", "12", "false", ""}},
+        // {13, null}
 
-        // {0, new string[]{"normalNote", "1.0", "(300,300,0)", "0", "false", ""}},
-        // {1, new string[]{"longNote", "2.0", "(700,700,0)", "1", "false", "10.0"}},
-        // {2, null}
+        {0, new string[]{"normalNote", "1.0", "(300,300,0)", "0", "false", ""}},
+        {1, new string[]{"longNote", "2.0", "(700,700,0)", "1", "false", "2.0"}},
+        {2, new string[]{"normalNote", "5.0", "(600,600,0)", "2", "false", ""}},
+        {3, null}
         
     };
 
@@ -141,7 +150,10 @@ public class playManager : MonoBehaviour
             slideNotesGameObject.SetActive(false);
         }
 
+        // 이번 곡에 사용할 채보를 chart에 저장
         chart = Fracture_Ray;
+
+        CalculateScore();
 
 
     }
@@ -325,5 +337,34 @@ public class playManager : MonoBehaviour
         }
     }
     
+    public void AddScore(bool notDead)
+    {
+        if(notDead)
+        {
+            score += scorePerNote;
+        }
+        else if(!notDead)
+        {
+            score += scorePerNote / 2;
+        }
+
+        score = Math.Floor(score);
+
+        // 반올림 등에 의해 점수가 100만점이 넘어간 경우, 점수를 100만점으로 취급
+        if (score >= 1000000)
+        {
+            score = 1000000;
+        }
+        
+        // 올얼라이브에 대해 점수를 정확하게 해주는 함수 호출
+
+        scoreText.text = score.ToString();
+    }
+
+    public void CalculateScore()
+    {
+        scorePerNote = 1000000 / (chart.Count - 1);
+        Debug.Log(scorePerNote);
+    }
     
 }

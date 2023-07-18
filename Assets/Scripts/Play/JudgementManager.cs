@@ -49,7 +49,7 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
         // 시작 시간 저장
         startTime = Time.time;
 
-        // playManager라는 컴포넌트를 가진 오브젝트중 제일 처음 것을 찾고, 그 컴포넌트를 참조 
+        // playManager라는 컴포넌트를 가진 오브젝트 중 제일 처음 것을 찾고, 그 컴포넌트를 참조 
         playManagerScript = FindObjectOfType<playManager>();
 
         noteEffect.SetActive(false);
@@ -104,6 +104,7 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
         {
             judgementTextTest.GetComponent<Text>().text = "Early Choice";
             playManagerScript.AddCombo(true);
+            playManagerScript.AddScore(false);
             Invoke("RemoveNote", 0.3f);
             noteEffect.SetActive(true);
         }
@@ -111,6 +112,7 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
         {
             judgementTextTest.GetComponent<Text>().text = "Alive";
             playManagerScript.AddCombo(true);
+            playManagerScript.AddScore(true);
             Invoke("RemoveNote", 0.3f);
             noteEffect.SetActive(true);
         }
@@ -118,6 +120,7 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
         {
             judgementTextTest.GetComponent<Text>().text = "Late Choice";
             playManagerScript.AddCombo(true);
+            playManagerScript.AddScore(false);
             Invoke("RemoveNote", 0.3f);
             noteEffect.SetActive(true);
         }
