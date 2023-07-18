@@ -34,6 +34,8 @@ public class SlideNoteJudgementManager : MonoBehaviour, IPointerExitHandler
     // 터치를 했는지 감지하는 변수
     public bool touched = false;
     
+    // 이펙트 이미지
+    public GameObject noteEffect;
 
     void Start()
     {
@@ -48,6 +50,8 @@ public class SlideNoteJudgementManager : MonoBehaviour, IPointerExitHandler
 
         // playManager라는 컴포넌트를 가진 오브젝트중 제일 처음 것을 찾고, 그 컴포넌트를 참조 
         playManagerScript = FindObjectOfType<playManager>();
+
+        noteEffect.SetActive(false);
 
     }
 
@@ -100,18 +104,21 @@ public class SlideNoteJudgementManager : MonoBehaviour, IPointerExitHandler
             judgementTextTest.GetComponent<Text>().text = "Early Choice";
             playManagerScript.AddCombo(true);
             Invoke("RemoveNote", 0.3f);
+            noteEffect.SetActive(true);
         }
         else if(touchElapsedTime >= 0.45f && touchElapsedTime <= 0.55f)
         {
             judgementTextTest.GetComponent<Text>().text = "Alive";
             playManagerScript.AddCombo(true);
             Invoke("RemoveNote", 0.3f);
+            noteEffect.SetActive(true);
         }
         else if(touchElapsedTime > 0.55f ) // && touchElapsedTime <= 0.8f)
         {
             judgementTextTest.GetComponent<Text>().text = "Late Choice";
             playManagerScript.AddCombo(true);
             Invoke("RemoveNote", 0.3f);
+            noteEffect.SetActive(true);
         }
         // else if(touchElapsedTime > 0.8f)
         // {

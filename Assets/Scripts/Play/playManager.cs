@@ -44,14 +44,15 @@ public class playManager : MonoBehaviour
     GameObject[] longNotes;
     GameObject[] slideNotes;
     
-
+    // 콤보 및 콤보가 작성될 Text 오브젝트
     int combo = 0;
     public Text comboText;
 
-    // 노트가 가진 속성을 작성한 사전
+    // 여러 속성을 가진 노트들로 이루어진 사전 형태의 채보
+    // {노트 순서(key값) , new string[]{노트 종류, 노트가 생성될 시각, 노트가 생성될 vector3 좌표, 노트 번호, 동타 여부, 롱 노트인 경우 지속시간}}
     Dictionary<int, string[]> chart = new Dictionary<int, string[]>(){};
 
-    // 노트가 가진 속성을 작성한 사전
+    // Fracture Ray
     Dictionary<int, string[]> Fracture_Ray = new Dictionary<int, string[]>()
     {
         // {노트 순서(key값) , new string[]{노트 종류, 노트가 생성될 시각, 노트가 생성될 vector3 좌표, 노트 번호, 동타 여부, 롱 노트인 경우 지속시간}}
@@ -66,9 +67,9 @@ public class playManager : MonoBehaviour
         {7, new string[]{"normalNote", "8.0", "(900,200,0)", "7", "false", ""}},
         {8, new string[]{"normalNote", "9.0", "(900,300,0)", "8", "false", ""}},
         {9, new string[]{"normalNote", "10.0", "(700,400,0)", "9", "false", ""}},
-        {10, new string[]{"normalNote", "11.0", "(700,500,0)", "10", "false", ""}},
-        {11, new string[]{"normalNote", "12.0", "(700,600,0)", "11", "false", ""}},
-        {12, new string[]{"normalNote", "13.0", "(700,700,0)", "12", "false", ""}},
+        {10, new string[]{"slideNote", "11.0", "(800,500,0)", "10", "false", ""}},
+        {11, new string[]{"slideNote", "11.1", "(900,600,0)", "11", "false", ""}},
+        {12, new string[]{"slideNote", "11.2", "(1000,700,0)", "12", "false", ""}},
         {13, null}
 
         // {0, new string[]{"normalNote", "1.0", "(300,300,0)", "0", "false", ""}},
@@ -76,6 +77,7 @@ public class playManager : MonoBehaviour
         // {2, null}
         
     };
+
 
     void Start()
     {
@@ -151,31 +153,31 @@ public class playManager : MonoBehaviour
         if(isPlaying)
         {
             // 사전에 접근하여 알아낸 노트 생성 시간 - 0.5 + 싱크시간에 노트 생성
-            if(noteCreatTime >= float.Parse(chart[noteCount][1]) - JUDGEMENTTIME + tuneTiming && noteCount == int.Parse(Fracture_Ray[noteCount][3]))
+            if(noteCreatTime >= float.Parse(chart[noteCount][1]) - JUDGEMENTTIME + tuneTiming && noteCount == int.Parse(chart[noteCount][3]))
             {
                 Debug.Log(noteCreatTime);
 
                 // 사전에 접근하여 노트의 종류 알아내기
-                string noteType = Fracture_Ray[noteCount][0];
+                string noteType = chart[noteCount][0];
 
                 // i) 노트의 종류가 일반 노트인 경우
                 if(noteType == "normalNote")
                 {
-                    normalNotes[noteCount].transform.position = StringToVector3(Fracture_Ray[noteCount][2]);
+                    normalNotes[noteCount].transform.position = StringToVector3(chart[noteCount][2]);
                     normalNotes[noteCount].SetActive(true);
                 }
 
                 // ii) 노트의 종류가 작은 일반 노트인 경우
                 else if(noteType == "smallNormalNote")
                 {
-                    smallNormalNotes[noteCount].transform.position = StringToVector3(Fracture_Ray[noteCount][2]);
+                    smallNormalNotes[noteCount].transform.position = StringToVector3(chart[noteCount][2]);
                     smallNormalNotes[noteCount].SetActive(true);
                 }
 
                 // iii) 노트의 종류가 큰 일반 노트인 경우
                 else if(noteType == "bigNormalNote")
                 {
-                    bigNormalNotes[noteCount].transform.position = StringToVector3(Fracture_Ray[noteCount][2]);
+                    bigNormalNotes[noteCount].transform.position = StringToVector3(chart[noteCount][2]);
                     bigNormalNotes[noteCount].SetActive(true);
                 }
 
@@ -183,15 +185,15 @@ public class playManager : MonoBehaviour
                 // 사전에 접근하여 알아낸 롱 노트 지속시간을 노트에 지정
                 else if(noteType == "longNote")
                 {
-                    longNotes[noteCount].GetComponent<LongNoteJudgementManager>().noteDeletingTime = float.Parse(Fracture_Ray[noteCount][5]);
-                    longNotes[noteCount].transform.position = StringToVector3(Fracture_Ray[noteCount][2]);
+                    longNotes[noteCount].GetComponent<LongNoteJudgementManager>().noteDeletingTime = float.Parse(chart[noteCount][5]);
+                    longNotes[noteCount].transform.position = StringToVector3(chart[noteCount][2]);
                     longNotes[noteCount].SetActive(true);
                 }
 
                 // iiiii) 노트의 종류가 슬라이드 노트인 경우
                 else if(noteType == "slideNote")
                 {
-                    slideNotes[noteCount].transform.position = StringToVector3(Fracture_Ray[noteCount][2]);
+                    slideNotes[noteCount].transform.position = StringToVector3(chart[noteCount][2]);
                     slideNotes[noteCount].SetActive(true);
                 }
 
@@ -199,7 +201,7 @@ public class playManager : MonoBehaviour
 
             }
 
-            if(Fracture_Ray[noteCount] == null)
+            if(chart[noteCount] == null)
             {
                 isPlaying = false;
             }
@@ -222,34 +224,34 @@ public class playManager : MonoBehaviour
             if(isPlaying)
             {
                 // 동타일때만 노트 생성
-                if(Fracture_Ray[noteCount][4] == "true")
+                if(chart[noteCount][4] == "true")
                 {
                     // 사전에 접근하여 알아낸 노트 생성 시간 - 0.5 + 싱크시간에 노트 생성
-                    if(noteCreatTime >= float.Parse(Fracture_Ray[noteCount][1]) - JUDGEMENTTIME + tuneTiming && noteCount == int.Parse(Fracture_Ray[noteCount][3]))
+                    if(noteCreatTime >= float.Parse(chart[noteCount][1]) - JUDGEMENTTIME + tuneTiming && noteCount == int.Parse(chart[noteCount][3]))
                     {
                         Debug.Log(noteCreatTime);
 
                         // 사전에 접근하여 노트의 종류 알아내기
-                        string noteType = Fracture_Ray[noteCount][0];
+                        string noteType = chart[noteCount][0];
 
                         // i) 노트의 종류가 일반 노트인 경우
                         if(noteType == "normalNote")
                         {
-                            normalNotes[noteCount].transform.position = StringToVector3(Fracture_Ray[noteCount][2]);
+                            normalNotes[noteCount].transform.position = StringToVector3(chart[noteCount][2]);
                             normalNotes[noteCount].SetActive(true);
                         }
 
                         // ii) 노트의 종류가 작은 일반 노트인 경우
                         else if(noteType == "smallNormalNote")
                         {
-                            smallNormalNotes[noteCount].transform.position = StringToVector3(Fracture_Ray[noteCount][2]);
+                            smallNormalNotes[noteCount].transform.position = StringToVector3(chart[noteCount][2]);
                             smallNormalNotes[noteCount].SetActive(true);
                         }
 
                         // iii) 노트의 종류가 큰 일반 노트인 경우
                         else if(noteType == "bigNormalNote")
                         {
-                            bigNormalNotes[noteCount].transform.position = StringToVector3(Fracture_Ray[noteCount][2]);
+                            bigNormalNotes[noteCount].transform.position = StringToVector3(chart[noteCount][2]);
                             bigNormalNotes[noteCount].SetActive(true);
                         }
 
@@ -257,22 +259,22 @@ public class playManager : MonoBehaviour
                         // 사전에 접근하여 알아낸 롱 노트 지속시간을 노트에 지정
                         else if(noteType == "longNote")
                         {
-                            longNotes[noteCount].GetComponent<LongNoteJudgementManager>().noteDeletingTime = float.Parse(Fracture_Ray[noteCount][5]);
-                            longNotes[noteCount].transform.position = StringToVector3(Fracture_Ray[noteCount][2]);
+                            longNotes[noteCount].GetComponent<LongNoteJudgementManager>().noteDeletingTime = float.Parse(chart[noteCount][5]);
+                            longNotes[noteCount].transform.position = StringToVector3(chart[noteCount][2]);
                             longNotes[noteCount].SetActive(true);
                         }
 
                         // iiiii) 노트의 종류가 슬라이드 노트인 경우
                         else if(noteType == "slideNote")
                         {
-                            slideNotes[noteCount].transform.position = StringToVector3(Fracture_Ray[noteCount][2]);
+                            slideNotes[noteCount].transform.position = StringToVector3(chart[noteCount][2]);
                             slideNotes[noteCount].SetActive(true);
                         }
 
                         noteCount += 1;
                     }
 
-                    if(Fracture_Ray[noteCount] == null)
+                    if(chart[noteCount] == null)
                     {
                         isPlaying = false;
                     }
