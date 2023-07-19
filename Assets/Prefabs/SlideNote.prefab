@@ -440,4 +440,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scaleDuration: 0.2
-  maxScale: 1.2
+  maxScale: 1.3

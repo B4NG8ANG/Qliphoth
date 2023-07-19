@@ -35,7 +35,7 @@ public class playManager : MonoBehaviour
     float noteCreatTime;
     int noteCount = 0;
 
-    // 곡이 진행중인지 나타내는 플래그
+    // 곡이 진행 중인지 나타내는 플래그
     bool isPlaying;
 
     // 오브젝트 풀링하기 위해 프리팹으로 만드는 노트 오브젝트의 배열
@@ -50,11 +50,15 @@ public class playManager : MonoBehaviour
     public Text comboText;
 
     // 총 점수, 노트 한 개당 점수, 점수가 작성될 Text 오브젝트
-    double score = 0;
-    double scorePerNote;
+    float score = 0;
+    float scorePerNote;
     public Text scoreText;
-
     
+    // alive, early, late, dead 판정을 받은 노트의 개수
+    int alive = 0;
+    int early = 0;
+    int late = 0;
+    int dead = 0;
 
     // 여러 속성을 가진 노트들로 이루어진 사전 형태의 채보
     // {노트 순서(key값) , new string[]{노트 종류, 노트가 생성될 시각, 노트가 생성될 vector3 좌표, 노트 번호, 동타 여부, 롱 노트인 경우 지속시간}}
@@ -84,6 +88,11 @@ public class playManager : MonoBehaviour
         {1, new string[]{"longNote", "2.0", "(700,700,0)", "1", "false", "2.0"}},
         {2, new string[]{"normalNote", "5.0", "(600,600,0)", "2", "false", ""}},
         {3, null}
+
+        // {0, new string[]{"normalNote", "1.0", "(300,300,0)", "0", "false", ""}},
+        // {1, new string[]{"normalNote", "2.0", "(700,700,0)", "1", "false", ""}},
+        // {2, new string[]{"normalNote", "5.0", "(600,600,0)", "2", "false", ""}},
+        // {3, null}
         
     };
 
@@ -216,6 +225,7 @@ public class playManager : MonoBehaviour
             if(chart[noteCount] == null)
             {
                 isPlaying = false;
+                
             }
             
         }
@@ -223,6 +233,7 @@ public class playManager : MonoBehaviour
         else
         {
             // 노래 끝나고 처리할 작업
+            Debug.Log("done");
         }
 
     }
@@ -345,26 +356,52 @@ public class playManager : MonoBehaviour
         }
         else if(!notDead)
         {
-            score += scorePerNote / 2;
+            score += Mathf.Floor(scorePerNote / 2);
         }
-
-        score = Math.Floor(score);
 
         // 반올림 등에 의해 점수가 100만점이 넘어간 경우, 점수를 100만점으로 취급
         if (score >= 1000000)
         {
             score = 1000000;
         }
-        
-        // 올얼라이브에 대해 점수를 정확하게 해주는 함수 호출
 
-        scoreText.text = score.ToString();
+        // All alive일 때 점수를 100만점으로 취급
+        if (alive == chart.Count - 1)
+        {
+            score = 1000000;
+        }
+
+        scoreText.text = score.ToString("0000000");
     }
 
+
+    // 노트 하나 당 점수를 계산
     public void CalculateScore()
     {
         scorePerNote = 1000000 / (chart.Count - 1);
+        scorePerNote = Mathf.Floor(scorePerNote);
         Debug.Log(scorePerNote);
+    }
+
+    // 판정의 개수를 각각 셈
+    public void CountJudgement(string judgement)
+    {
+        if(judgement == "alive")
+        {
+            alive = alive + 1;
+        }
+        else if(judgement == "early")
+        {
+            early = early + 1;
+        }
+        else if(judgement == "late")
+        {
+            late = late + 1;
+        }
+        else if(judgement == "dead")
+        {
+            dead = dead + 1;
+        }
     }
     
 }

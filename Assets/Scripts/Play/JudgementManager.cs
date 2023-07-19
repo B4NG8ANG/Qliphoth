@@ -104,6 +104,7 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
         {
             judgementTextTest.GetComponent<Text>().text = "Early Choice";
             playManagerScript.AddCombo(true);
+            playManagerScript.CountJudgement("early");
             playManagerScript.AddScore(false);
             Invoke("RemoveNote", 0.3f);
             noteEffect.SetActive(true);
@@ -112,6 +113,7 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
         {
             judgementTextTest.GetComponent<Text>().text = "Alive";
             playManagerScript.AddCombo(true);
+            playManagerScript.CountJudgement("alive");
             playManagerScript.AddScore(true);
             Invoke("RemoveNote", 0.3f);
             noteEffect.SetActive(true);
@@ -120,6 +122,7 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
         {
             judgementTextTest.GetComponent<Text>().text = "Late Choice";
             playManagerScript.AddCombo(true);
+            playManagerScript.CountJudgement("late");
             playManagerScript.AddScore(false);
             Invoke("RemoveNote", 0.3f);
             noteEffect.SetActive(true);

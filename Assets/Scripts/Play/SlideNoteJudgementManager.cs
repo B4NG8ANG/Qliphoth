@@ -37,6 +37,8 @@ public class SlideNoteJudgementManager : MonoBehaviour, IPointerExitHandler
     // 이펙트 이미지
     public GameObject noteEffect;
 
+
+
     void Start()
     {
         // 판정선 transform 저장
@@ -89,6 +91,12 @@ public class SlideNoteJudgementManager : MonoBehaviour, IPointerExitHandler
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        // 이미 터치 되어 처리가 된 슬라이드 노트는 터치 이벤트를 무시하여 중복 처리 금지
+        if (touched)
+        {
+            return;
+        }
+
         // 노트 지속시간이 경과되면 터치 이벤트를 무시
         if (elapsedTime >= noteDeletingTime)
         {
@@ -103,6 +111,8 @@ public class SlideNoteJudgementManager : MonoBehaviour, IPointerExitHandler
         {
             judgementTextTest.GetComponent<Text>().text = "Early Choice";
             playManagerScript.AddCombo(true);
+            playManagerScript.CountJudgement("early");
+            playManagerScript.AddScore(false);
             Invoke("RemoveNote", 0.3f);
             noteEffect.SetActive(true);
         }
@@ -110,6 +120,8 @@ public class SlideNoteJudgementManager : MonoBehaviour, IPointerExitHandler
         {
             judgementTextTest.GetComponent<Text>().text = "Alive";
             playManagerScript.AddCombo(true);
+            playManagerScript.CountJudgement("alive");
+            playManagerScript.AddScore(true);
             Invoke("RemoveNote", 0.3f);
             noteEffect.SetActive(true);
         }
@@ -117,6 +129,8 @@ public class SlideNoteJudgementManager : MonoBehaviour, IPointerExitHandler
         {
             judgementTextTest.GetComponent<Text>().text = "Late Choice";
             playManagerScript.AddCombo(true);
+            playManagerScript.CountJudgement("late");
+            playManagerScript.AddScore(false);
             Invoke("RemoveNote", 0.3f);
             noteEffect.SetActive(true);
         }

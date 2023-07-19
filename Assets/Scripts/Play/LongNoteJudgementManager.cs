@@ -104,6 +104,23 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
             isLongNote = false;
 
             judgementTextTest.GetComponent<Text>().text = longNoteJudgement;
+
+            if(longNoteJudgement == "Early Choice")
+            {
+                playManagerScript.CountJudgement("early");
+                playManagerScript.AddScore(false);
+            }
+            else if(longNoteJudgement == "Alive")
+            {
+                playManagerScript.CountJudgement("alive");
+                playManagerScript.AddScore(true);
+            }
+            else if(longNoteJudgement == "Late Choice")
+            {
+                playManagerScript.CountJudgement("late");
+                playManagerScript.AddScore(false);
+            }
+            
             playManagerScript.AddCombo(true);
             Invoke("RemoveNote", 0.3f);
             return;
@@ -149,6 +166,12 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        // 노트 지속시간이 경과되면 터치 중지 이벤트를 무시
+        if (elapsedTime >= noteDeletingTime)
+        {
+            return;
+        }
+
         judgementTextTest.GetComponent<Text>().text = "Dead";
         playManagerScript.AddCombo(false);
         Invoke("RemoveNote", 0.3f);
