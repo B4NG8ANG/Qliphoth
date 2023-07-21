@@ -24,7 +24,7 @@ public class longNoteTouchEffect : MonoBehaviour
         initialScale = transform.localScale;
 
         // 게이지 애니메이션의 지속 시간을 롱 노트의 지속시간에서 판정선이 줄어드는 시간을 뺀 값으로 저장
-        scaleDuration = longNote.GetComponent<LongNoteJudgementManager>().noteDeletingTime - 0.5f;
+        scaleDuration = longNote.GetComponent<LongNoteJudgementManager>().noteDeletingTime;
 
         // 게이지 지속 시간에서 롱 노트를 터치하기 전에 지나간 시간을 뺸 값으로 다시 저장
         scaleDuration -= longNote.GetComponent<LongNoteJudgementManager>().touchElapsedTime;
