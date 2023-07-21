@@ -7,8 +7,8 @@ public class songSelectManager : MonoBehaviour
 {
     public GameObject songSelectPanel; // 곡 선택창
     public GameObject songArtImage; // 곡 앨범 아트 이미지
-    public GameObject birthDifficultyImage; // birth 난이도 버튼 이미지
-    public GameObject lifeDifficultyImage; // life 난이도 버튼 이미지
+    public GameObject normalDifficultyImage; // birth 난이도 버튼 이미지
+    public GameObject hardDifficultyImage; // life 난이도 버튼 이미지
     public GameObject deathDifficultyImage; // death 난이도 버튼 이미지
     public GameObject songName; // 곡 이름 텍스트
     public GameObject songComposerName; // 곡 작곡가 이름 텍스트

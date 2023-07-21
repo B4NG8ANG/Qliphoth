@@ -79,12 +79,13 @@ public class playManager : MonoBehaviour
 
     // 여러 속성을 가진 노트들로 이루어진 사전 형태의 채보
     // {노트 순서(key값) , new string[]{노트 종류, 노트가 생성될 시각, 노트가 생성될 vector3 좌표, 노트 번호, 동타 여부, 롱 노트인 경우 지속시간}}
+    // 롱노트의 지속시간은 싱크에 맞는 시간 + 0.5초로 정해야 함
     Dictionary<int, string[]> chart = new Dictionary<int, string[]>(){};
 
     Dictionary<string, Dictionary<int, string[]>> chartContainer = new Dictionary<string, Dictionary<int, string[]>>();
 
-    // Fracture Ray Birth
-    Dictionary<int, string[]> Fracture_Ray_B = new Dictionary<int, string[]>()
+    // Fracture Ray Normal
+    Dictionary<int, string[]> Fracture_Ray_Normal = new Dictionary<int, string[]>()
     {
         // {노트 순서(key값) , new string[]{노트 종류, 노트가 생성될 시각, 노트가 생성될 vector3 좌표, 노트 번호, 동타 여부, 롱 노트인 경우 지속시간}}
 
@@ -108,15 +109,15 @@ public class playManager : MonoBehaviour
         // {2, new string[]{"normalNote", "5.0", "(600,600,0)", "2", "false", ""}},
         // {3, null}
 
-        {0, new string[]{"normalNote", "1.0", "(300,300,0)", "0", "false", ""}},
-        {1, new string[]{"normalNote", "2.0", "(700,700,0)", "1", "false", ""}},
-        {2, new string[]{"normalNote", "5.0", "(600,600,0)", "2", "false", ""}},
+        {0, new string[]{"longNote", "1.0", "(300,300,0)", "0", "false", "1.0"}},
+        {1, new string[]{"longNote", "2.0", "(700,700,0)", "1", "false", "2.0"}},
+        {2, new string[]{"longNote", "5.0", "(600,600,0)", "2", "false", "5.0"}},
         {3, null}
         
     };
 
-    // Fracture Ray Life
-    Dictionary<int, string[]> Fracture_Ray_L = new Dictionary<int, string[]>()
+    // Fracture Ray Hard
+    Dictionary<int, string[]> Fracture_Ray_Hard = new Dictionary<int, string[]>()
     {
         // {노트 순서(key값) , new string[]{노트 종류, 노트가 생성될 시각, 노트가 생성될 vector3 좌표, 노트 번호, 동타 여부, 롱 노트인 경우 지속시간}}
 
@@ -148,7 +149,7 @@ public class playManager : MonoBehaviour
     };
 
     // Fracture Ray Death
-    Dictionary<int, string[]> Fracture_Ray_D = new Dictionary<int, string[]>()
+    Dictionary<int, string[]> Fracture_Ray_Death = new Dictionary<int, string[]>()
     {
         // {노트 순서(key값) , new string[]{노트 종류, 노트가 생성될 시각, 노트가 생성될 vector3 좌표, 노트 번호, 동타 여부, 롱 노트인 경우 지속시간}}
 
@@ -180,7 +181,7 @@ public class playManager : MonoBehaviour
     };
 
     // Cytus II Death
-    Dictionary<int, string[]> Cytus_II_D = new Dictionary<int, string[]>()
+    Dictionary<int, string[]> Cytus_II_Death = new Dictionary<int, string[]>()
     {
         // {노트 순서(key값) , new string[]{노트 종류, 노트가 생성될 시각, 노트가 생성될 vector3 좌표, 노트 번호, 동타 여부, 롱 노트인 경우 지속시간}}
 
@@ -240,10 +241,10 @@ public class playManager : MonoBehaviour
         songComposerName = mainManager.GetComponent<mainManager>().songComposerName;
 
         // 이번 곡에 사용할 채보를 chart에 저장
-        chartContainer["Fracture_Ray_B"] = Fracture_Ray_B;
-        chartContainer["Fracture_Ray_L"] = Fracture_Ray_L;
-        chartContainer["Fracture_Ray_D"] = Fracture_Ray_D;
-        chartContainer["Cytus_II_D"] = Cytus_II_D;
+        chartContainer["Fracture_Ray_Normal"] = Fracture_Ray_Normal;
+        chartContainer["Fracture_Ray_Hard"] = Fracture_Ray_Hard;
+        chartContainer["Fracture_Ray_Death"] = Fracture_Ray_Death;
+        chartContainer["Cytus_II_Death"] = Cytus_II_Death;
         songDifficulty = mainManager.GetComponent<mainManager>().songDifficulty;
         SetChart();
 
@@ -342,9 +343,10 @@ public class playManager : MonoBehaviour
 
                 // iiii) 노트의 종류가 롱 노트인 경우
                 // 사전에 접근하여 알아낸 롱 노트 지속시간을 노트에 지정
+                // 롱 노트 지속시간에 판정선이 줄어드는 0.5초를 더해줌
                 else if(noteType == "longNote")
                 {
-                    longNotes[noteCount].GetComponent<LongNoteJudgementManager>().noteDeletingTime = float.Parse(chart[noteCount][5]);
+                    longNotes[noteCount].GetComponent<LongNoteJudgementManager>().noteDeletingTime = float.Parse(chart[noteCount][5]) + 0.5f;
                     longNotes[noteCount].transform.position = StringToVector3(chart[noteCount][2]);
                     longNotes[noteCount].SetActive(true);
                 }
@@ -372,7 +374,7 @@ public class playManager : MonoBehaviour
         {
             // 노트가 다 출력 된 뒤 실행
             // 추후에 노트가 다 출력 된 후가 아닌 음악이 다 재생된 뒤로 변경
-            Invoke("ResultSceneChanger", 3.0f);
+            Invoke("ResultSceneChanger", 10.0f);
         }
 
     }
@@ -419,9 +421,10 @@ public class playManager : MonoBehaviour
 
                         // iiii) 노트의 종류가 롱 노트인 경우
                         // 사전에 접근하여 알아낸 롱 노트 지속시간을 노트에 지정
+                        // 롱 노트 지속시간에 판정선이 줄어드는 0.5초를 더해줌
                         else if(noteType == "longNote")
                         {
-                            longNotes[noteCount].GetComponent<LongNoteJudgementManager>().noteDeletingTime = float.Parse(chart[noteCount][5]);
+                            longNotes[noteCount].GetComponent<LongNoteJudgementManager>().noteDeletingTime = float.Parse(chart[noteCount][5]) + 0.5f;
                             longNotes[noteCount].transform.position = StringToVector3(chart[noteCount][2]);
                             longNotes[noteCount].SetActive(true);
                         }

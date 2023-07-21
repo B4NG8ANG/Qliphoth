@@ -350,7 +350,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Life
+  m_Text: Hard
 --- !u!222 &105632393
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -451,7 +451,7 @@ GameObject:
   - component: {fileID: 238694059}
   - component: {fileID: 238694058}
   m_Layer: 5
-  m_Name: D
+  m_Name: Death
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -510,7 +510,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: D
+  m_Text: Death
 --- !u!222 &238694059
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1378,7 +1378,7 @@ GameObject:
   - component: {fileID: 849295540}
   - component: {fileID: 849295539}
   m_Layer: 5
-  m_Name: L
+  m_Name: Hard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1437,7 +1437,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: L
+  m_Text: Hard
 --- !u!222 &849295540
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1646,7 +1646,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Birth
+  m_Text: Normal
 --- !u!222 &954415166
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1966,8 +1966,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   songSelectPanel: {fileID: 1783743559}
   songArtImage: {fileID: 1886216984}
-  birthDifficultyImage: {fileID: 1178464791}
-  lifeDifficultyImage: {fileID: 2071146278}
+  normalDifficultyImage: {fileID: 0}
+  hardDifficultyImage: {fileID: 0}
   deathDifficultyImage: {fileID: 1684804530}
   songName: {fileID: 1098500181}
   songComposerName: {fileID: 180167024}
@@ -1991,7 +1991,7 @@ GameObject:
   - component: {fileID: 1178464796}
   - component: {fileID: 1178464795}
   m_Layer: 5
-  m_Name: BirthDifficultyImage
+  m_Name: NormalDifficultyImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2182,12 +2182,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   songSelectPanel: {fileID: 1783743559}
   songArtImage: {fileID: 1886216984}
-  birthDifficultyImage: {fileID: 1178464791}
-  lifeDifficultyImage: {fileID: 2071146278}
+  normalDifficultyImage: {fileID: 0}
+  hardDifficultyImage: {fileID: 0}
   deathDifficultyImage: {fileID: 1684804530}
   songName: {fileID: 1098500181}
   songComposerName: {fileID: 180167024}
-  songScore: {fileID: 0}
+  songScore: {fileID: 1315620186}
   songProgress: {fileID: 1783794527}
   songRank: {fileID: 423373243}
   selectedSongArtImage: {fileID: 71366598}
@@ -2846,7 +2846,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: Normal
 --- !u!222 &1723347105
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3178,7 +3178,7 @@ GameObject:
   - component: {fileID: 1792546311}
   - component: {fileID: 1792546310}
   m_Layer: 5
-  m_Name: B
+  m_Name: Normal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3237,7 +3237,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: B
+  m_Text: Normal
 --- !u!222 &1792546311
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3670,7 +3670,7 @@ GameObject:
   - component: {fileID: 2071146283}
   - component: {fileID: 2071146282}
   m_Layer: 5
-  m_Name: LifeDifficultyImage
+  m_Name: HardDifficultyImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
