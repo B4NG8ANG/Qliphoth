@@ -895,6 +895,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f79a8ee7f260204d86f80b1b7d9aa03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  backgroundImage: {fileID: 1404371610}
   tuneTiming: 0
   musicClip: {fileID: 8300000, guid: 222050668b3169a4ab1afdb3cbd39039, type: 3}
   bigNormalNote: {fileID: 7531876094015726898, guid: e010a7bbd96b75549950b459930774fa, type: 3}

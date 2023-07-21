@@ -5,21 +5,38 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.EventSystems;
 using System;
+using UnityEngine.SceneManagement;
 
 public class playManager : MonoBehaviour
 {
+    // mainManager 스크립트를 참조하기 위한 변수
+    private GameObject mainManager;
+
+    // Main씬에서 Play씬으로 넘어온 정보들
+    // 곡 이름, 곡 이미지 이름, 곡 작곡가 이름, 곡 난이도(B, L, D)
+    string songName;
+    string songArtImageName;
+    string songComposerName;
+    string songDifficulty;
+
+    // Play씬에 사용할 배경 이미지 (곡 이미지)
+    public Image backgroundImage;
+
+    // Play씬에 사용할 채보 이름
+    string chartName;
+
     // 판정선이 줄어드는 시간
     const float JUDGEMENTTIME = 0.5f;
 
-    // 플레이어가 싱크 조절할 값
+    // 플레이어가 싱크 조절한 값
     public float tuneTiming = 0;
 
     // 노래를 재생하는데 사용할 소스, audioSource에 사용할 음악 클립
     AudioSource audioSource;
-    public AudioClip musicClip;
+    AudioClip musicClip;
 
     // 스크립트 시작 시각
-    private float startTime; 
+    private float startTime;
 
     // 노트 프리팹
     public GameObject bigNormalNote;
@@ -64,8 +81,42 @@ public class playManager : MonoBehaviour
     // {노트 순서(key값) , new string[]{노트 종류, 노트가 생성될 시각, 노트가 생성될 vector3 좌표, 노트 번호, 동타 여부, 롱 노트인 경우 지속시간}}
     Dictionary<int, string[]> chart = new Dictionary<int, string[]>(){};
 
-    // Fracture Ray
-    Dictionary<int, string[]> Fracture_Ray = new Dictionary<int, string[]>()
+    Dictionary<string, Dictionary<int, string[]>> chartContainer = new Dictionary<string, Dictionary<int, string[]>>();
+
+    // Fracture Ray Birth
+    Dictionary<int, string[]> Fracture_Ray_B = new Dictionary<int, string[]>()
+    {
+        // {노트 순서(key값) , new string[]{노트 종류, 노트가 생성될 시각, 노트가 생성될 vector3 좌표, 노트 번호, 동타 여부, 롱 노트인 경우 지속시간}}
+
+        // {0, new string[]{"normalNote", "1.0", "(100,300,0)", "0", "false", ""}},
+        // {1, new string[]{"smallNormalNote", "2.0", "(300,300,0)", "1", "false", ""}},
+        // {2, new string[]{"slideNote", "3.0", "(100,500,0)", "2", "false", ""}},
+        // {3, new string[]{"slideNote", "4.0", "(500,500,0)", "3", "false", ""}},
+        // {4, new string[]{"longNote", "5.0", "(600,500,0)", "4", "false", "1.0"}},
+        // {5, new string[]{"bigNormalNote", "6.0", "(900,200,0)", "5", "false", ""}},
+        // {6, new string[]{"normalNote", "7.0", "(800,200,0)", "6", "false", ""}},
+        // {7, new string[]{"normalNote", "8.0", "(900,200,0)", "7", "false", ""}},
+        // {8, new string[]{"normalNote", "9.0", "(900,300,0)", "8", "false", ""}},
+        // {9, new string[]{"normalNote", "10.0", "(700,400,0)", "9", "false", ""}},
+        // {10, new string[]{"slideNote", "11.0", "(800,500,0)", "10", "false", ""}},
+        // {11, new string[]{"slideNote", "11.1", "(900,600,0)", "11", "false", ""}},
+        // {12, new string[]{"slideNote", "11.2", "(1000,700,0)", "12", "false", ""}},
+        // {13, null}
+
+        // {0, new string[]{"normalNote", "1.0", "(300,300,0)", "0", "false", ""}},
+        // {1, new string[]{"longNote", "2.0", "(700,700,0)", "1", "false", "2.0"}},
+        // {2, new string[]{"normalNote", "5.0", "(600,600,0)", "2", "false", ""}},
+        // {3, null}
+
+        {0, new string[]{"normalNote", "1.0", "(300,300,0)", "0", "false", ""}},
+        {1, new string[]{"normalNote", "2.0", "(700,700,0)", "1", "false", ""}},
+        {2, new string[]{"normalNote", "5.0", "(600,600,0)", "2", "false", ""}},
+        {3, null}
+        
+    };
+
+    // Fracture Ray Life
+    Dictionary<int, string[]> Fracture_Ray_L = new Dictionary<int, string[]>()
     {
         // {노트 순서(key값) , new string[]{노트 종류, 노트가 생성될 시각, 노트가 생성될 vector3 좌표, 노트 번호, 동타 여부, 롱 노트인 경우 지속시간}}
 
@@ -96,16 +147,108 @@ public class playManager : MonoBehaviour
         
     };
 
+    // Fracture Ray Death
+    Dictionary<int, string[]> Fracture_Ray_D = new Dictionary<int, string[]>()
+    {
+        // {노트 순서(key값) , new string[]{노트 종류, 노트가 생성될 시각, 노트가 생성될 vector3 좌표, 노트 번호, 동타 여부, 롱 노트인 경우 지속시간}}
+
+        {0, new string[]{"normalNote", "1.0", "(100,300,0)", "0", "false", ""}},
+        {1, new string[]{"smallNormalNote", "2.0", "(300,300,0)", "1", "false", ""}},
+        {2, new string[]{"slideNote", "3.0", "(100,500,0)", "2", "false", ""}},
+        {3, new string[]{"slideNote", "4.0", "(500,500,0)", "3", "false", ""}},
+        {4, new string[]{"longNote", "5.0", "(600,500,0)", "4", "false", "1.0"}},
+        {5, new string[]{"bigNormalNote", "6.0", "(900,200,0)", "5", "false", ""}},
+        {6, new string[]{"normalNote", "7.0", "(800,200,0)", "6", "false", ""}},
+        {7, new string[]{"normalNote", "8.0", "(900,200,0)", "7", "false", ""}},
+        {8, new string[]{"normalNote", "9.0", "(900,300,0)", "8", "false", ""}},
+        {9, new string[]{"normalNote", "10.0", "(700,400,0)", "9", "false", ""}},
+        {10, new string[]{"slideNote", "11.0", "(800,500,0)", "10", "false", ""}},
+        {11, new string[]{"slideNote", "11.1", "(900,600,0)", "11", "false", ""}},
+        {12, new string[]{"slideNote", "11.2", "(1000,700,0)", "12", "false", ""}},
+        {13, null}
+
+        // {0, new string[]{"normalNote", "1.0", "(300,300,0)", "0", "false", ""}},
+        // {1, new string[]{"longNote", "2.0", "(700,700,0)", "1", "false", "2.0"}},
+        // {2, new string[]{"normalNote", "5.0", "(600,600,0)", "2", "false", ""}},
+        // {3, null}
+
+        // {0, new string[]{"normalNote", "1.0", "(300,300,0)", "0", "false", ""}},
+        // {1, new string[]{"normalNote", "2.0", "(700,700,0)", "1", "false", ""}},
+        // {2, new string[]{"normalNote", "5.0", "(600,600,0)", "2", "false", ""}},
+        // {3, null}
+        
+    };
+
+    // Cytus II Death
+    Dictionary<int, string[]> Cytus_II_D = new Dictionary<int, string[]>()
+    {
+        // {노트 순서(key값) , new string[]{노트 종류, 노트가 생성될 시각, 노트가 생성될 vector3 좌표, 노트 번호, 동타 여부, 롱 노트인 경우 지속시간}}
+
+        // {0, new string[]{"normalNote", "1.0", "(100,300,0)", "0", "false", ""}},
+        // {1, new string[]{"smallNormalNote", "2.0", "(300,300,0)", "1", "false", ""}},
+        // {2, new string[]{"slideNote", "3.0", "(100,500,0)", "2", "false", ""}},
+        // {3, new string[]{"slideNote", "4.0", "(500,500,0)", "3", "false", ""}},
+        // {4, new string[]{"longNote", "5.0", "(600,500,0)", "4", "false", "1.0"}},
+        // {5, new string[]{"bigNormalNote", "6.0", "(900,200,0)", "5", "false", ""}},
+        // {6, new string[]{"normalNote", "7.0", "(800,200,0)", "6", "false", ""}},
+        // {7, new string[]{"normalNote", "8.0", "(900,200,0)", "7", "false", ""}},
+        // {8, new string[]{"normalNote", "9.0", "(900,300,0)", "8", "false", ""}},
+        // {9, new string[]{"normalNote", "10.0", "(700,400,0)", "9", "false", ""}},
+        // {10, new string[]{"slideNote", "11.0", "(800,500,0)", "10", "false", ""}},
+        // {11, new string[]{"slideNote", "11.1", "(900,600,0)", "11", "false", ""}},
+        // {12, new string[]{"slideNote", "11.2", "(1000,700,0)", "12", "false", ""}},
+        // {13, null}
+
+        // {0, new string[]{"normalNote", "1.0", "(300,300,0)", "0", "false", ""}},
+        // {1, new string[]{"longNote", "2.0", "(700,700,0)", "1", "false", "2.0"}},
+        // {2, new string[]{"normalNote", "5.0", "(600,600,0)", "2", "false", ""}},
+        // {3, null}
+
+        // {0, new string[]{"normalNote", "1.0", "(300,300,0)", "0", "false", ""}},
+        // {1, new string[]{"normalNote", "2.0", "(700,700,0)", "1", "false", ""}},
+        // {2, new string[]{"normalNote", "5.0", "(600,600,0)", "2", "false", ""}},
+        // {3, null}
+
+        {0, new string[]{"slideNote", "1.0", "(300,300,0)", "0", "false", ""}},
+        {1, new string[]{"slideNote", "2.0", "(700,700,0)", "1", "false", ""}},
+        {2, new string[]{"slideNote", "5.0", "(600,600,0)", "2", "false", ""}},
+        {3, null}
+        
+    };
+
 
     void Start()
     {
+        // mainManager 오브젝트를 찾음 
+        mainManager = GameObject.Find("MainManager");
+
         // 동타 노트 생성을 위한 2번째 Update()
         StartCoroutine(CustomUpdate());
 
         // 음원 재생
         audioSource = GetComponent<AudioSource>();
+        songName = mainManager.GetComponent<mainManager>().songName;
+        musicClip = Resources.Load<AudioClip>("Audio/PlayableSong/" + songName);
         audioSource.clip = musicClip;
         audioSource.Play();
+
+        // 배경 화면 설정
+        songArtImageName = mainManager.GetComponent<mainManager>().songArtImageName;
+        backgroundImage.sprite = Resources.Load<Sprite>("Play/SongArt/" + songArtImageName);
+
+        // 작곡가 이름 저장
+        songComposerName = mainManager.GetComponent<mainManager>().songComposerName;
+
+        // 이번 곡에 사용할 채보를 chart에 저장
+        chartContainer["Fracture_Ray_B"] = Fracture_Ray_B;
+        chartContainer["Fracture_Ray_L"] = Fracture_Ray_L;
+        chartContainer["Fracture_Ray_D"] = Fracture_Ray_D;
+        chartContainer["Cytus_II_D"] = Cytus_II_D;
+        songDifficulty = mainManager.GetComponent<mainManager>().songDifficulty;
+        SetChart();
+
+        // 이번 곡의 노트 하나당 점수 계산
+        CalculateScore();
 
         // 시작 시간 저장
         startTime = Time.time;
@@ -158,14 +301,9 @@ public class playManager : MonoBehaviour
             slideNotesGameObject.transform.SetParent(notePanel.transform, false);
             slideNotesGameObject.SetActive(false);
         }
-
-        // 이번 곡에 사용할 채보를 chart에 저장
-        chart = Fracture_Ray;
-
-        CalculateScore();
-
-
+        
     }
+    
 
     void Update()
     {
@@ -232,8 +370,9 @@ public class playManager : MonoBehaviour
 
         else
         {
-            // 노래 끝나고 처리할 작업
-            Debug.Log("done");
+            // 노트가 다 출력 된 뒤 실행
+            // 추후에 노트가 다 출력 된 후가 아닌 음악이 다 재생된 뒤로 변경
+            Invoke("ResultSceneChanger", 3.0f);
         }
 
     }
@@ -380,7 +519,7 @@ public class playManager : MonoBehaviour
     {
         scorePerNote = 1000000 / (chart.Count - 1);
         scorePerNote = Mathf.Floor(scorePerNote);
-        Debug.Log(scorePerNote);
+        Debug.Log("노트당 점수" + scorePerNote);
     }
 
     // 판정의 개수를 각각 셈
@@ -402,6 +541,29 @@ public class playManager : MonoBehaviour
         {
             dead = dead + 1;
         }
+    }
+
+    public void SetChart()
+    {
+        // 곡 이름과 난이도를 조합해서 차트 이름에 해당하는 새 문자열 생성
+        string replaceSongName = songName.Replace(" ", "_");
+        replaceSongName += "_";
+        chartName = replaceSongName + songDifficulty;
+
+        Debug.Log(chartName);
+
+        if (chartContainer.ContainsKey(chartName))
+        {
+            chart = chartContainer[chartName];
+
+        }
+
+    }
+
+
+    public void ResultSceneChanger()
+    {
+        SceneManager.LoadScene("Result");
     }
     
 }

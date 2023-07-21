@@ -20,25 +20,28 @@ public class songSelectManager : MonoBehaviour
     public GameObject selectedSongName; // 선택된 곡 이름 텍스트
     public GameObject selectedSongComposer; // 선택된 곡 이름 텍스트
 
-
-    // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
 
+    // 곡 아이콘 클릭시 호출
     public void onSongSelectButtonClick()
-    {
+    { 
+        // 곡 선택 패널 활성화
         songSelectPanel.SetActive(true);
-        songArtImage.GetComponent<Image>().sprite = selectedSongArtImage.GetComponent<Image>().sprite;
-        songName.GetComponent<Text>().text = selectedSongName.GetComponent<Text>().text;
-        songComposerName.GetComponent<Text>().text = selectedSongComposer.GetComponent<Text>().text;
+
+        // 곡 선택창의 정보들 설정
+        songArtImage.GetComponent<Image>().sprite = selectedSongArtImage.GetComponent<Image>().sprite; // 곡 이미지
+        songName.GetComponent<Text>().text = selectedSongName.GetComponent<Text>().text; // 곡 이름
+        songComposerName.GetComponent<Text>().text = selectedSongComposer.GetComponent<Text>().text; // 곡 작곡가 이름
+
+        // 곡에서 받은 점수, 달성도, 랭크를 받아와서 여기서 보여줘야함
     }
 
 }
