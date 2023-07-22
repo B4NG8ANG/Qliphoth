@@ -123,6 +123,50 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &68806022
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 68806023}
+  - component: {fileID: 68806024}
+  m_Layer: 0
+  m_Name: ChartManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &68806023
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 68806022}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 918.18866, y: 534.7235, z: 7.996707}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &68806024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 68806022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d96cea65b42c5734fadbcc67534296a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &603326966 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7531876094015726897, guid: e010a7bbd96b75549950b459930774fa, type: 3}
@@ -897,7 +941,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundImage: {fileID: 1404371610}
   tuneTiming: 0
-  musicClip: {fileID: 8300000, guid: 222050668b3169a4ab1afdb3cbd39039, type: 3}
   bigNormalNote: {fileID: 7531876094015726898, guid: e010a7bbd96b75549950b459930774fa, type: 3}
   normalNote: {fileID: 3676836465749018980, guid: 6e6c18e600e95d140ba307617fdb54ff, type: 3}
   smallNormalNote: {fileID: 1084247638402067443, guid: cd5ad9e92c90e3046904f3daf197e24b, type: 3}
