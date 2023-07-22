@@ -246,6 +246,16 @@ public class playManager : MonoBehaviour
             Invoke("ResultSceneChanger", 10.0f);
         }
 
+        // 게임이 멈춘 상태라면 음악을 일시정지하고, 진행 중인 상태라면 음악을 재생
+        if (Time.timeScale == 0f)
+        {
+            audioSource.Pause();
+        }
+        else
+        {
+            audioSource.UnPause();
+        }
+
     }
 
     IEnumerator CustomUpdate()

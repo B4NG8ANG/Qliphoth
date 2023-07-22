@@ -99,12 +99,13 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
             Invoke("RemoveNote", 0.3f);
         }
 
-        // 터치가 한번이라도 된 채로 롱 노트 지속시간이 초과되면 Alive 판정 후 삭제
+        // 터치가 한번이라도 된 채로 롱 노트 지속시간이 초과되면 판정 후 삭제
         else if(touched && elapsedTime >= noteDeletingTime && isLongNote)
         {
             // Invoke가 불러와지는 0.3초동안 실행되지 않도록 플래그 변경
             isLongNote = false;
 
+            // 판정 텍스트 표시
             judgementTextTest.GetComponent<Text>().text = longNoteJudgement;
 
             if(longNoteJudgement == "Early Choice")
