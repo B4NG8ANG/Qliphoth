@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class songSelectManager : MonoBehaviour
 {
+    public GameObject songSelectButtonObject; // 곡 선택 버튼
     public GameObject songSelectPanel; // 곡 선택창
     public GameObject songArtImage; // 곡 앨범 아트 이미지
     public GameObject normalDifficultyImage; // birth 난이도 버튼 이미지
@@ -30,9 +31,17 @@ public class songSelectManager : MonoBehaviour
         
     }
 
-    // 곡 아이콘 클릭시 호출
+    // 곡 선택 아이콘 클릭시 호출
     public void onSongSelectButtonClick()
-    { 
+    {
+        // 곡 선택 아이콘 클릭시 곡 이미지가 보이지 않는 상태였다면 곡 이미지를 보여줌
+        if(!selectedSongArtImage.activeSelf)
+        {
+            selectedSongArtImage.SetActive(true);
+            songSelectButtonObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/SelectedSongSelectButtonImage");
+            return;
+        }
+
         // 곡 선택 패널 활성화
         songSelectPanel.SetActive(true);
 
@@ -42,6 +51,13 @@ public class songSelectManager : MonoBehaviour
         songComposerName.GetComponent<Text>().text = selectedSongComposer.GetComponent<Text>().text; // 곡 작곡가 이름
 
         // 곡에서 받은 점수, 달성도, 랭크를 받아와서 여기서 보여줘야함
+    }
+
+    // 활성화 된 곡 이미지 버튼 클릭시 호출 
+    public void onSongImageButtonClick()
+    {
+        selectedSongArtImage.SetActive(false);
+        songSelectButtonObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/SongSelectButtonImage");
     }
 
 }

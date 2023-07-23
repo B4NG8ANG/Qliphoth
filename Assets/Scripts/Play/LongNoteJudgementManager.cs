@@ -182,6 +182,9 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
             return;
         }
 
+        // 롱노트를 놓친 경우 Update의 판정 계산 조건문에 들어가지 않도록 지정
+        isLongNote = false;
+
         judgementTextTest.GetComponent<Text>().text = "Dead";
         playManagerScript.AddCombo(false);
         Invoke("RemoveNote", 0.3f);
