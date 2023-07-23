@@ -8,6 +8,7 @@ public class enterPlay : MonoBehaviour
 
     public void onPlayButtonClick()
     {
-        SceneManager.LoadScene("Play");
+        //SceneManager.LoadScene("Play");
+        SceneChangeEffectManager.instance.FadeToScene("Play");
     }
 }

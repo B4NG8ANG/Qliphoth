@@ -34,8 +34,10 @@ public class pauseManager : MonoBehaviour
     public void onExitButtonClick()
     {
         pausePanel.SetActive(false);
+        //SceneManager.LoadScene("Main");
         Time.timeScale = 1f;
-        SceneManager.LoadScene("Main");
+        SceneChangeEffectManager.instance.FadeToScene("Main");
+        
     }
 
 }

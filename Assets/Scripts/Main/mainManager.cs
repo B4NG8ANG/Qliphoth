@@ -51,6 +51,7 @@ public class mainManager : MonoBehaviour
         songComposerNameObject = GameObject.Find("SelectedSongComposerName"); // 곡 작곡가 텍스트 오브젝트
         difficultyImageObject = GameObject.Find("SelectedSongDifficulty"); // 곡 난이도 텍스트 오브젝트
 
+        // 변수에 데이터를 담아두고, 다른 씬에서 꺼내서 사용
         if(songSelectPanel != null)
         {
             if(songSelectPanel.activeSelf)

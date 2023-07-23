@@ -25,6 +25,9 @@ public class playManager : MonoBehaviour
     // Play씬에 사용할 배경 이미지 (곡 이미지)
     public Image backgroundImage;
 
+    // 재시작 카운트다운 오브젝트
+    public GameObject restartCountdownText;
+
     // Play씬에 사용할 채보 이름
     string chartName;
 
@@ -90,6 +93,8 @@ public class playManager : MonoBehaviour
 
     void Start()
     {
+        
+
         // mainManager 오브젝트를 찾음 
         mainManager = GameObject.Find("MainManager");
 
@@ -171,6 +176,9 @@ public class playManager : MonoBehaviour
             slideNotesGameObject.transform.SetParent(notePanel.transform, false);
             slideNotesGameObject.SetActive(false);
         }
+
+        Time.timeScale = 0f;
+        restartCountdownText.SetActive(true);
         
     }
     
