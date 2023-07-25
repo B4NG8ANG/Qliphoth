@@ -17,7 +17,7 @@ public class difficultyManager : MonoBehaviour
 
     public void SetDifficulty()
     {
-        GameObject SelectedSongDifficulty = GameObject.Find("SelectedSongDifficulty");
+        GameObject SelectedSongDifficulty = GameObject.Find("SongDifficulty");
         SelectedSongDifficulty.GetComponent<Text>().text = transform.GetChild(0).GetComponent<Text>().text;
     }
 }

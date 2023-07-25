@@ -46,10 +46,10 @@ public class mainManager : MonoBehaviour
     {   
         // 곡 정보를 매 프레임마다 갱신
         songSelectPanel = GameObject.Find("SongSelectPanel"); // 곡 선택창 패널
-        songNameObject = GameObject.Find("SelectedSongName"); // 곡 이름 텍스트 오브젝트
-        songArtImageObject = GameObject.Find("SelectedSongArtImage"); // 곡 이미지 이미지 오브젝트
-        songComposerNameObject = GameObject.Find("SelectedSongComposerName"); // 곡 작곡가 텍스트 오브젝트
-        difficultyImageObject = GameObject.Find("SelectedSongDifficulty"); // 곡 난이도 텍스트 오브젝트
+        songNameObject = GameObject.Find("SongName"); // 곡 이름 텍스트 오브젝트
+        songArtImageObject = GameObject.Find("SongArtImage"); // 곡 이미지 이미지 오브젝트
+        songComposerNameObject = GameObject.Find("SongComposerName"); // 곡 작곡가 텍스트 오브젝트
+        difficultyImageObject = GameObject.Find("SongDifficulty"); // 곡 난이도 텍스트 오브젝트
 
         // 변수에 데이터를 담아두고, 다른 씬에서 꺼내서 사용
         if(songSelectPanel != null)
