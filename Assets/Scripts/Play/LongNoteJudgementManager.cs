@@ -91,8 +91,8 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
         }
         */
 
-        // 터치가 한번도 되지 않은 상태로 롱 노트 지속시간이 초과되면 Dead 판정 후 삭제
-        if(!touched && elapsedTime >= noteDeletingTime)
+        // 터치가 한번도 되지 않은 상태로 1초가 지나면 Dead 판정 후 삭제
+        if(!touched && elapsedTime >= 1.0f)
         {
             judgementTextTest.GetComponent<Text>().text = "Dead";
             playManagerScript.AddCombo(false);

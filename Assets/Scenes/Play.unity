@@ -1424,6 +1424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backgroundImage: {fileID: 1404371610}
+  pausePanel: {fileID: 1177737188}
   restartCountdownText: {fileID: 535953102}
   tuneTiming: 0
   bigNormalNote: {fileID: 7531876094015726898, guid: e010a7bbd96b75549950b459930774fa, type: 3}

@@ -25,6 +25,9 @@ public class playManager : MonoBehaviour
     // Play씬에 사용할 배경 이미지 (곡 이미지)
     public Image backgroundImage;
 
+    // 일시정지 패널 오브젝트
+    public GameObject pausePanel;
+
     // 재시작 카운트다운 오브젝트
     public GameObject restartCountdownText;
 
@@ -37,9 +40,10 @@ public class playManager : MonoBehaviour
     // 플레이어가 싱크 조절한 값
     public float tuneTiming = 0;
 
-    // 노래를 재생하는데 사용할 소스, audioSource에 사용할 음악 클립
+    // 노래를 재생하는데 사용할 소스, audioSource에 사용할 음악 클립, 음악의 길이
     AudioSource audioSource;
     AudioClip musicClip;
+    float musicLength;
 
     // 스크립트 시작 시각
     private float startTime;
@@ -58,8 +62,9 @@ public class playManager : MonoBehaviour
     float noteCreatTime;
     int noteCount = 0;
 
-    // 곡이 진행 중인지 나타내는 플래그
+    // 게임, 곡이 진행 중인지 나타내는 플래그
     bool isPlaying;
+    private bool isMusicFinished = false;
 
     // 오브젝트 풀링하기 위해 프리팹으로 만드는 노트 오브젝트의 배열
     GameObject[] normalNotes;
@@ -94,7 +99,6 @@ public class playManager : MonoBehaviour
     void Start()
     {
         
-
         // mainManager 오브젝트를 찾음 
         mainManager = GameObject.Find("MainManager");
 
@@ -109,6 +113,7 @@ public class playManager : MonoBehaviour
         songName = mainManager.GetComponent<mainManager>().songName;
         musicClip = Resources.Load<AudioClip>("Audio/PlayableSong/" + songName);
         audioSource.clip = musicClip;
+        musicLength = musicClip.length;
         audioSource.Play();
 
         // 배경 화면 설정
@@ -242,17 +247,16 @@ public class playManager : MonoBehaviour
             if(chart[noteCount] == null)
             {
                 isPlaying = false;
-                
             }
-            
+
         }
 
-        else
+        if(noteCreatTime >= musicLength && !isMusicFinished)
         {
-            // 노트가 다 출력 된 뒤 실행
-            // 추후에 노트가 다 출력 된 후가 아닌 음악이 다 재생된 뒤로 변경
-            Invoke("ResultSceneChanger", 10.0f);
+            isMusicFinished = true;
+            Invoke("ResultSceneChanger", 3.0f);
         }
+        
 
         // 게임이 멈춘 상태라면 음악을 일시정지하고, 진행 중인 상태라면 음악을 재생
         if (Time.timeScale == 0f)
@@ -456,7 +460,7 @@ public class playManager : MonoBehaviour
 
     public void ResultSceneChanger()
     {
-        SceneManager.LoadScene("Result");
+        SceneChangeEffectManager.instance.FadeToScene("Result");
     }
     
 }

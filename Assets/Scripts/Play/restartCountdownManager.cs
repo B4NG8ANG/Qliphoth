@@ -38,7 +38,7 @@ public class restartCountdownManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(1f);
 
         // 타이머가 끝나면 게임 재개
-        Time.timeScale = 1f;
         restartCountdownText.SetActive(false);
+        Time.timeScale = 1f;
     }
 }
