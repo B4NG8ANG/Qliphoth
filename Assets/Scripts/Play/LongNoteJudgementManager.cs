@@ -96,6 +96,7 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
         {
             judgementTextTest.GetComponent<Text>().text = "Dead";
             playManagerScript.AddCombo(false);
+            playManagerScript.CountJudgement("dead");
             Invoke("RemoveNote", 0.3f);
         }
 
@@ -187,6 +188,7 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
 
         judgementTextTest.GetComponent<Text>().text = "Dead";
         playManagerScript.AddCombo(false);
+        playManagerScript.CountJudgement("dead");
         Invoke("RemoveNote", 0.3f);
         noteEffectFirst.SetActive(false);
     }

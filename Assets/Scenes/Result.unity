@@ -194,7 +194,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: S
+  m_Text: 
 --- !u!222 &87235667
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 180500570}
   - component: {fileID: 180500569}
   m_Layer: 5
-  m_Name: Image (4)
+  m_Name: ResultRestartButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -234,7 +234,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1487258409}
-  m_RootOrder: 19
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -291,7 +291,7 @@ GameObject:
   - component: {fileID: 223242824}
   - component: {fileID: 223242823}
   m_Layer: 5
-  m_Name: Text (Legacy) (6)
+  m_Name: Late
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -310,12 +310,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1487258409}
-  m_RootOrder: 7
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 200, y: -240}
-  m_SizeDelta: {x: 300, y: 50}
+  m_AnchoredPosition: {x: 175, y: -300}
+  m_SizeDelta: {x: 250, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &223242823
 MonoBehaviour:
@@ -371,7 +371,7 @@ GameObject:
   - component: {fileID: 243815386}
   - component: {fileID: 243815385}
   m_Layer: 5
-  m_Name: Image
+  m_Name: ResultSongArtImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -447,7 +447,7 @@ GameObject:
   - component: {fileID: 343397033}
   - component: {fileID: 343397032}
   m_Layer: 5
-  m_Name: Text (Legacy) (10)
+  m_Name: AliveNum
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -466,7 +466,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1487258409}
-  m_RootOrder: 11
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -500,13 +500,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 4
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 2
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1000
+  m_Text: 0
 --- !u!222 &343397033
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -595,7 +595,7 @@ GameObject:
   - component: {fileID: 405680867}
   - component: {fileID: 405680866}
   m_Layer: 5
-  m_Name: Text (Legacy) (12)
+  m_Name: LateNum
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -648,13 +648,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 4
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 2
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1000
+  m_Text: 0
 --- !u!222 &405680867
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -675,7 +675,7 @@ GameObject:
   - component: {fileID: 423708271}
   - component: {fileID: 423708270}
   m_Layer: 5
-  m_Name: Text (Legacy) (5)
+  m_Name: Early
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -694,12 +694,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1487258409}
-  m_RootOrder: 6
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 200, y: -180}
-  m_SizeDelta: {x: 300, y: 50}
+  m_AnchoredPosition: {x: 175, y: -240}
+  m_SizeDelta: {x: 250, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &423708270
 MonoBehaviour:
@@ -839,7 +839,7 @@ GameObject:
   - component: {fileID: 496435422}
   - component: {fileID: 496435421}
   m_Layer: 5
-  m_Name: Text (Legacy) (13)
+  m_Name: DeadNum
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -858,7 +858,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1487258409}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -892,13 +892,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 4
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 2
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1000
+  m_Text: 0
 --- !u!222 &496435422
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -995,7 +995,7 @@ GameObject:
   - component: {fileID: 533995185}
   - component: {fileID: 533995184}
   m_Layer: 5
-  m_Name: Image (2)
+  m_Name: Highscore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1015,7 +1015,7 @@ RectTransform:
   m_Children:
   - {fileID: 1503049929}
   m_Father: {fileID: 1487258409}
-  m_RootOrder: 17
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1072,7 +1072,7 @@ GameObject:
   - component: {fileID: 584975510}
   - component: {fileID: 584975509}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: ResultSongName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1091,7 +1091,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1487258409}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1140,86 +1140,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 584975507}
   m_CullTransparentMesh: 1
---- !u!1 &712865404
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 712865405}
-  - component: {fileID: 712865407}
-  - component: {fileID: 712865406}
-  m_Layer: 5
-  m_Name: Text (Legacy)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &712865405
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 712865404}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1487258409}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 450, y: 250}
-  m_SizeDelta: {x: 800, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &712865406
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 712865404}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 40
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 4
-    m_MaxSize: 40
-    m_Alignment: 0
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: "\uC791\uACE1\uAC00"
---- !u!222 &712865407
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 712865404}
-  m_CullTransparentMesh: 1
 --- !u!1 &767896522
 GameObject:
   m_ObjectHideFlags: 0
@@ -1232,7 +1152,7 @@ GameObject:
   - component: {fileID: 767896525}
   - component: {fileID: 767896524}
   m_Layer: 5
-  m_Name: Text (Legacy) (1)
+  m_Name: ResultSongScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1291,7 +1211,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1000000
+  m_Text: 0000000
 --- !u!222 &767896525
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1312,7 +1232,7 @@ GameObject:
   - component: {fileID: 784283985}
   - component: {fileID: 784283984}
   m_Layer: 5
-  m_Name: Image (3)
+  m_Name: ResultSongDifficulty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1331,7 +1251,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1487258409}
-  m_RootOrder: 18
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1358,7 +1278,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1110bee18800eda47b8326dc8990c59a, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1388,7 +1308,7 @@ GameObject:
   - component: {fileID: 826513710}
   - component: {fileID: 826513709}
   m_Layer: 5
-  m_Name: Text (Legacy) (9)
+  m_Name: MaxComboNum
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1407,7 +1327,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1487258409}
-  m_RootOrder: 10
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1441,13 +1361,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 4
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 2
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1000
+  m_Text: 0
 --- !u!222 &826513710
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1456,6 +1376,59 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 826513707}
   m_CullTransparentMesh: 1
+--- !u!1 &851969620
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 851969621}
+  - component: {fileID: 851969622}
+  m_Layer: 0
+  m_Name: ResultManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &851969621
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 851969620}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 878.7632, y: 496.90076, z: 0.58075666}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &851969622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 851969620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d4ffef213ade3c44b9f07c4ab3ddf5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resultSongArtImage: {fileID: 243815383}
+  resultSongDifficulty: {fileID: 784283982}
+  resultSongName: {fileID: 584975507}
+  resultSongScore: {fileID: 767896522}
+  resultComboNum: {fileID: 826513707}
+  resultAliveNum: {fileID: 343397030}
+  resultEarlyNum: {fileID: 1947371989}
+  resultLateNum: {fileID: 405680864}
+  resultDeadNum: {fileID: 496435419}
 --- !u!1 &852505567
 GameObject:
   m_ObjectHideFlags: 0
@@ -1468,7 +1441,7 @@ GameObject:
   - component: {fileID: 852505570}
   - component: {fileID: 852505569}
   m_Layer: 5
-  m_Name: Text (Legacy) (7)
+  m_Name: Dead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1487,12 +1460,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1487258409}
-  m_RootOrder: 8
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 200, y: -300}
-  m_SizeDelta: {x: 300, y: 50}
+  m_AnchoredPosition: {x: 175, y: -360}
+  m_SizeDelta: {x: 250, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &852505569
 MonoBehaviour:
@@ -1628,7 +1601,7 @@ GameObject:
   - component: {fileID: 1310287896}
   - component: {fileID: 1310287895}
   m_Layer: 5
-  m_Name: Text (Legacy) (8)
+  m_Name: MaxCombo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1647,7 +1620,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1487258409}
-  m_RootOrder: 9
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1790,23 +1763,22 @@ RectTransform:
   m_Children:
   - {fileID: 498466431}
   - {fileID: 243815384}
+  - {fileID: 784283983}
   - {fileID: 584975508}
-  - {fileID: 712865405}
   - {fileID: 767896523}
-  - {fileID: 1818038018}
-  - {fileID: 423708269}
-  - {fileID: 223242822}
-  - {fileID: 852505568}
+  - {fileID: 533995183}
   - {fileID: 1310287894}
   - {fileID: 826513708}
+  - {fileID: 1818038018}
   - {fileID: 343397031}
+  - {fileID: 423708269}
   - {fileID: 1947371990}
+  - {fileID: 223242822}
   - {fileID: 405680865}
+  - {fileID: 852505568}
   - {fileID: 496435420}
-  - {fileID: 1710363495}
   - {fileID: 1613661879}
-  - {fileID: 533995183}
-  - {fileID: 784283983}
+  - {fileID: 1710363495}
   - {fileID: 180500568}
   - {fileID: 1520957304}
   m_Father: {fileID: 0}
@@ -1909,7 +1881,7 @@ GameObject:
   - component: {fileID: 1520957306}
   - component: {fileID: 1520957305}
   m_Layer: 5
-  m_Name: Image (5)
+  m_Name: ResultExitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1928,7 +1900,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1487258409}
-  m_RootOrder: 20
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1985,7 +1957,7 @@ GameObject:
   - component: {fileID: 1613661881}
   - component: {fileID: 1613661880}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: ResultSongProgress
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2062,7 +2034,7 @@ GameObject:
   - component: {fileID: 1710363497}
   - component: {fileID: 1710363496}
   m_Layer: 5
-  m_Name: Image
+  m_Name: ResultSongRank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2082,7 +2054,7 @@ RectTransform:
   m_Children:
   - {fileID: 87235665}
   m_Father: {fileID: 1487258409}
-  m_RootOrder: 15
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2139,7 +2111,7 @@ GameObject:
   - component: {fileID: 1818038020}
   - component: {fileID: 1818038019}
   m_Layer: 5
-  m_Name: Text (Legacy) (4)
+  m_Name: Alive
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2158,12 +2130,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1487258409}
-  m_RootOrder: 5
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 200, y: -360}
-  m_SizeDelta: {x: 300, y: 50}
+  m_AnchoredPosition: {x: 175, y: -180}
+  m_SizeDelta: {x: 250, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1818038019
 MonoBehaviour:
@@ -2219,7 +2191,7 @@ GameObject:
   - component: {fileID: 1947371992}
   - component: {fileID: 1947371991}
   m_Layer: 5
-  m_Name: Text (Legacy) (11)
+  m_Name: EarlyNum
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2238,7 +2210,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1487258409}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2272,13 +2244,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 4
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 2
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1000
+  m_Text: 0
 --- !u!222 &1947371992
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -7,7 +7,7 @@ public class chartManager : MonoBehaviour
     public Dictionary<string, Dictionary<int, string[]>> chartContainer = new Dictionary<string, Dictionary<int, string[]>>();
 
     // Fracture Ray Normal
-    Dictionary<int, string[]> Fracture_Ray_Normal = new Dictionary<int, string[]>()
+    Dictionary<int, string[]> Fracture_Ray_Normal4 = new Dictionary<int, string[]>()
     {
         // {노트 순서(key값) , new string[]{노트 종류, 노트가 생성될 시각, 노트가 생성될 vector3 좌표, 노트 번호, 동타 여부, 롱 노트인 경우 지속시간}}
 
@@ -39,7 +39,7 @@ public class chartManager : MonoBehaviour
     };
 
     // Fracture Ray Hard
-    Dictionary<int, string[]> Fracture_Ray_Hard = new Dictionary<int, string[]>()
+    Dictionary<int, string[]> Fracture_Ray_Hard6 = new Dictionary<int, string[]>()
     {
         // {노트 순서(key값) , new string[]{노트 종류, 노트가 생성될 시각, 노트가 생성될 vector3 좌표, 노트 번호, 동타 여부, 롱 노트인 경우 지속시간}}
 
@@ -71,7 +71,7 @@ public class chartManager : MonoBehaviour
     };
 
     // Fracture Ray Death
-    Dictionary<int, string[]> Fracture_Ray_Death = new Dictionary<int, string[]>()
+    Dictionary<int, string[]> Fracture_Ray_Death9 = new Dictionary<int, string[]>()
     {
         // {노트 순서(key값) , new string[]{노트 종류, 노트가 생성될 시각, 노트가 생성될 vector3 좌표, 노트 번호, 동타 여부, 롱 노트인 경우 지속시간}}
 
@@ -103,7 +103,7 @@ public class chartManager : MonoBehaviour
     };
 
     // Cytus II Death
-    Dictionary<int, string[]> Cytus_II_Death = new Dictionary<int, string[]>()
+    Dictionary<int, string[]> Cytus_II_Death5 = new Dictionary<int, string[]>()
     {
         // {노트 순서(key값) , new string[]{노트 종류, 노트가 생성될 시각, 노트가 생성될 vector3 좌표, 노트 번호, 동타 여부, 롱 노트인 경우 지속시간}}
 
@@ -135,22 +135,18 @@ public class chartManager : MonoBehaviour
         {0, new string[]{"slideNote", "1.0", "(300,300,0)", "0", "false", ""}},
         {1, new string[]{"slideNote", "2.0", "(700,700,0)", "1", "false", ""}},
         {2, new string[]{"slideNote", "5.0", "(600,600,0)", "2", "false", ""}},
-        {3, null}
+        {3, new string[]{"slideNote", "7.0", "(600,600,0)", "3", "false", ""}},
+        {4, null}
         
     };
 
 
     void Start()
     {
-        chartContainer["Fracture_Ray_Normal"] = Fracture_Ray_Normal;
-        chartContainer["Fracture_Ray_Hard"] = Fracture_Ray_Hard;
-        chartContainer["Fracture_Ray_Death"] = Fracture_Ray_Death;
-        chartContainer["Cytus_II_Death"] = Cytus_II_Death;
+        chartContainer["Fracture_Ray_Normal4"] = Fracture_Ray_Normal4;
+        chartContainer["Fracture_Ray_Hard6"] = Fracture_Ray_Hard6;
+        chartContainer["Fracture_Ray_Death9"] = Fracture_Ray_Death9;
+        chartContainer["Cytus_II_Death5"] = Cytus_II_Death5;
     }
 
-    
-    void Update()
-    {
-        
-    }
 }

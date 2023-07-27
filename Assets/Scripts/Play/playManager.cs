@@ -17,10 +17,10 @@ public class playManager : MonoBehaviour
 
     // Main씬에서 Play씬으로 넘어온 정보들
     // 곡 이름, 곡 이미지 이름, 곡 작곡가 이름, 곡 난이도(B, L, D)
-    string songName;
-    string songArtImageName;
-    string songComposerName;
-    string songDifficulty;
+    public string songName;
+    public string songArtImageName;
+    public string songComposerName;
+    public string songDifficulty;
 
     // Play씬에 사용할 배경 이미지 (곡 이미지)
     public Image backgroundImage;
@@ -73,20 +73,21 @@ public class playManager : MonoBehaviour
     GameObject[] longNotes;
     GameObject[] slideNotes;
     
-    // 콤보 및 콤보가 작성될 Text 오브젝트
+    // 콤보, 콤보가 작성될 Text 오브젝트, 최대 콤보
     int combo = 0;
     public Text comboText;
+    public int maxCombo = 0;
 
     // 총 점수, 노트 한 개당 점수, 점수가 작성될 Text 오브젝트
-    float score = 0;
+    public float score = 0;
     float scorePerNote;
     public Text scoreText;
     
     // alive, early, late, dead 판정을 받은 노트의 개수
-    int alive = 0;
-    int early = 0;
-    int late = 0;
-    int dead = 0;
+    public int alive = 0;
+    public int early = 0;
+    public int late = 0;
+    public int dead = 0;
 
     // 여러 속성을 가진 노트들로 이루어진 사전 형태의 채보
     // {노트 순서(key값) , new string[]{노트 종류, 노트가 생성될 시각, 노트가 생성될 vector3 좌표, 노트 번호, 동타 여부, 롱 노트인 경우 지속시간}}
@@ -98,7 +99,6 @@ public class playManager : MonoBehaviour
 
     void Start()
     {
-        
         // mainManager 오브젝트를 찾음 
         mainManager = GameObject.Find("MainManager");
 
@@ -251,6 +251,7 @@ public class playManager : MonoBehaviour
 
         }
 
+        // 노래 및 채보가 끝나면 호출
         if(noteCreatTime >= musicLength && !isMusicFinished)
         {
             isMusicFinished = true;
@@ -378,6 +379,11 @@ public class playManager : MonoBehaviour
         else if(combo < 2)
         {
             comboText.text = "";
+        }
+
+        if(combo > maxCombo)
+        {
+            maxCombo = combo;
         }
     }
     

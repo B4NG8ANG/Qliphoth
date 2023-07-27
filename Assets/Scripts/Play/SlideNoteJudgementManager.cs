@@ -82,8 +82,10 @@ public class SlideNoteJudgementManager : MonoBehaviour, IPointerExitHandler
         // 터치 되지 않은채로 노트 지속시간이 경과되면 Dead 판정 후 삭제
         if(!touched && elapsedTime > noteDeletingTime)
         {
+            touched = true;
             judgementTextTest.GetComponent<Text>().text = "Dead";
             playManagerScript.AddCombo(false);
+            playManagerScript.CountJudgement("dead");
             Invoke("RemoveNote", 0.3f);
         }
         

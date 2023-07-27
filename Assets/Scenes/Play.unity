@@ -1048,6 +1048,59 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1698007958
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1698007959}
+  - component: {fileID: 1698007960}
+  m_Layer: 0
+  m_Name: ResultContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1698007959
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1698007958}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1209.016, y: 544.23676, z: 11.340024}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1698007960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1698007958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b4f44d39d167b14eb24f4e5724fd8ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resultSongName: 
+  resultDifficulty: 
+  resultSongImageName: 
+  resultScore: 0
+  resultMaxCombo: 0
+  resultAlive: 0
+  resultEarly: 0
+  resultLate: 0
+  resultDead: 0
 --- !u!1 &1715702153
 GameObject:
   m_ObjectHideFlags: 0
@@ -1423,6 +1476,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f79a8ee7f260204d86f80b1b7d9aa03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  songName: 
+  songArtImageName: 
+  songComposerName: 
+  songDifficulty: 
   backgroundImage: {fileID: 1404371610}
   pausePanel: {fileID: 1177737188}
   restartCountdownText: {fileID: 535953102}
@@ -1434,7 +1491,12 @@ MonoBehaviour:
   slideNote: {fileID: 5451865765748981291, guid: f3951e62cc24cbd4c81beedf2621c6f4, type: 3}
   notePanel: {fileID: 2011431507}
   comboText: {fileID: 1768954665}
+  score: 0
   scoreText: {fileID: 1574212263}
+  alive: 0
+  early: 0
+  late: 0
+  dead: 0
 --- !u!1 &1968864837
 GameObject:
   m_ObjectHideFlags: 0
