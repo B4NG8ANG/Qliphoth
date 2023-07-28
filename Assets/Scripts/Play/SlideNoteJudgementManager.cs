@@ -107,7 +107,6 @@ public class SlideNoteJudgementManager : MonoBehaviour, IPointerExitHandler
 
         touched = true;
         float touchElapsedTime = Time.time - startTime;
-        Debug.Log(touchElapsedTime);
 
         if(touchElapsedTime < 0.45f)
         {

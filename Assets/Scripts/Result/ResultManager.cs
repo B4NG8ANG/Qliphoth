@@ -61,6 +61,10 @@ public class ResultManager : MonoBehaviour
         resultDeadNum.GetComponent<Text>().text = resultDead.ToString();
 
 
+        PlayerPrefs.SetString("SongScore" + songName + resultDifficulty, resultScore.ToString("0000000"));
+        Debug.Log("SongScore" + songName);
+        Debug.Log(resultDifficulty);
+
     }
 
     

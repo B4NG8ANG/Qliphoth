@@ -40,13 +40,15 @@ public class ResultContainer : MonoBehaviour
 
     void Start()
     {
-        // chartManager 오브젝트를 찾음 
-        playManager = GameObject.Find("PlayManager");
+        
 
     }
 
     void Update()
     {
+        // PlayManager 오브젝트를 찾음 
+        playManager = GameObject.Find("PlayManager");
+
         // ResultContainer의 변수에 데이터를 담아두고, ResultManager에서 꺼내서 사용
         if(playManager == null)
         {

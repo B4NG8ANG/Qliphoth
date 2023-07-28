@@ -3,7 +3,25 @@ guid: 11bfc07f2f2e08f40a9aaff6fe054bc5
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - songSelectButtonObject: {instanceID: 0}
+  - songSelectPanel: {instanceID: 0}
+  - songArtImage: {instanceID: 0}
+  - normalDifficultyImage: {instanceID: 0}
+  - hardDifficultyImage: {instanceID: 0}
+  - deathDifficultyImage: {instanceID: 0}
+  - songName: {instanceID: 0}
+  - songComposerName: {instanceID: 0}
+  - songScore: {instanceID: 0}
+  - songProgress: {instanceID: 0}
+  - songRank: {instanceID: 0}
+  - selectedSongArtImage: {instanceID: 0}
+  - selectedSongName: {instanceID: 0}
+  - selectedSongComposer: {instanceID: 0}
+  - selectedSongScore: {instanceID: 0}
+  - selectedNormalDifficultyImage: {instanceID: 0}
+  - selectedHardDifficultyImage: {instanceID: 0}
+  - selectedDeathDifficultyImage: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

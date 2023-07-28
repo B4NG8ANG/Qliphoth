@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class songSelectManager : MonoBehaviour
 {
-    // 곡 선택창에 보여질 정보
+    // 곡 선택창에 보여지는 정보
     public GameObject songSelectButtonObject; // 곡 선택 버튼
     public GameObject songSelectPanel; // 곡 선택창
     public GameObject songArtImage; // 곡 앨범 아트 이미지
@@ -18,17 +18,41 @@ public class songSelectManager : MonoBehaviour
     public GameObject songProgress; // 곡에서 달성한 달성도 (Perfect Alive, Full Alive, Clear, Fail)
     public GameObject songRank; // 곡에서 달성한 랭크 (S+, S, A+, A, B, C)
 
+    // 곡 선택창에 있지만 보여지지 않는 정보
+    public GameObject normalSongScore; // 곡에서 받은 Normal 난이도 점수
+    public GameObject hardSongScore; // 곡에서 받은 Hard 난이도 점수
+    public GameObject deathSongScore; // 곡에서 받은 Death 난이도 점수
+    public GameObject songDifficulty; // 곡에서 현재 선택된 난이도
+
     // 곡 선택 버튼이 가지고 있는 정보
     public GameObject selectedSongArtImage; // 선택된 곡 앨범 아트 이미지
     public GameObject selectedSongName; // 선택된 곡 이름 텍스트
     public GameObject selectedSongComposer; // 선택된 곡 이름 텍스트
+    public GameObject selectedNormalSongScore; // 선택된 곡 점수 텍스트
+    public GameObject selectedHardSongScore; // 선택된 곡 점수 텍스트
+    public GameObject selectedDeathSongScore; // 선택된 곡 점수 텍스트
     public GameObject selectedNormalDifficultyImage; // normal 난이도 버튼 이미지
     public GameObject selectedHardDifficultyImage; // hard 난이도 버튼 이미지
     public GameObject selectedDeathDifficultyImage; // death 난이도 버튼 이미지
 
     void Start()
     {
-        
+        // 결과창에서 받아온 점수를 곡 선택 버튼에 저장
+        if (PlayerPrefs.HasKey("SongScore" + selectedSongName.GetComponent<Text>().text + selectedNormalDifficultyImage.GetComponent<Image>().sprite.name))
+        {
+            string normalScore = PlayerPrefs.GetString("SongScore" + selectedSongName.GetComponent<Text>().text + selectedNormalDifficultyImage.GetComponent<Image>().sprite.name);
+            selectedNormalSongScore.GetComponent<Text>().text = normalScore;
+        }
+        else if (PlayerPrefs.HasKey("SongScore" + selectedSongName.GetComponent<Text>().text + selectedHardDifficultyImage.GetComponent<Image>().sprite.name))
+        {
+            string hardScore = PlayerPrefs.GetString("SongScore" + selectedSongName.GetComponent<Text>().text + selectedHardDifficultyImage.GetComponent<Image>().sprite.name);
+            selectedHardSongScore.GetComponent<Text>().text = hardScore;
+        }
+        else if (PlayerPrefs.HasKey("SongScore" + selectedSongName.GetComponent<Text>().text + selectedNormalDifficultyImage.GetComponent<Image>().sprite.name))
+        {
+            string deathScore = PlayerPrefs.GetString("SongScore" + selectedSongName.GetComponent<Text>().text + selectedDeathDifficultyImage.GetComponent<Image>().sprite.name);
+            selectedDeathSongScore.GetComponent<Text>().text = deathScore;
+        }
     }
 
     void Update()
@@ -54,9 +78,16 @@ public class songSelectManager : MonoBehaviour
         songArtImage.GetComponent<Image>().sprite = selectedSongArtImage.GetComponent<Image>().sprite; // 곡 이미지
         songName.GetComponent<Text>().text = selectedSongName.GetComponent<Text>().text; // 곡 이름
         songComposerName.GetComponent<Text>().text = selectedSongComposer.GetComponent<Text>().text; // 곡 작곡가 이름
-        normalDifficultyImage.GetComponent<Image>().sprite = selectedNormalDifficultyImage.GetComponent<Image>().sprite; // 곡 이미지
-        hardDifficultyImage.GetComponent<Image>().sprite = selectedHardDifficultyImage.GetComponent<Image>().sprite; // 곡 이미지
-        deathDifficultyImage.GetComponent<Image>().sprite = selectedDeathDifficultyImage.GetComponent<Image>().sprite; // 곡 이미지
+        
+        normalDifficultyImage.GetComponent<Image>().sprite = selectedNormalDifficultyImage.GetComponent<Image>().sprite; // 곡 Normal 난이도 이미지
+        hardDifficultyImage.GetComponent<Image>().sprite = selectedHardDifficultyImage.GetComponent<Image>().sprite; // 곡 Hard 난이도 이미지
+        deathDifficultyImage.GetComponent<Image>().sprite = selectedDeathDifficultyImage.GetComponent<Image>().sprite; // 곡  Death 난이도 이미지
+
+        normalSongScore.GetComponent<Text>().text = selectedNormalSongScore.GetComponent<Text>().text;
+        hardSongScore.GetComponent<Text>().text = selectedHardSongScore.GetComponent<Text>().text;
+        deathSongScore.GetComponent<Text>().text = selectedDeathSongScore.GetComponent<Text>().text;
+        songDifficulty.GetComponent<Text>().text = selectedNormalDifficultyImage.GetComponent<Image>().sprite.name; // 곡 점수는 클릭시 노말 난이도 점수가 보이도록 고정 (임시)
+        songScore.GetComponent<Text>().text = selectedNormalSongScore.GetComponent<Text>().text; // 곡 점수는 클릭시 노말 난이도 점수가 보이도록 고정 (임시)
 
         // 곡에서 받은 점수, 달성도, 랭크를 받아와서 여기서 보여줘야함
     }
