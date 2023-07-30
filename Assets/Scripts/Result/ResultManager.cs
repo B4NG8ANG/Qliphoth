@@ -8,15 +8,18 @@ public class ResultManager : MonoBehaviour
     // ResultContainer 스크립트를 참조하기 위한 변수
     private GameObject resultContainer;
 
+    // Result씬에서 보일 정보들이 담긴 오브젝트
     public GameObject resultSongArtImage;
     public GameObject resultSongDifficulty;
     public GameObject resultSongName;
     public GameObject resultSongScore;
+    public GameObject resultHighScore;
     public GameObject resultComboNum;
     public GameObject resultAliveNum;
     public GameObject resultEarlyNum;
     public GameObject resultLateNum;
     public GameObject resultDeadNum;
+    public GameObject resultSongRank;
 
    
     void Start()
@@ -60,8 +63,44 @@ public class ResultManager : MonoBehaviour
         int resultDead = resultContainer.GetComponent<ResultContainer>().resultDead;
         resultDeadNum.GetComponent<Text>().text = resultDead.ToString();
 
+        // Highscore일때만 점수를 갱신 및 Highscore 오브젝트 활성화
+        if(!PlayerPrefs.HasKey("SongScore" + songName + resultDifficulty) || resultScore > float.Parse(PlayerPrefs.GetString("SongScore" + songName + resultDifficulty)))
+        {
+            
+            PlayerPrefs.SetString("SongScore" + songName + resultDifficulty, resultScore.ToString("0000000"));
+            Debug.Log(float.Parse(PlayerPrefs.GetString("SongScore" + songName + resultDifficulty)));
+            resultHighScore.SetActive(true);
+        }
+        
+        // 점수별 랭크 설정
+        if(resultScore >= 990000f)
+        {
+            resultSongRank.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/RankImageSplus");
+        }
+        else if(990000f > resultScore && resultScore >= 980000f)
+        {
+            resultSongRank.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/RankImage");
+        }
+        else if(980000f > resultScore && resultScore >= 950000f)
+        {
+            resultSongRank.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/RankImageAplus");
+        }
+        else if(950000f > resultScore && resultScore >= 920000f)
+        {
+            resultSongRank.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/RankImageA");
+        }
+        else if(920000f > resultScore && resultScore >= 890000f)
+        {
+            resultSongRank.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/RankImageB");
+        }
+        else if(890000f > resultScore)
+        {
+            resultSongRank.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/RankImageC");
+        }
 
-        PlayerPrefs.SetString("SongScore" + songName + resultDifficulty, resultScore.ToString("0000000"));
+
+        
+
         Debug.Log("SongScore" + songName);
         Debug.Log(resultDifficulty);
 

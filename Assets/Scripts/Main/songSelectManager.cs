@@ -37,7 +37,7 @@ public class songSelectManager : MonoBehaviour
 
     void Start()
     {
-        // 결과창에서 받아온 점수를 곡 선택 버튼에 저장
+        // 결과창에서 받아온 점수를 곡 선택 버튼에 있는 각각의 항목에 저장
         if (PlayerPrefs.HasKey("SongScore" + selectedSongName.GetComponent<Text>().text + selectedNormalDifficultyImage.GetComponent<Image>().sprite.name))
         {
             string normalScore = PlayerPrefs.GetString("SongScore" + selectedSongName.GetComponent<Text>().text + selectedNormalDifficultyImage.GetComponent<Image>().sprite.name);
@@ -63,7 +63,7 @@ public class songSelectManager : MonoBehaviour
     // 곡 선택 아이콘 클릭시 호출
     public void onSongSelectButtonClick()
     {
-        // 곡 선택 아이콘 클릭시 곡 이미지가 보이지 않는 상태였다면 곡 이미지를 보여줌
+        // 곡 선택 아이콘 클릭시 곡 이미지가 보이지 않는 상태였다면 곡 이미지를 보여주고, 곡 이미지가 보이는 상태라면 곡 선택창 활성화
         if(!selectedSongArtImage.activeSelf)
         {
             selectedSongArtImage.SetActive(true);
@@ -71,7 +71,7 @@ public class songSelectManager : MonoBehaviour
             return;
         }
 
-        // 곡 선택 패널 활성화
+        // 곡 선택창 활성화
         songSelectPanel.SetActive(true);
 
         // 곡 선택창의 정보들 설정
@@ -86,8 +86,11 @@ public class songSelectManager : MonoBehaviour
         normalSongScore.GetComponent<Text>().text = selectedNormalSongScore.GetComponent<Text>().text;
         hardSongScore.GetComponent<Text>().text = selectedHardSongScore.GetComponent<Text>().text;
         deathSongScore.GetComponent<Text>().text = selectedDeathSongScore.GetComponent<Text>().text;
-        songDifficulty.GetComponent<Text>().text = selectedNormalDifficultyImage.GetComponent<Image>().sprite.name; // 곡 점수는 클릭시 노말 난이도 점수가 보이도록 고정 (임시)
-        songScore.GetComponent<Text>().text = selectedNormalSongScore.GetComponent<Text>().text; // 곡 점수는 클릭시 노말 난이도 점수가 보이도록 고정 (임시)
+
+        normalDifficultyImage.GetComponent<difficultyManager>().SetDifficulty();
+
+        //songDifficulty.GetComponent<Text>().text = selectedNormalDifficultyImage.GetComponent<Image>().sprite.name; // 곡 점수는 클릭시 노말 난이도 점수가 보이도록 고정 (임시)
+        //songScore.GetComponent<Text>().text = selectedNormalSongScore.GetComponent<Text>().text; // 곡 점수는 클릭시 노말 난이도 점수가 보이도록 고정 (임시)
 
         // 곡에서 받은 점수, 달성도, 랭크를 받아와서 여기서 보여줘야함
     }

@@ -1000,7 +1000,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &533995183
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1424,11 +1424,13 @@ MonoBehaviour:
   resultSongDifficulty: {fileID: 784283982}
   resultSongName: {fileID: 584975507}
   resultSongScore: {fileID: 767896522}
+  resultHighScore: {fileID: 533995182}
   resultComboNum: {fileID: 826513707}
   resultAliveNum: {fileID: 343397030}
   resultEarlyNum: {fileID: 1947371989}
   resultLateNum: {fileID: 405680864}
   resultDeadNum: {fileID: 496435419}
+  resultSongRank: {fileID: 1710363494}
 --- !u!1 &852505567
 GameObject:
   m_ObjectHideFlags: 0
@@ -2128,8 +2130,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 700, y: -194}
-  m_SizeDelta: {x: 300, y: 200}
+  m_AnchoredPosition: {x: 700, y: -220}
+  m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1710363496
 MonoBehaviour:
