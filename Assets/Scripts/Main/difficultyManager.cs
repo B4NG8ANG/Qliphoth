@@ -26,42 +26,50 @@ public class difficultyManager : MonoBehaviour
 
         GameObject songScore = GameObject.Find("SongScore");
         GameObject songName = GameObject.Find("SongName");
-        GameObject normalSongScore = GameObject.Find("NormalSongScore");
-        GameObject hardSongScore = GameObject.Find("HardSongScore");
-        GameObject deathSongScore = GameObject.Find("DeathSongScore");
         GameObject songRank = GameObject.Find("SongRank");
+
+        // GameObject normalSongScore = GameObject.Find("NormalSongScore");
+        // GameObject hardSongScore = GameObject.Find("HardSongScore");
+        // GameObject deathSongScore = GameObject.Find("DeathSongScore");
+        
 
         if(GetComponent<Image>().sprite.name.Contains("Normal"))
         {
+            // PlayerPrefs 키가 없을경우 한번도 플레이 한적이 없는 곡으로 간주
             if (PlayerPrefs.HasKey("SongScore" + songName.GetComponent<Text>().text + GetComponent<Image>().sprite.name))
             {
                 songScore.GetComponent<Text>().text = PlayerPrefs.GetString("SongScore" + songName.GetComponent<Text>().text + GetComponent<Image>().sprite.name);
             }
             else
             {
-                songScore.GetComponent<Text>().text = normalSongScore.GetComponent<Text>().text;
+                //songScore.GetComponent<Text>().text = normalSongScore.GetComponent<Text>().text;
+                songScore.GetComponent<Text>().text = "0000000";
             }
         }
         else if(GetComponent<Image>().sprite.name.Contains("Hard"))
         {
+            // PlayerPrefs 키가 없을경우 한번도 플레이 한적이 없는 곡으로 간주
             if (PlayerPrefs.HasKey("SongScore" + songName.GetComponent<Text>().text + GetComponent<Image>().sprite.name))
             {
                 songScore.GetComponent<Text>().text = PlayerPrefs.GetString("SongScore" + songName.GetComponent<Text>().text + GetComponent<Image>().sprite.name);
             }
             else
             {
-                songScore.GetComponent<Text>().text = hardSongScore.GetComponent<Text>().text;
+                //songScore.GetComponent<Text>().text = hardSongScore.GetComponent<Text>().text;
+                songScore.GetComponent<Text>().text = "0000000";
             }
         }
         else if(GetComponent<Image>().sprite.name.Contains("Death"))
         {
+            // PlayerPrefs 키가 없을경우 한번도 플레이 한적이 없는 곡으로 간주
             if (PlayerPrefs.HasKey("SongScore" + songName.GetComponent<Text>().text + GetComponent<Image>().sprite.name))
             {
                 songScore.GetComponent<Text>().text = PlayerPrefs.GetString("SongScore" + songName.GetComponent<Text>().text + GetComponent<Image>().sprite.name);
             }
             else
             {
-                songScore.GetComponent<Text>().text = deathSongScore.GetComponent<Text>().text;
+                //songScore.GetComponent<Text>().text = deathSongScore.GetComponent<Text>().text;
+                songScore.GetComponent<Text>().text = "0000000";
             }
         }
         

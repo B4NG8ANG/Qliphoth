@@ -1491,6 +1491,7 @@ MonoBehaviour:
   slideNote: {fileID: 5451865765748981291, guid: f3951e62cc24cbd4c81beedf2621c6f4, type: 3}
   notePanel: {fileID: 2011431507}
   comboText: {fileID: 1768954665}
+  maxCombo: 0
   score: 0
   scoreText: {fileID: 1574212263}
   alive: 0
