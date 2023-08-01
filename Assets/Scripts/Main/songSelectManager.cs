@@ -22,7 +22,10 @@ public class songSelectManager : MonoBehaviour
     public GameObject normalSongScore; // 곡에서 받은 Normal 난이도 점수
     public GameObject hardSongScore; // 곡에서 받은 Hard 난이도 점수
     public GameObject deathSongScore; // 곡에서 받은 Death 난이도 점수
-    public GameObject songDifficulty; // 곡에서 현재 선택된 난이도
+    public GameObject clickedNormalDifficultyImage; // normal 난이도 버튼 이미지
+    public GameObject clickedHardDifficultyImage; // hard 난이도 버튼 이미지
+    public GameObject clickedDeathDifficultyImage; // death 난이도 버튼 이미지
+    
 
     // 곡 선택 버튼이 가지고 있는 정보
     public GameObject selectedSongArtImage; // 선택된 곡 앨범 아트 이미지
@@ -80,6 +83,10 @@ public class songSelectManager : MonoBehaviour
         normalDifficultyImage.GetComponent<Image>().sprite = selectedNormalDifficultyImage.GetComponent<Image>().sprite; // 곡 Normal 난이도 이미지
         hardDifficultyImage.GetComponent<Image>().sprite = selectedHardDifficultyImage.GetComponent<Image>().sprite; // 곡 Hard 난이도 이미지
         deathDifficultyImage.GetComponent<Image>().sprite = selectedDeathDifficultyImage.GetComponent<Image>().sprite; // 곡  Death 난이도 이미지
+
+        clickedNormalDifficultyImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/" + "Selected" + selectedNormalDifficultyImage.GetComponent<Image>().sprite.name); // 곡 Normal 난이도 이미지
+        clickedHardDifficultyImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/" + "Selected" + selectedHardDifficultyImage.GetComponent<Image>().sprite.name); // 곡 Normal 난이도 이미지
+        clickedDeathDifficultyImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/" + "Selected" + selectedDeathDifficultyImage.GetComponent<Image>().sprite.name); // 곡 Normal 난이도 이미지
 
         // 곡 선택창 활성화 시 노멀 난이도가 선택되도록 고정
         normalDifficultyImage.GetComponent<difficultyManager>().SetDifficulty();
