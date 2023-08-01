@@ -1252,7 +1252,6 @@ GameObject:
   - component: {fileID: 497120797}
   - component: {fileID: 497120796}
   - component: {fileID: 497120795}
-  - component: {fileID: 497120794}
   m_Layer: 5
   m_Name: ClickedNormalDifficultyImage
   m_TagString: Untagged
@@ -1281,21 +1280,6 @@ RectTransform:
   m_AnchoredPosition: {x: 180, y: 320}
   m_SizeDelta: {x: 230, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &497120794
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 497120792}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4be65f5ac77ab99468d9fda7c2e4a048, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clickedNormalDifficultyImage: {fileID: 0}
-  clickedHardDifficultyImage: {fileID: 0}
-  clickedDeathDifficultyImage: {fileID: 0}
 --- !u!114 &497120795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1340,7 +1324,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 497120794}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: difficultyManager, Assembly-CSharp
         m_MethodName: SetDifficulty
         m_Mode: 1
@@ -2444,7 +2428,6 @@ GameObject:
   - component: {fileID: 1130410430}
   - component: {fileID: 1130410429}
   - component: {fileID: 1130410428}
-  - component: {fileID: 1130410427}
   m_Layer: 5
   m_Name: ClickedHardDifficultyImage
   m_TagString: Untagged
@@ -2473,21 +2456,6 @@ RectTransform:
   m_AnchoredPosition: {x: 450, y: 320}
   m_SizeDelta: {x: 230, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1130410427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1130410425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4be65f5ac77ab99468d9fda7c2e4a048, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clickedNormalDifficultyImage: {fileID: 0}
-  clickedHardDifficultyImage: {fileID: 0}
-  clickedDeathDifficultyImage: {fileID: 0}
 --- !u!114 &1130410428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2532,7 +2500,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1130410427}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: difficultyManager, Assembly-CSharp
         m_MethodName: SetDifficulty
         m_Mode: 1
@@ -3412,8 +3380,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 700, y: -350}
-  m_SizeDelta: {x: 300, y: 100}
+  m_AnchoredPosition: {x: 700, y: -300}
+  m_SizeDelta: {x: 355, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1366511511
 MonoBehaviour:
@@ -4287,7 +4255,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 700, y: -92}
-  m_SizeDelta: {x: 300, y: 80}
+  m_SizeDelta: {x: 335, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1783794529
 MonoBehaviour:
@@ -4309,7 +4277,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 3555a55bc3f010e45a0d55d1950f59c8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4419,7 +4387,6 @@ GameObject:
   - component: {fileID: 1840041339}
   - component: {fileID: 1840041338}
   - component: {fileID: 1840041337}
-  - component: {fileID: 1840041336}
   m_Layer: 5
   m_Name: ClickedDeathDifficultyImage
   m_TagString: Untagged
@@ -4448,21 +4415,6 @@ RectTransform:
   m_AnchoredPosition: {x: 720, y: 320}
   m_SizeDelta: {x: 230, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1840041336
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1840041334}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4be65f5ac77ab99468d9fda7c2e4a048, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clickedNormalDifficultyImage: {fileID: 0}
-  clickedHardDifficultyImage: {fileID: 0}
-  clickedDeathDifficultyImage: {fileID: 0}
 --- !u!114 &1840041337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4507,7 +4459,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1840041336}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: difficultyManager, Assembly-CSharp
         m_MethodName: SetDifficulty
         m_Mode: 1
