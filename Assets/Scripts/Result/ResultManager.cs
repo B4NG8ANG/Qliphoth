@@ -20,6 +20,7 @@ public class ResultManager : MonoBehaviour
     public GameObject resultLateNum;
     public GameObject resultDeadNum;
     public GameObject resultSongRank;
+    public GameObject resultSongProgress;
 
    
     void Start()
@@ -62,6 +63,21 @@ public class ResultManager : MonoBehaviour
         // Dead 판정 개수 표시
         int resultDead = resultContainer.GetComponent<ResultContainer>().resultDead;
         resultDeadNum.GetComponent<Text>().text = resultDead.ToString();
+
+        // Dead 판정 개수 표시
+        int resultChartNoteCount = resultContainer.GetComponent<ResultContainer>().resultChartNoteCount;
+
+        // All Alive 표시
+        if(resultAlive == resultChartNoteCount)
+        {
+            Debug.Log("good1");
+            resultSongProgress.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/SongProgressImageAllAlive");
+        }
+        else if(!(resultAlive == resultChartNoteCount) && resultMaxCombo == resultChartNoteCount)
+        {
+            Debug.Log("good1");
+            resultSongProgress.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/SongProgressImageFullCombo");
+        }
 
         // Highscore일때만 점수를 갱신 및 Highscore 오브젝트 활성화
         if(!PlayerPrefs.HasKey("SongScore" + songName + resultDifficulty) || resultScore > float.Parse(PlayerPrefs.GetString("SongScore" + songName + resultDifficulty)))

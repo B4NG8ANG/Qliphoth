@@ -24,6 +24,8 @@ public class ResultContainer : MonoBehaviour
     public int resultLate;
     public int resultDead;
 
+    // 전체 노트의 개수
+    public int resultChartNoteCount;
 
     private void Awake()
     {
@@ -64,6 +66,7 @@ public class ResultContainer : MonoBehaviour
         resultEarly = playManager.GetComponent<playManager>().early;
         resultLate = playManager.GetComponent<playManager>().late;
         resultDead = playManager.GetComponent<playManager>().dead;
+        resultChartNoteCount = playManager.GetComponent<playManager>().chartNoteCount;
 
     }
 }

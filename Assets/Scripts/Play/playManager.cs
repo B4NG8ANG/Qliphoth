@@ -93,8 +93,10 @@ public class playManager : MonoBehaviour
     // {노트 순서(key값) , new string[]{노트 종류, 노트가 생성될 시각, 노트가 생성될 vector3 좌표, 노트 번호, 동타 여부, 롱 노트인 경우 지속시간}}
     // 롱노트의 지속시간은 싱크에 맞는 시간 + 0.5초로 정해야 함
     Dictionary<int, string[]> chart = new Dictionary<int, string[]>(){};
-
     Dictionary<string, Dictionary<int, string[]>> chartContainer = new Dictionary<string, Dictionary<int, string[]>>();
+
+    // 노트의 총 갯수
+    public int chartNoteCount;
 
 
     void Start()
@@ -123,9 +125,10 @@ public class playManager : MonoBehaviour
         // 작곡가 이름 저장
         songComposerName = mainManager.GetComponent<mainManager>().songComposerName;
 
-        // 이번 곡에 사용할 채보를 chart에 저장
+        // 이번 곡에 사용할 채보를 chart에 저장하고 총 노트의 개수 계산
         songDifficulty = mainManager.GetComponent<mainManager>().songDifficulty;
         SetChart();
+        chartNoteCount = chart.Count - 1;
 
         // 이번 곡의 노트 하나당 점수 계산
         CalculateScore();
@@ -405,7 +408,7 @@ public class playManager : MonoBehaviour
         }
 
         // All alive일 때 점수를 100만점으로 취급
-        if (alive == chart.Count - 1)
+        if (alive == chartNoteCount)
         {
             score = 1000000;
         }
@@ -417,7 +420,7 @@ public class playManager : MonoBehaviour
     // 노트 하나 당 점수를 계산
     public void CalculateScore()
     {
-        scorePerNote = 1000000 / (chart.Count - 1);
+        scorePerNote = 1000000 / (chartNoteCount);
         scorePerNote = Mathf.Floor(scorePerNote);
         Debug.Log("노트당 점수" + scorePerNote);
     }
@@ -458,7 +461,6 @@ public class playManager : MonoBehaviour
         if (chartContainer.ContainsKey(chartName))
         {
             chart = chartContainer[chartName];
-
         }
 
     }
