@@ -31,6 +31,7 @@ public class difficultyManager : MonoBehaviour
         GameObject songScore = GameObject.Find("SongScore");
         GameObject songName = GameObject.Find("SongName");
         GameObject songRank = GameObject.Find("SongRank");
+        GameObject songProgress = GameObject.Find("SongProgress");
         GameObject normalDifficultyImage = GameObject.Find("NormalDifficultyImage");
         GameObject hardDifficultyImage = GameObject.Find("HardDifficultyImage");
         GameObject deathDifficultyImage = GameObject.Find("DeathDifficultyImage");
@@ -47,7 +48,8 @@ public class difficultyManager : MonoBehaviour
 
         if(GetComponent<Image>().sprite.name.Contains("Normal"))
         {
-            // PlayerPrefs 키가 없을경우 한번도 플레이 한적이 없는 곡으로 간주
+            // 곡 랭크 이미지 설정
+            // PlayerPrefs 키가 없을 경우 한번도 플레이 한적이 없는 곡으로 간주
             if (PlayerPrefs.HasKey("SongScore" + songName.GetComponent<Text>().text + GetComponent<Image>().sprite.name))
             {
                 songScore.GetComponent<Text>().text = PlayerPrefs.GetString("SongScore" + songName.GetComponent<Text>().text + GetComponent<Image>().sprite.name);
@@ -58,6 +60,16 @@ public class difficultyManager : MonoBehaviour
                 songScore.GetComponent<Text>().text = "0000000";
             }
 
+            // 곡 달성도 이미지 설정
+            if (PlayerPrefs.HasKey("SongProgress" + songName.GetComponent<Text>().text + GetComponent<Image>().sprite.name))
+            {
+                songProgress.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/" + PlayerPrefs.GetString("SongProgress" + songName.GetComponent<Text>().text + GetComponent<Image>().sprite.name));
+            }
+            else
+            {
+                songProgress.GetComponent<Image>().sprite = null;
+            }
+
             // 난이도 버튼 선택시 선택된 이미지로 변경
             clickedNormalDifficultyImage.SetActive(true);
             clickedHardDifficultyImage.SetActive(false);
@@ -66,7 +78,8 @@ public class difficultyManager : MonoBehaviour
         }
         else if(GetComponent<Image>().sprite.name.Contains("Hard"))
         {
-            // PlayerPrefs 키가 없을경우 한번도 플레이 한적이 없는 곡으로 간주
+            // 곡 랭크 이미지 설정
+            // PlayerPrefs 키가 없을 경우 한번도 플레이 한적이 없는 곡으로 간주
             if (PlayerPrefs.HasKey("SongScore" + songName.GetComponent<Text>().text + GetComponent<Image>().sprite.name))
             {
                 songScore.GetComponent<Text>().text = PlayerPrefs.GetString("SongScore" + songName.GetComponent<Text>().text + GetComponent<Image>().sprite.name);
@@ -77,6 +90,16 @@ public class difficultyManager : MonoBehaviour
                 songScore.GetComponent<Text>().text = "0000000";
             }
 
+            // 곡 달성도 이미지 설정
+            if (PlayerPrefs.HasKey("SongProgress" + songName.GetComponent<Text>().text + GetComponent<Image>().sprite.name))
+            {
+                songProgress.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/" + PlayerPrefs.GetString("SongProgress" + songName.GetComponent<Text>().text + GetComponent<Image>().sprite.name));
+            }
+            else
+            {
+                songProgress.GetComponent<Image>().sprite = null;
+            }
+
             // 난이도 버튼 선택시 선택된 이미지로 변경
             clickedNormalDifficultyImage.SetActive(false);
             clickedHardDifficultyImage.SetActive(true);
@@ -85,7 +108,8 @@ public class difficultyManager : MonoBehaviour
         }
         else if(GetComponent<Image>().sprite.name.Contains("Death"))
         {
-            // PlayerPrefs 키가 없을경우 한번도 플레이 한적이 없는 곡으로 간주
+            // 곡 랭크 이미지 설정
+            // PlayerPrefs 키가 없을 경우 한번도 플레이 한적이 없는 곡으로 간주
             if (PlayerPrefs.HasKey("SongScore" + songName.GetComponent<Text>().text + GetComponent<Image>().sprite.name))
             {
                 songScore.GetComponent<Text>().text = PlayerPrefs.GetString("SongScore" + songName.GetComponent<Text>().text + GetComponent<Image>().sprite.name);
@@ -94,6 +118,16 @@ public class difficultyManager : MonoBehaviour
             {
                 //songScore.GetComponent<Text>().text = deathSongScore.GetComponent<Text>().text;
                 songScore.GetComponent<Text>().text = "0000000";
+            }
+
+            // 곡 달성도 이미지 설정
+            if (PlayerPrefs.HasKey("SongProgress" + songName.GetComponent<Text>().text + GetComponent<Image>().sprite.name))
+            {
+                songProgress.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/" + PlayerPrefs.GetString("SongProgress" + songName.GetComponent<Text>().text + GetComponent<Image>().sprite.name));
+            }
+            else
+            {
+                songProgress.GetComponent<Image>().sprite = null;
             }
 
             // 난이도 버튼 선택시 선택된 이미지로 변경

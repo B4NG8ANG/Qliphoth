@@ -21,6 +21,12 @@ public class testDataDelete : MonoBehaviour
         PlayerPrefs.DeleteKey("SongScoreCytus IINormal1");
         PlayerPrefs.DeleteKey("SongScoreCytus IIHard3");
         PlayerPrefs.DeleteKey("SongScoreCytus IIDeath5");
+        PlayerPrefs.DeleteKey("SongProgressCytus IINormal1");
+        PlayerPrefs.DeleteKey("SongProgressCytus IIHard3");
+        PlayerPrefs.DeleteKey("SongProgressCytus IIDeath5");
+        PlayerPrefs.DeleteKey("SongProgressCytus IINormal1");
+        PlayerPrefs.DeleteKey("SongProgressCytus IIHard3");
+        PlayerPrefs.DeleteKey("SongProgressCytus IIDeath5");
 
     }
 }

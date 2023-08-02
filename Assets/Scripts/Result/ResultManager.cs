@@ -67,17 +67,33 @@ public class ResultManager : MonoBehaviour
         // Dead 판정 개수 표시
         int resultChartNoteCount = resultContainer.GetComponent<ResultContainer>().resultChartNoteCount;
 
-        // All Alive 표시
+
+        // All Alive, Full Combo, Clear 달성도 이미지 표시 및 곡 선택창으로 데이터 전송
         if(resultAlive == resultChartNoteCount)
         {
-            Debug.Log("good1");
             resultSongProgress.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/SongProgressImageAllAlive");
+            PlayerPrefs.SetString("SongProgress" + songName + resultDifficulty, resultSongProgress.GetComponent<Image>().sprite.name);
         }
         else if(!(resultAlive == resultChartNoteCount) && resultMaxCombo == resultChartNoteCount)
         {
-            Debug.Log("good1");
             resultSongProgress.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/SongProgressImageFullCombo");
+
+            if(!(PlayerPrefs.GetString("SongProgress" + songName + resultDifficulty) == "SongProgressImageAllAlive"))
+            {
+                PlayerPrefs.SetString("SongProgress" + songName + resultDifficulty, resultSongProgress.GetComponent<Image>().sprite.name);
+            }
+            
         }
+        else if(!(resultAlive == resultChartNoteCount) && !(resultMaxCombo == resultChartNoteCount))
+        {
+            resultSongProgress.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/SongProgressImageClear");
+
+            if(!(PlayerPrefs.GetString("SongProgress" + songName + resultDifficulty) == "SongProgressImageAllAlive") && !(PlayerPrefs.GetString("SongProgress" + songName + resultDifficulty) == "SongProgressImageFullCombo"))
+            {
+                PlayerPrefs.SetString("SongProgress" + songName + resultDifficulty, resultSongProgress.GetComponent<Image>().sprite.name);
+            }
+        }
+
 
         // Highscore일때만 점수를 갱신 및 Highscore 오브젝트 활성화
         if(!PlayerPrefs.HasKey("SongScore" + songName + resultDifficulty) || resultScore > float.Parse(PlayerPrefs.GetString("SongScore" + songName + resultDifficulty)))
