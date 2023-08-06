@@ -45,13 +45,17 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
     // 롱노트의 판정 상태를 저장 할 변수
     public string longNoteJudgement;
 
-    // 이펙트 이미지 오브젝트
+    // 이펙트 이미지
     public GameObject noteEffectFirst;
     public GameObject noteEffectSecond;
 
+    // 노트 터치 판정 이미지
+    public GameObject judgementImageAlive;
+    public GameObject judgementImageEarly;
+    public GameObject judgementImageLate;
+    public GameObject judgementImageDead;
 
 
-    
     void Start()
     {
         // 판정선 transform 저장
@@ -68,6 +72,10 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
 
         noteEffectFirst.SetActive(false);
         noteEffectSecond.SetActive(false);
+        judgementImageAlive.SetActive(false);
+        judgementImageEarly.SetActive(false);
+        judgementImageLate.SetActive(false);
+        judgementImageDead.SetActive(false);
     }
 
     void Update()
@@ -98,6 +106,7 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
             playManagerScript.AddCombo(false);
             playManagerScript.CountJudgement("dead");
             Invoke("RemoveNote", 0.3f);
+            judgementImageDead.SetActive(true);
         }
 
         // 터치가 한번이라도 된 채로 롱 노트 지속시간이 초과되면 판정 후 삭제
@@ -113,16 +122,19 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
             {
                 playManagerScript.CountJudgement("early");
                 playManagerScript.AddScore(false);
+                judgementImageEarly.SetActive(true);
             }
             else if(longNoteJudgement == "Alive")
             {
                 playManagerScript.CountJudgement("alive");
                 playManagerScript.AddScore(true);
+                judgementImageAlive.SetActive(true);
             }
             else if(longNoteJudgement == "Late Choice")
             {
                 playManagerScript.CountJudgement("late");
                 playManagerScript.AddScore(false);
+                judgementImageLate.SetActive(true);
             }
             
             noteEffectSecond.SetActive(true);
@@ -191,6 +203,8 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
         playManagerScript.CountJudgement("dead");
         Invoke("RemoveNote", 0.3f);
         noteEffectFirst.SetActive(false);
+        judgementImageDead.SetActive(true);
+        
     }
 
     private void RemoveNote()

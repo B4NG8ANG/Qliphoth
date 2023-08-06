@@ -37,8 +37,11 @@ public class SlideNoteJudgementManager : MonoBehaviour, IPointerExitHandler
     // 이펙트 이미지
     public GameObject noteEffect;
 
-    // 이펙트 이미지
+    // 노트 터치 판정 이미지
     public GameObject judgementImageAlive;
+    public GameObject judgementImageEarly;
+    public GameObject judgementImageLate;
+    public GameObject judgementImageDead;
 
 
 
@@ -58,6 +61,9 @@ public class SlideNoteJudgementManager : MonoBehaviour, IPointerExitHandler
 
         noteEffect.SetActive(false);
         judgementImageAlive.SetActive(false);
+        judgementImageEarly.SetActive(false);
+        judgementImageLate.SetActive(false);
+        judgementImageDead.SetActive(false);
 
     }
 
@@ -91,6 +97,7 @@ public class SlideNoteJudgementManager : MonoBehaviour, IPointerExitHandler
             playManagerScript.AddCombo(false);
             playManagerScript.CountJudgement("dead");
             Invoke("RemoveNote", 0.3f);
+            judgementImageDead.SetActive(true);
         }
         
     }
@@ -120,6 +127,7 @@ public class SlideNoteJudgementManager : MonoBehaviour, IPointerExitHandler
             playManagerScript.AddScore(false);
             Invoke("RemoveNote", 0.3f);
             noteEffect.SetActive(true);
+            judgementImageEarly.SetActive(true);
         }
         else if(touchElapsedTime >= 0.45f && touchElapsedTime <= 0.55f)
         {
@@ -139,6 +147,7 @@ public class SlideNoteJudgementManager : MonoBehaviour, IPointerExitHandler
             playManagerScript.AddScore(false);
             Invoke("RemoveNote", 0.3f);
             noteEffect.SetActive(true);
+            judgementImageLate.SetActive(true);
         }
         // else if(touchElapsedTime > 0.8f)
         // {
@@ -151,7 +160,7 @@ public class SlideNoteJudgementManager : MonoBehaviour, IPointerExitHandler
 
     private void RemoveNote()
     {
-        gameObject.SetActive(false);
+        note.SetActive(false);
     }
 
 }
