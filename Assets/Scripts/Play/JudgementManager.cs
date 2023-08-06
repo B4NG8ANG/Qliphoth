@@ -37,6 +37,13 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
     // 이펙트 이미지
     public GameObject noteEffect;
 
+    // 노트 터치 판정 이미지
+    public GameObject judgementImageAlive;
+    public GameObject judgementImageEarly;
+    public GameObject judgementImageLate;
+    public GameObject judgementImageDead;
+
+
     
     void Start()
     {
@@ -53,6 +60,10 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
         playManagerScript = FindObjectOfType<playManager>();
 
         noteEffect.SetActive(false);
+        judgementImageAlive.SetActive(false);
+        judgementImageEarly.SetActive(false);
+        judgementImageLate.SetActive(false);
+        judgementImageDead.SetActive(false);
     }
 
     void Update()
@@ -85,6 +96,7 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
             playManagerScript.AddCombo(false);
             playManagerScript.CountJudgement("dead");
             Invoke("RemoveNote", 0.3f);
+            judgementImageDead.SetActive(true);
         }
         
     }
@@ -94,6 +106,12 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
     {
         // 노트 지속시간이 경과되면 터치 이벤트를 무시
         if (elapsedTime >= noteDeletingTime)
+        {
+            return;
+        }
+
+        // 이미 처리된 노트는 터치 이벤트를 무시
+        if (touched)
         {
             return;
         }
@@ -110,6 +128,7 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
             playManagerScript.AddScore(false);
             Invoke("RemoveNote", 0.3f);
             noteEffect.SetActive(true);
+            judgementImageEarly.SetActive(true);
         }
         else if(touchElapsedTime >= 0.45f && touchElapsedTime <= 0.55f)
         {
@@ -119,6 +138,7 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
             playManagerScript.AddScore(true);
             Invoke("RemoveNote", 0.3f);
             noteEffect.SetActive(true);
+            judgementImageAlive.SetActive(true);
         }
         else if(touchElapsedTime > 0.55f) // && touchElapsedTime <= 0.8f)
         {
@@ -128,6 +148,7 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
             playManagerScript.AddScore(false);
             Invoke("RemoveNote", 0.3f);
             noteEffect.SetActive(true);
+            judgementImageLate.SetActive(true);
         }
         // else if(touchElapsedTime > 0.8f)
         // {

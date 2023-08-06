@@ -134,7 +134,9 @@ public class chartManager : MonoBehaviour
 
         {0, new string[]{"slideNote", "1.0", "(300,300,0)", "0", "false", ""}},
         {1, new string[]{"slideNote", "2.0", "(700,700,0)", "1", "false", ""}},
-        {2, null}
+        {2, new string[]{"slideNote", "3.0", "(200,200,0)", "2", "false", ""}},
+        {3, new string[]{"slideNote", "4.0", "(500,500,0)", "3", "false", ""}},
+        {4, null}
         
     };
 
@@ -168,10 +170,12 @@ public class chartManager : MonoBehaviour
         // {2, new string[]{"normalNote", "5.0", "(600,600,0)", "2", "false", ""}},
         // {3, null}
 
-        {0, new string[]{"slideNote", "1.0", "(300,300,0)", "0", "false", ""}},
-        {1, new string[]{"slideNote", "2.0", "(700,700,0)", "1", "false", ""}},
-        {2, new string[]{"slideNote", "5.0", "(600,600,0)", "2", "false", ""}},
-        {3, null}
+        {0, new string[]{"smallNormalNote", "1.0", "(300,300,0)", "0", "false", ""}},
+        {1, new string[]{"normalNote", "2.0", "(700,700,0)", "1", "false", ""}},
+        {2, new string[]{"bigNormalNote", "5.0", "(600,600,0)", "2", "false", ""}},
+        {3, new string[]{"normalNote", "6.0", "(800,800,0)", "3", "false", ""}},
+        {4, new string[]{"normalNote", "8.0", "(600,600,0)", "4", "false", ""}},
+        {5, null}
         
     };
 

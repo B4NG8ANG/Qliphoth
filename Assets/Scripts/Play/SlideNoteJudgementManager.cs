@@ -37,6 +37,9 @@ public class SlideNoteJudgementManager : MonoBehaviour, IPointerExitHandler
     // 이펙트 이미지
     public GameObject noteEffect;
 
+    // 이펙트 이미지
+    public GameObject judgementImageAlive;
+
 
 
     void Start()
@@ -54,6 +57,7 @@ public class SlideNoteJudgementManager : MonoBehaviour, IPointerExitHandler
         playManagerScript = FindObjectOfType<playManager>();
 
         noteEffect.SetActive(false);
+        judgementImageAlive.SetActive(false);
 
     }
 
@@ -93,14 +97,14 @@ public class SlideNoteJudgementManager : MonoBehaviour, IPointerExitHandler
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        // 이미 터치 되어 처리가 된 슬라이드 노트는 터치 이벤트를 무시하여 중복 처리 금지
-        if (touched)
+        // 노트 지속시간이 경과되면 터치 이벤트를 무시
+        if (elapsedTime >= noteDeletingTime)
         {
             return;
         }
 
-        // 노트 지속시간이 경과되면 터치 이벤트를 무시
-        if (elapsedTime >= noteDeletingTime)
+        // 이미 터치 되어 처리가 된 슬라이드 노트는 터치 이벤트를 무시하여 중복 처리 금지
+        if (touched)
         {
             return;
         }
@@ -125,6 +129,7 @@ public class SlideNoteJudgementManager : MonoBehaviour, IPointerExitHandler
             playManagerScript.AddScore(true);
             Invoke("RemoveNote", 0.3f);
             noteEffect.SetActive(true);
+            judgementImageAlive.SetActive(true);
         }
         else if(touchElapsedTime > 0.55f ) // && touchElapsedTime <= 0.8f)
         {

@@ -276,6 +276,10 @@ RectTransform:
   - {fileID: 7531876092959357971}
   - {fileID: 7531876094290481547}
   - {fileID: 396341017152673736}
+  - {fileID: 9203613610725429374}
+  - {fileID: 4435318024961448746}
+  - {fileID: 2485550916954508302}
+  - {fileID: 7335535042310550556}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -304,6 +308,10 @@ MonoBehaviour:
   noteDeletingTime: 1
   touched: 0
   noteEffect: {fileID: 5504750284067426027}
+  judgementImageAlive: {fileID: 5271105470889192510}
+  judgementImageEarly: {fileID: 3913610351547193759}
+  judgementImageLate: {fileID: 2752329028930408851}
+  judgementImageDead: {fileID: 4217039766099325761}
 --- !u!1 &7531876094290481548
 GameObject:
   m_ObjectHideFlags: 0
