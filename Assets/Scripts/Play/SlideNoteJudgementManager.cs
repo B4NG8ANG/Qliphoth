@@ -44,7 +44,6 @@ public class SlideNoteJudgementManager : MonoBehaviour, IPointerExitHandler
     public GameObject judgementImageDead;
 
 
-
     void Start()
     {
         // 판정선 transform 저장
