@@ -27,7 +27,6 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
     // 판정선, 노트, 판정 텍스트, 콤보 테스트 오브젝트
     public GameObject judgementLine;
     public GameObject note; 
-    GameObject judgementTextTest;
     GameObject comboTest;
 
     // 노트가 삭제되기까지 걸리는 시간 (노트 오브젝트 지속 시간)
@@ -61,7 +60,6 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
         // 판정선 transform 저장
         judgementLineTransform = judgementLine.transform;
 
-        judgementTextTest = GameObject.Find("JudgementTextTest");
         //comboTest = GameObject.Find("ComboTest");
 
         // 시작 시각 저장
@@ -102,7 +100,6 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
         // 터치가 한번도 되지 않은 상태로 1초가 지나면 Dead 판정 후 삭제
         if(!touched && elapsedTime >= 1.0f)
         {
-            judgementTextTest.GetComponent<Text>().text = "Dead";
             playManagerScript.AddCombo(false);
             playManagerScript.CountJudgement("dead");
             Invoke("RemoveNote", 0.3f);
@@ -114,9 +111,6 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
         {
             // Invoke가 불러와지는 0.3초동안 실행되지 않도록 플래그 변경
             isLongNote = false;
-
-            // 판정 텍스트 표시
-            judgementTextTest.GetComponent<Text>().text = longNoteJudgement;
 
             if(longNoteJudgement == "Early Choice")
             {
@@ -181,7 +175,6 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
         }
         // else if(touchElapsedTime > 0.8f)
         // {
-        //     judgementTextTest.GetComponent<Text>().text = "Dead";
         //     playManagerScript.AddCombo(false);
         // }
 
@@ -198,7 +191,6 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
         // 롱노트를 놓친 경우 Update의 판정 계산 조건문에 들어가지 않도록 지정
         isLongNote = false;
 
-        judgementTextTest.GetComponent<Text>().text = "Dead";
         playManagerScript.AddCombo(false);
         playManagerScript.CountJudgement("dead");
         Invoke("RemoveNote", 0.3f);

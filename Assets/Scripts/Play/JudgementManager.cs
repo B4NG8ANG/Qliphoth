@@ -23,10 +23,9 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
     // 판정선 transform
     private Transform judgementLineTransform;
 
-    // 판정선, 노트, 판정 텍스트, 콤보 테스트 오브젝트
+    // 판정선, 노트, 판정 텍스트
     public GameObject judgementLine;
     public GameObject note;
-    GameObject judgementTextTest;
 
     // 노트가 삭제되기까지 걸리는 시간 (노트 오브젝트 지속 시간)
     public float noteDeletingTime;
@@ -49,9 +48,6 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
     {
         // 판정선 transform 저장
         judgementLineTransform = judgementLine.transform;
-
-        // 판정 텍스트 오브젝트 저장 (임시)
-        judgementTextTest = GameObject.Find("JudgementTextTest");
 
         // 시작 시간 저장
         startTime = Time.time;
@@ -92,7 +88,6 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
         if(!touched && elapsedTime > noteDeletingTime)
         {
             touched = true;
-            judgementTextTest.GetComponent<Text>().text = "Dead";
             playManagerScript.AddCombo(false);
             playManagerScript.CountJudgement("dead");
             Invoke("RemoveNote", 0.3f);
@@ -122,7 +117,6 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
 
         if(touchElapsedTime < 0.45f)
         {
-            judgementTextTest.GetComponent<Text>().text = "Early Choice";
             playManagerScript.AddCombo(true);
             playManagerScript.CountJudgement("early");
             playManagerScript.AddScore(false);
@@ -132,7 +126,6 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
         }
         else if(touchElapsedTime >= 0.45f && touchElapsedTime <= 0.55f)
         {
-            judgementTextTest.GetComponent<Text>().text = "Alive";
             playManagerScript.AddCombo(true);
             playManagerScript.CountJudgement("alive");
             playManagerScript.AddScore(true);
@@ -142,7 +135,6 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
         }
         else if(touchElapsedTime > 0.55f) // && touchElapsedTime <= 0.8f)
         {
-            judgementTextTest.GetComponent<Text>().text = "Late Choice";
             playManagerScript.AddCombo(true);
             playManagerScript.CountJudgement("late");
             playManagerScript.AddScore(false);
@@ -152,7 +144,6 @@ public class JudgementManager : MonoBehaviour, IPointerDownHandler
         }
         // else if(touchElapsedTime > 0.8f)
         // {
-        //     judgementTextTest.GetComponent<Text>().text = "Dead";
         //     playManagerScript.AddCombo(false);
         //     Invoke("RemoveNote", 0.3f);
         //     noteEffectTest.SetActive(true);

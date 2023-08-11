@@ -25,6 +25,10 @@ public class playManager : MonoBehaviour
     // Play씬에 사용할 배경 이미지 (곡 이미지)
     public Image backgroundImage;
 
+    // Play씬 밑에 보일 곡 이름과 난이도 텍스트 오브젝트
+    public GameObject songNameText;
+    public GameObject songDifficultyText;
+
     // 일시정지 패널 오브젝트
     public GameObject pausePanel;
 
@@ -129,6 +133,20 @@ public class playManager : MonoBehaviour
         songDifficulty = mainManager.GetComponent<mainManager>().songDifficulty;
         SetChart();
         chartNoteCount = chart.Count - 1;
+
+        // play 씬 밑에 곡 이름과 난이도 텍스트 설정
+        string spacedString = songDifficulty;
+
+        for (int i = 0; i < spacedString.Length - 1; i++)
+        {
+            // 난이도 텍스트의 문자와 숫자 사이에 띄어쓰기 추가
+            if ((char.IsLetter(spacedString[i]) && char.IsDigit(spacedString[i + 1])))
+            {
+                spacedString = spacedString.Insert(i + 1, " ");
+            }
+        }
+        songNameText.GetComponent<Text>().text = songName;
+        songDifficultyText.GetComponent<Text>().text = spacedString;
 
         // 이번 곡의 노트 하나당 점수 계산
         CalculateScore();

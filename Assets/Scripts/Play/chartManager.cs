@@ -71,7 +71,7 @@ public class chartManager : MonoBehaviour
     };
 
     // Fracture Ray Death
-    Dictionary<int, string[]> Fracture_Ray_Death9 = new Dictionary<int, string[]>()
+    Dictionary<int, string[]> Fracture_Ray_Death10 = new Dictionary<int, string[]>()
     {
         // {노트 순서(key값) , new string[]{노트 종류, 노트가 생성될 시각, 노트가 생성될 vector3 좌표, 노트 번호, 동타 여부, 롱 노트인 경우 지속시간}}
 
@@ -222,7 +222,7 @@ public class chartManager : MonoBehaviour
     {
         chartContainer["Fracture_Ray_Normal4"] = Fracture_Ray_Normal4;
         chartContainer["Fracture_Ray_Hard6"] = Fracture_Ray_Hard6;
-        chartContainer["Fracture_Ray_Death9"] = Fracture_Ray_Death9;
+        chartContainer["Fracture_Ray_Death10"] = Fracture_Ray_Death10;
         chartContainer["Cytus_II_Normal1"] = Cytus_II_Normal1;
         chartContainer["Cytus_II_Hard3"] = Cytus_II_Hard3;
         chartContainer["Cytus_II_Death5"] = Cytus_II_Death5;
