@@ -50,7 +50,7 @@ public class difficultyManager : MonoBehaviour
         {
             //곡 랭크 이미지, 달성도 이미지 설정
             SetRankAndProgress(songName, songScore, songProgress);
-
+            
             // 난이도 버튼 선택시 선택된 이미지로 변경
             clickedNormalDifficultyImage.SetActive(true);
             clickedHardDifficultyImage.SetActive(false);
