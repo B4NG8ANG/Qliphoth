@@ -27,8 +27,7 @@ public class pauseManager : MonoBehaviour
     public void onContinueButtonClick()
     {
         pausePanel.SetActive(false);
-        restartCountdownText.SetActive(true);
-        
+        restartCountdownText.SetActive(true); 
     }
 
     public void onExitButtonClick()

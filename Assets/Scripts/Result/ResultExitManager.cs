@@ -21,4 +21,9 @@ public class ResultExitManager : MonoBehaviour
     {
         SceneChangeEffectManager.instance.FadeToScene("Main");
     }
+
+    public void onResultRestartButtonClick()
+    {
+        SceneChangeEffectManager.instance.FadeToScene("Play");
+    }
 }
