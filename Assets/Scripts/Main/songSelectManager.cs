@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class songSelectManager : MonoBehaviour
 {
+    // 메인씬 상단에 보여지는 메뉴바
+    public GameObject menu;
+
     // 곡 선택창에 보여지는 정보
     public GameObject songSelectButtonObject; // 곡 선택 버튼
     public GameObject songSelectPanel; // 곡 선택창
@@ -19,9 +22,9 @@ public class songSelectManager : MonoBehaviour
     public GameObject songRank; // 곡에서 달성한 랭크 (S+, S, A+, A, B, C)
 
     // 곡 선택창에 있지만 보여지지 않는 정보
-    public GameObject normalSongScore; // 곡에서 받은 Normal 난이도 점수
-    public GameObject hardSongScore; // 곡에서 받은 Hard 난이도 점수
-    public GameObject deathSongScore; // 곡에서 받은 Death 난이도 점수
+    // public GameObject normalSongScore; // 곡에서 받은 Normal 난이도 점수
+    // public GameObject hardSongScore; // 곡에서 받은 Hard 난이도 점수
+    // public GameObject deathSongScore; // 곡에서 받은 Death 난이도 점수
     public GameObject clickedNormalDifficultyImage; // normal 난이도 버튼 이미지
     public GameObject clickedHardDifficultyImage; // hard 난이도 버튼 이미지
     public GameObject clickedDeathDifficultyImage; // death 난이도 버튼 이미지
@@ -64,13 +67,16 @@ public class songSelectManager : MonoBehaviour
     // 곡 선택 아이콘 클릭시 호출
     public void onSongSelectButtonClick()
     {
+        // 상단 메뉴바 비활성화
+        menu.SetActive(false);
+
         // 곡 선택 아이콘 클릭시 곡 이미지가 보이지 않는 상태였다면 곡 이미지를 보여주고, 곡 이미지가 보이는 상태라면 곡 선택창 활성화
-        if(!selectedSongArtImage.activeSelf)
-        {
-            selectedSongArtImage.SetActive(true);
-            songSelectButtonObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/SelectedSongSelectButtonImage");
-            return;
-        }
+        // if(!selectedSongArtImage.activeSelf)
+        // {
+        //     selectedSongArtImage.SetActive(true);
+        //     songSelectButtonObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/SelectedSongSelectButtonImage");
+        //     return;
+        // }
 
         // 곡 선택창 활성화
         songSelectPanel.SetActive(true);
@@ -93,13 +99,6 @@ public class songSelectManager : MonoBehaviour
 
         // 곡에서 받은 점수, 달성도, 랭크를 받아와서 여기서 보여줘야함
 
-    }
-
-    // 활성화 된 곡 이미지 버튼 클릭시 호출 
-    public void onSongImageButtonClick()
-    {
-        selectedSongArtImage.SetActive(false);
-        songSelectButtonObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/SongSelectButtonImage");
     }
 
 }
