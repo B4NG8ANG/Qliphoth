@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "757673956415",
+    "project_id": "qliphoth-43de2",
+    "storage_bucket": "qliphoth-43de2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:757673956415:android:68247eca2c09837bef948a",
+        "android_client_info": {
+          "package_name": "com.goongam.qliphoth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "757673956415-5t6gj3rlnr38sjn0fq3no509rjpkj84t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwOOk1fGFrmB5Jfj9wRcQepKaQ_i0jAUg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "757673956415-5t6gj3rlnr38sjn0fq3no509rjpkj84t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
