@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
+
 
 public class ResultManager : MonoBehaviour
 {
@@ -130,15 +132,34 @@ public class ResultManager : MonoBehaviour
             resultSongRank.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/RankImageC");
         }
 
-
-        
-
         Debug.Log("SongScore" + songName);
         Debug.Log(resultDifficulty);
 
+        StartCoroutine(UnityWebRequestGET(songName, resultScore));
     }
 
-    
+    IEnumerator UnityWebRequestGET(string songName, float resultScore){
+        string url = "http://175.115.13.86:3000/score";
+        WWWForm form = new WWWForm();
+
+        form.AddField("song_id", songName);
+        form.AddField("user_id", "dlwjddn");
+        form.AddField("score", resultScore.ToString());
+
+        UnityWebRequest www = UnityWebRequest.Post(url, form);  // 보낼 주소와 데이터 입력
+
+        yield return www.SendWebRequest();
+
+        if(www.error == null){
+            Debug.Log(www.downloadHandler.text);
+        }
+        else{
+            Debug.Log(www.error);
+        }
+
+        www.Dispose();
+    }
+
     void Update()
     {
         
