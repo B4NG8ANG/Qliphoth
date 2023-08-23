@@ -96,7 +96,8 @@ public class playManager : MonoBehaviour
     // 여러 속성을 가진 노트들로 이루어진 사전 형태의 채보
     // {노트 순서(key값) , new string[]{노트 종류, 노트가 생성될 시각, 노트가 생성될 vector3 좌표, 노트 번호, 동타 여부, 롱 노트인 경우 지속시간}}
     // 롱노트의 지속시간은 싱크에 맞는 시간 + 0.5초로 정해야 함
-    Dictionary<int, string[]> chart = new Dictionary<int, string[]>(){};
+    // Dictionary<int, string[]> chart = new Dictionary<int, string[]>(){};
+    Note[] chart;
     Dictionary<string, Dictionary<int, string[]>> chartContainer = new Dictionary<string, Dictionary<int, string[]>>();
 
     // 노트의 총 갯수
@@ -105,6 +106,8 @@ public class playManager : MonoBehaviour
 
     void Start()
     {
+        Debug.Log(songManager.Instance.song[0].id);
+        
         // mainManager 오브젝트를 찾음 
         mainManager = GameObject.Find("MainManager");
 
@@ -132,7 +135,7 @@ public class playManager : MonoBehaviour
         // 이번 곡에 사용할 채보를 chart에 저장하고 총 노트의 개수 계산
         songDifficulty = mainManager.GetComponent<mainManager>().songDifficulty;
         SetChart();
-        chartNoteCount = chart.Count - 1;
+        chartNoteCount = chart.Length;
 
         // play 씬 밑에 곡 이름과 난이도 텍스트 설정
         string spacedString = songDifficulty;
@@ -216,31 +219,31 @@ public class playManager : MonoBehaviour
         if(isPlaying)
         {
             // 사전에 접근하여 알아낸 노트 생성 시간 - 0.5 + 싱크시간에 노트 생성
-            if(noteCreatTime >= float.Parse(chart[noteCount][1]) - JUDGEMENTTIME + tuneTiming && noteCount == int.Parse(chart[noteCount][3]))
+            if(noteCreatTime >= float.Parse(chart[noteCount].noteCreateTime) - JUDGEMENTTIME + tuneTiming && noteCount == int.Parse(chart[noteCount].noteNum))
             {
                 Debug.Log(noteCreatTime);
 
                 // 사전에 접근하여 노트의 종류 알아내기
-                string noteType = chart[noteCount][0];
+                string noteType = chart[noteCount].noteType;
 
                 // i) 노트의 종류가 일반 노트인 경우
                 if(noteType == "normalNote")
                 {
-                    normalNotes[noteCount].transform.position = StringToVector3(chart[noteCount][2]);
+                    normalNotes[noteCount].transform.position = StringToVector3(chart[noteCount].noteCreatePos);
                     normalNotes[noteCount].SetActive(true);
                 }
 
                 // ii) 노트의 종류가 작은 일반 노트인 경우
                 else if(noteType == "smallNormalNote")
                 {
-                    smallNormalNotes[noteCount].transform.position = StringToVector3(chart[noteCount][2]);
+                    smallNormalNotes[noteCount].transform.position = StringToVector3(chart[noteCount].noteCreatePos);
                     smallNormalNotes[noteCount].SetActive(true);
                 }
 
                 // iii) 노트의 종류가 큰 일반 노트인 경우
                 else if(noteType == "bigNormalNote")
                 {
-                    bigNormalNotes[noteCount].transform.position = StringToVector3(chart[noteCount][2]);
+                    bigNormalNotes[noteCount].transform.position = StringToVector3(chart[noteCount].noteCreatePos);
                     bigNormalNotes[noteCount].SetActive(true);
                 }
 
@@ -249,15 +252,15 @@ public class playManager : MonoBehaviour
                 // 롱 노트 지속시간에 판정선이 줄어드는 0.5초를 더해줌
                 else if(noteType == "longNote")
                 {
-                    longNotes[noteCount].GetComponent<LongNoteJudgementManager>().noteDeletingTime = float.Parse(chart[noteCount][5]) + 0.5f;
-                    longNotes[noteCount].transform.position = StringToVector3(chart[noteCount][2]);
+                    longNotes[noteCount].GetComponent<LongNoteJudgementManager>().noteDeletingTime = float.Parse(chart[noteCount].longNoteDuration) + 0.5f;
+                    longNotes[noteCount].transform.position = StringToVector3(chart[noteCount].noteCreatePos);
                     longNotes[noteCount].SetActive(true);
                 }
 
                 // iiiii) 노트의 종류가 슬라이드 노트인 경우
                 else if(noteType == "slideNote")
                 {
-                    slideNotes[noteCount].transform.position = StringToVector3(chart[noteCount][2]);
+                    slideNotes[noteCount].transform.position = StringToVector3(chart[noteCount].noteCreatePos);
                     slideNotes[noteCount].SetActive(true);
                 }
 
@@ -265,7 +268,7 @@ public class playManager : MonoBehaviour
 
             }
 
-            if(chart[noteCount] == null)
+            if(noteCount >= chart.Length)
             {
                 isPlaying = false;
             }
@@ -300,35 +303,36 @@ public class playManager : MonoBehaviour
 
             if(isPlaying)
             {
+                
                 // 동타일때만 노트 생성
-                if(chart[noteCount][4] == "true")
+                if(chart[noteCount].isNoteSameTime == "true")
                 {
                     // 사전에 접근하여 알아낸 노트 생성 시간 - 0.5 + 싱크시간에 노트 생성
-                    if(noteCreatTime >= float.Parse(chart[noteCount][1]) - JUDGEMENTTIME + tuneTiming && noteCount == int.Parse(chart[noteCount][3]))
+                    if(noteCreatTime >= float.Parse(chart[noteCount].noteCreateTime) - JUDGEMENTTIME + tuneTiming && noteCount == int.Parse(chart[noteCount].noteNum))
                     {
                         Debug.Log(noteCreatTime);
 
                         // 사전에 접근하여 노트의 종류 알아내기
-                        string noteType = chart[noteCount][0];
+                        string noteType = chart[noteCount].noteType;
 
                         // i) 노트의 종류가 일반 노트인 경우
                         if(noteType == "normalNote")
                         {
-                            normalNotes[noteCount].transform.position = StringToVector3(chart[noteCount][2]);
+                            normalNotes[noteCount].transform.position = StringToVector3(chart[noteCount].noteCreatePos);
                             normalNotes[noteCount].SetActive(true);
                         }
 
                         // ii) 노트의 종류가 작은 일반 노트인 경우
                         else if(noteType == "smallNormalNote")
                         {
-                            smallNormalNotes[noteCount].transform.position = StringToVector3(chart[noteCount][2]);
+                            smallNormalNotes[noteCount].transform.position = StringToVector3(chart[noteCount].noteCreatePos);
                             smallNormalNotes[noteCount].SetActive(true);
                         }
 
                         // iii) 노트의 종류가 큰 일반 노트인 경우
                         else if(noteType == "bigNormalNote")
                         {
-                            bigNormalNotes[noteCount].transform.position = StringToVector3(chart[noteCount][2]);
+                            bigNormalNotes[noteCount].transform.position = StringToVector3(chart[noteCount].noteCreatePos);
                             bigNormalNotes[noteCount].SetActive(true);
                         }
 
@@ -337,22 +341,22 @@ public class playManager : MonoBehaviour
                         // 롱 노트 지속시간에 판정선이 줄어드는 0.5초를 더해줌
                         else if(noteType == "longNote")
                         {
-                            longNotes[noteCount].GetComponent<LongNoteJudgementManager>().noteDeletingTime = float.Parse(chart[noteCount][5]) + 0.5f;
-                            longNotes[noteCount].transform.position = StringToVector3(chart[noteCount][2]);
+                            longNotes[noteCount].GetComponent<LongNoteJudgementManager>().noteDeletingTime = float.Parse(chart[noteCount].longNoteDuration) + 0.5f;
+                            longNotes[noteCount].transform.position = StringToVector3(chart[noteCount].noteCreatePos);
                             longNotes[noteCount].SetActive(true);
                         }
 
                         // iiiii) 노트의 종류가 슬라이드 노트인 경우
                         else if(noteType == "slideNote")
                         {
-                            slideNotes[noteCount].transform.position = StringToVector3(chart[noteCount][2]);
+                            slideNotes[noteCount].transform.position = StringToVector3(chart[noteCount].noteCreatePos);
                             slideNotes[noteCount].SetActive(true);
                         }
 
                         noteCount += 1;
                     }
 
-                    if(chart[noteCount] == null)
+                    if(noteCount >= chart.Length)
                     {
                         isPlaying = false;
                     }
@@ -466,20 +470,22 @@ public class playManager : MonoBehaviour
 
     public void SetChart()
     {
-        // 곡 이름과 난이도를 조합해서 차트 이름에 해당하는 새 문자열 생성
-        string replaceSongName = songName.Replace(" ", "_");
-        replaceSongName += "_";
-        chartName = replaceSongName + songDifficulty;
+        // // 곡 이름과 난이도를 조합해서 차트 이름에 해당하는 새 문자열 생성
+        // string replaceSongName = songName.Replace(" ", "_");
+        // replaceSongName += "_";
+        // chartName = replaceSongName + songDifficulty;
 
-        // chartManager의 chartContainer 사전을 가져와서 저장
-        chartContainer = chartManager.GetComponent<chartManager>().chartContainer;
+        // // chartManager의 chartContainer 사전을 가져와서 저장
+        // chartContainer = chartManager.GetComponent<chartManager>().chartContainer;
 
-        Debug.Log(chartName);
+        // Debug.Log(chartName);
 
-        if (chartContainer.ContainsKey(chartName))
-        {
-            chart = chartContainer[chartName];
-        }
+        // if (chartContainer.ContainsKey(chartName))
+        // {
+        //     chart = chartContainer[chartName];
+        // }
+
+        chart = songManager.Instance.song[0].chartNormal;
 
     }
 

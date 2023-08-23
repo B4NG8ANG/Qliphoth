@@ -28,6 +28,7 @@ public class songManager
         Note[] deathChart = new Note[] {new Note("smallNormalNote", "1.0", "(300,300,0)", "0", "false", "1.0")};
 
         song = new Song[]{new Song("FractureRay1", "Fracture Ray", 4, 6, 10, normalChart, hardChart, deathChart)};
-
     }
+
+    // public string getSongbyId(){}
 }
