@@ -38,7 +38,7 @@ public class showSongImage : MonoBehaviour, IPointerClickHandler
         // 곡 이미지가 노출 되어있을때 다시 클릭시 곡 이미지 숨김
         if(gameObject.GetComponent<Image>().sprite.name == "SongSelectButtonImage")
         {
-            while (targetImage.rectTransform.anchoredPosition.x >= -250f)
+            while (targetImage.rectTransform.anchoredPosition.x >= -275f)
             {
                 targetImage.rectTransform.anchoredPosition -= Vector2.right * (moveSpeed * Time.deltaTime);
                 yield return null;
