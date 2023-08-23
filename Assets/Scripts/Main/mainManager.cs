@@ -12,17 +12,12 @@ public class mainManager : MonoBehaviour
     GameObject songSelectPanel;
 
     // Play 씬으로 넘겨줘야 할 정보들을 저장
-    GameObject songArtImageObject; // 곡 앨범 아트 이미지
-    GameObject songNameObject; // 곡 이름 텍스트
-    GameObject songComposerNameObject; // 곡 작곡가 이름 텍스트
-    GameObject difficultyImageObject; // 난이도 버튼 이미지
-    public AudioSource song; // 플레이 할 곡 음원
+    GameObject songDifficultyContainer; // 곡 난이도를 담는 컨테이너 오브젝트
+    GameObject songIDContainer; // 곡 ID를 담는 컨테이너 오브젝트
 
-    // Play 씬으로 넘겨줘야 할 정보 변수들
-    public string songName;
-    public string songArtImageName;
-    public string songComposerName;
+    // Play 씬으로 넘겨줘야 할 정보를 저장하는 변수들
     public string songDifficulty;
+    public string songID;
     
     private void Awake()
     {
@@ -46,23 +41,18 @@ public class mainManager : MonoBehaviour
     {   
         // 곡 정보를 매 프레임마다 갱신
         songSelectPanel = GameObject.Find("SongSelectPanel"); // 곡 선택창 패널
-        songNameObject = GameObject.Find("SongName"); // 곡 이름 텍스트 오브젝트
-        songArtImageObject = GameObject.Find("SongArtImage"); // 곡 이미지 이미지 오브젝트
-        songComposerNameObject = GameObject.Find("SongComposerName"); // 곡 작곡가 텍스트 오브젝트
-        difficultyImageObject = GameObject.Find("SongDifficulty"); // 곡 난이도 텍스트 오브젝트
+        songDifficultyContainer = GameObject.Find("SongDifficultyContainer"); // 곡 난이도를 가지고 있는 오브젝트
+        songIDContainer = GameObject.Find("SongIDContainer"); // 곡 ID를 가지고 있는 오브젝트
 
-        // 변수에 데이터를 담아두고, 다른 씬에서 꺼내서 사용
+        // 변수에 데이터를 담아두고, 다른 씬에서 mainManager에 접근하여 사용
         if(songSelectPanel != null)
         {
             if(songSelectPanel.activeSelf)
             {
-                songName = songNameObject.GetComponent<Text>().text;
-                songArtImageName = songArtImageObject.GetComponent<Image>().sprite.name;
-                songComposerName = songComposerNameObject.GetComponent<Text>().text;
-                songDifficulty = difficultyImageObject.GetComponent<Text>().text;
+                songDifficulty = songDifficultyContainer.GetComponent<Text>().text;
+                songID = songIDContainer.GetComponent<Text>().text;
             }
         }
-        
         
     }
 }

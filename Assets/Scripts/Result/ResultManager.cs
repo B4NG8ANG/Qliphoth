@@ -10,7 +10,7 @@ public class ResultManager : MonoBehaviour
     // ResultContainer 스크립트를 참조하기 위한 변수
     private GameObject resultContainer;
 
-    // Result씬에서 보일 정보들이 담긴 오브젝트
+    // Result씬에서 보일 오브젝트
     public GameObject resultSongArtImage;
     public GameObject resultSongDifficulty;
     public GameObject resultSongName;
@@ -30,16 +30,19 @@ public class ResultManager : MonoBehaviour
         // ResultContainer 오브젝트를 찾음 
         resultContainer = GameObject.Find("ResultContainer");
 
+        // ResultContainer 넘어온 곡 id를 이용하여 곡 정보를 불러와 Song 클래스 타입의 song 변수에 저장
+        string songID = resultContainer.GetComponent<ResultContainer>().resultSongID;
+        Song song = songManager.Instance.getSongbyId(songID);
+
         // 곡 이미지 표시
-        string songArtImageName = resultContainer.GetComponent<ResultContainer>().resultSongImageName;
-        resultSongArtImage.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/SongArt/" + songArtImageName);
+        resultSongArtImage.GetComponent<Image>().sprite = Resources.Load<Sprite>(song.songImageFileURL);
 
         // 곡 난이도 이미지 표시
         string resultDifficulty = resultContainer.GetComponent<ResultContainer>().resultDifficulty;
         resultSongDifficulty.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/" + resultDifficulty);
 
         // 곡 이름 표시
-        string songName = resultContainer.GetComponent<ResultContainer>().resultSongName;
+        string songName = song.songName;
         resultSongName.GetComponent<Text>().text = songName;
 
         // 곡 점수 표시
@@ -84,7 +87,6 @@ public class ResultManager : MonoBehaviour
             {
                 PlayerPrefs.SetString("SongProgress" + songName + resultDifficulty, resultSongProgress.GetComponent<Image>().sprite.name);
             }
-            
         }
         else if(!(resultAlive == resultChartNoteCount) && !(resultMaxCombo == resultChartNoteCount))
         {
@@ -100,7 +102,6 @@ public class ResultManager : MonoBehaviour
         // Highscore일때만 점수를 갱신 및 Highscore 오브젝트 활성화
         if(!PlayerPrefs.HasKey("SongScore" + songName + resultDifficulty) || resultScore > float.Parse(PlayerPrefs.GetString("SongScore" + songName + resultDifficulty)))
         {
-            
             PlayerPrefs.SetString("SongScore" + songName + resultDifficulty, resultScore.ToString("0000000"));
             Debug.Log(float.Parse(PlayerPrefs.GetString("SongScore" + songName + resultDifficulty)));
             resultHighScore.SetActive(true);
@@ -138,6 +139,7 @@ public class ResultManager : MonoBehaviour
         StartCoroutine(UnityWebRequestGET(songName, resultScore));
     }
 
+    // 곡 랭크 이미지랑 곡 달성도 이미지 저장 필요
     IEnumerator UnityWebRequestGET(string songName, float resultScore){
         string url = "http://175.115.13.86:3000/score";
         WWWForm form = new WWWForm();

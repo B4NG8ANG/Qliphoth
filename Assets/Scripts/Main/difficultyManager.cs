@@ -21,12 +21,9 @@ public class difficultyManager : MonoBehaviour
 
     public void SetDifficulty()
     {
-        // 이미지 하위의 텍스트를 이미지의 이름으로 (난이도) 변경
-        transform.GetChild(0).GetComponent<Text>().text = transform.GetComponent<Image>().sprite.name;
-
-        // 곡 선택창의 SongDifficulty 텍스트를 클릭된 난이도로 변경
-        GameObject SelectedSongDifficulty = GameObject.Find("SongDifficulty");
-        SelectedSongDifficulty.GetComponent<Text>().text = transform.GetChild(0).GetComponent<Text>().text;
+        // 곡 선택창의 SongDifficultyContainer 텍스트를 클릭된 난이도로 변경
+        GameObject SelectedSongDifficulty = GameObject.Find("SongDifficultyContainer");
+        SelectedSongDifficulty.GetComponent<Text>().text = transform.GetComponent<Image>().sprite.name;
 
         GameObject songScore = GameObject.Find("SongScore");
         GameObject songName = GameObject.Find("SongName");
@@ -38,9 +35,6 @@ public class difficultyManager : MonoBehaviour
         // GameObject clickedNormalDifficultyImage = GameObject.Find("ClickedNormalDifficultyImage");
         // GameObject clickedHardDifficultyImage = GameObject.Find("ClickedHardDifficultyImage");
         // GameObject clickedDeathDifficultyImage = GameObject.Find("ClickedDeathDifficultyImage");
-
-        
-
         // GameObject normalSongScore = GameObject.Find("NormalSongScore");
         // GameObject hardSongScore = GameObject.Find("HardSongScore");
         // GameObject deathSongScore = GameObject.Find("DeathSongScore");
@@ -48,8 +42,8 @@ public class difficultyManager : MonoBehaviour
 
         if(GetComponent<Image>().sprite.name.Contains("Normal"))
         {
-            //곡 랭크 이미지, 달성도 이미지 설정
-            SetRankAndProgress(songName, songScore, songProgress);
+            //곡 점수 텍스트, 달성도 이미지 설정
+            SetScoreAndProgress(songName, songScore, songProgress);
             
             // 난이도 버튼 선택시 선택된 이미지로 변경
             clickedNormalDifficultyImage.SetActive(true);
@@ -59,8 +53,8 @@ public class difficultyManager : MonoBehaviour
         }
         else if(GetComponent<Image>().sprite.name.Contains("Hard"))
         {
-            //곡 랭크 이미지, 달성도 이미지 설정
-            SetRankAndProgress(songName, songScore, songProgress);
+            //곡 점수 텍스트, 달성도 이미지 설정
+            SetScoreAndProgress(songName, songScore, songProgress);
 
             // 난이도 버튼 선택시 선택된 이미지로 변경
             clickedNormalDifficultyImage.SetActive(false);
@@ -70,8 +64,8 @@ public class difficultyManager : MonoBehaviour
         }
         else if(GetComponent<Image>().sprite.name.Contains("Death"))
         {
-            //곡 랭크 이미지, 달성도 이미지 설정
-            SetRankAndProgress(songName, songScore, songProgress);
+            //곡 점수 텍스트, 달성도 이미지 설정
+            SetScoreAndProgress(songName, songScore, songProgress);
 
             // 난이도 버튼 선택시 선택된 이미지로 변경
             clickedNormalDifficultyImage.SetActive(false);
@@ -114,17 +108,14 @@ public class difficultyManager : MonoBehaviour
             songRank.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/RankImageNone");
         }
 
-        
-
         // 곡 선택 버튼에서 난이도 별 점수를 바로 곡 선택창의 점수 텍스트로 넘기지 말고,
-        // 곡 선택창의 난이도 별 점수로 한번 보낸뒤 다시 거쳐서 오도록 변경 
-
+        // 곡 선택창의 난이도 별 점수로 한번 보낸뒤 다시 거쳐서 오도록 변경
 
     }
 
-    public void SetRankAndProgress(GameObject songName, GameObject songScore, GameObject songProgress)
+    public void SetScoreAndProgress(GameObject songName, GameObject songScore, GameObject songProgress)
     {
-        // 곡 랭크 이미지 설정
+        // 곡 점수 텍스트 설정
         // PlayerPrefs 키가 없을 경우 한번도 플레이 한적이 없는 곡으로 간주
         if (PlayerPrefs.HasKey("SongScore" + songName.GetComponent<Text>().text + GetComponent<Image>().sprite.name))
         {

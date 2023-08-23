@@ -13,13 +13,11 @@ public class playManager : MonoBehaviour
     private GameObject mainManager;
 
     // mainManager 스크립트를 참조하기 위한 변수
-    private GameObject chartManager;
+    // private GameObject chartManager;
 
     // Main씬에서 Play씬으로 넘어온 정보들
-    // 곡 이름, 곡 이미지 이름, 곡 작곡가 이름, 곡 난이도(B, L, D)
-    public string songName;
-    public string songArtImageName;
-    public string songComposerName;
+    // 곡 ID, 곡 난이도
+    public string songID;
     public string songDifficulty;
 
     // Play씬에 사용할 배경 이미지 (곡 이미지)
@@ -34,9 +32,6 @@ public class playManager : MonoBehaviour
 
     // 재시작 카운트다운 오브젝트
     public GameObject restartCountdownText;
-
-    // Play씬에 사용할 채보 이름
-    string chartName;
 
     // 판정선이 줄어드는 시간
     const float JUDGEMENTTIME = 0.5f;
@@ -93,51 +88,45 @@ public class playManager : MonoBehaviour
     public int late = 0;
     public int dead = 0;
 
-    // 여러 속성을 가진 노트들로 이루어진 사전 형태의 채보
+    // 여러 속성을 가진 노트들의 배열로 이루어진 채보
     // {노트 순서(key값) , new string[]{노트 종류, 노트가 생성될 시각, 노트가 생성될 vector3 좌표, 노트 번호, 동타 여부, 롱 노트인 경우 지속시간}}
-    // 롱노트의 지속시간은 싱크에 맞는 시간 + 0.5초로 정해야 함
-    // Dictionary<int, string[]> chart = new Dictionary<int, string[]>(){};
     Note[] chart;
-    Dictionary<string, Dictionary<int, string[]>> chartContainer = new Dictionary<string, Dictionary<int, string[]>>();
 
     // 노트의 총 갯수
     public int chartNoteCount;
 
 
     void Start()
-    {
-        Debug.Log(songManager.Instance.song[0].id);
-        
+    {   
         // mainManager 오브젝트를 찾음 
         mainManager = GameObject.Find("MainManager");
 
         // chartManager 오브젝트를 찾음 
-        chartManager = GameObject.Find("ChartManager");
+        // chartManager = GameObject.Find("ChartManager");
 
         // 동타 노트 생성을 위한 2번째 Update()
         StartCoroutine(CustomUpdate());
 
+        // mainManager에서 넘어온 곡 id를 이용하여 곡 정보를 불러와 Song 클래스 타입의 song 변수에 저장
+        songID = mainManager.GetComponent<mainManager>().songID;
+        Song song = songManager.Instance.getSongbyId(songID);
+
         // 음원 재생
         audioSource = GetComponent<AudioSource>();
-        songName = mainManager.GetComponent<mainManager>().songName;
-        musicClip = Resources.Load<AudioClip>("Audio/PlayableSong/" + songName);
+        musicClip = Resources.Load<AudioClip>(song.songFileURL);
         audioSource.clip = musicClip;
         musicLength = musicClip.length;
         audioSource.Play();
 
         // 배경 화면 설정
-        songArtImageName = mainManager.GetComponent<mainManager>().songArtImageName;
-        backgroundImage.sprite = Resources.Load<Sprite>("Play/SongArt/" + songArtImageName);
-
-        // 작곡가 이름 저장
-        songComposerName = mainManager.GetComponent<mainManager>().songComposerName;
+        backgroundImage.sprite = Resources.Load<Sprite>(song.songImageFileURL);
 
         // 이번 곡에 사용할 채보를 chart에 저장하고 총 노트의 개수 계산
         songDifficulty = mainManager.GetComponent<mainManager>().songDifficulty;
-        SetChart();
+        SetChart(songID);
         chartNoteCount = chart.Length;
 
-        // play 씬 밑에 곡 이름과 난이도 텍스트 설정
+        // play 씬 밑에 곡 이름과 난이도 텍스트 설정 (난이도 표시 시 텍스트와 숫자 사이에 빈칸 추가)
         string spacedString = songDifficulty;
 
         for (int i = 0; i < spacedString.Length - 1; i++)
@@ -148,7 +137,7 @@ public class playManager : MonoBehaviour
                 spacedString = spacedString.Insert(i + 1, " ");
             }
         }
-        songNameText.GetComponent<Text>().text = songName;
+        songNameText.GetComponent<Text>().text = song.songName;
         songDifficultyText.GetComponent<Text>().text = spacedString;
 
         // 이번 곡의 노트 하나당 점수 계산
@@ -211,7 +200,6 @@ public class playManager : MonoBehaviour
         
     }
     
-
     void Update()
     {
         noteCreatTime = Time.time - startTime;
@@ -303,7 +291,6 @@ public class playManager : MonoBehaviour
 
             if(isPlaying)
             {
-                
                 // 동타일때만 노트 생성
                 if(chart[noteCount].isNoteSameTime == "true")
                 {
@@ -468,25 +455,24 @@ public class playManager : MonoBehaviour
         }
     }
 
-    public void SetChart()
+    // 곡의 id와 난이도를 이용하여 songManager에서 채보 정보를 가져와서 저장
+    public void SetChart(string songID)
     {
-        // // 곡 이름과 난이도를 조합해서 차트 이름에 해당하는 새 문자열 생성
-        // string replaceSongName = songName.Replace(" ", "_");
-        // replaceSongName += "_";
-        // chartName = replaceSongName + songDifficulty;
-
-        // // chartManager의 chartContainer 사전을 가져와서 저장
-        // chartContainer = chartManager.GetComponent<chartManager>().chartContainer;
-
-        // Debug.Log(chartName);
-
-        // if (chartContainer.ContainsKey(chartName))
-        // {
-        //     chart = chartContainer[chartName];
-        // }
-
-        chart = songManager.Instance.song[0].chartNormal;
-
+        // 난이도가 Normal인 경우
+        if(songDifficulty.Contains("Normal"))
+        {
+            chart = songManager.Instance.song[int.Parse(songID)].chartNormal;
+        }
+        // 난이도가 Hard 경우
+        else if(songDifficulty.Contains("Hard"))
+        {
+            chart = songManager.Instance.song[int.Parse(songID)].chartHard;
+        }
+        // 난이도가 Death 경우
+        else if(songDifficulty.Contains("Death"))
+        {
+            chart = songManager.Instance.song[int.Parse(songID)].chartDeath;
+        }
     }
 
 

@@ -11,10 +11,9 @@ public class ResultContainer : MonoBehaviour
     // playManager 스크립트를 참조하기 위한 변수
     private GameObject playManager;
 
-    // 결과창에 보일 곡 제목, 곡 난이도, 곡 이미지의 이름
-    public string resultSongName;
+    // 결과창에 보일 곡의 ID, 곡 난이도
     public string resultDifficulty;
-    public string resultSongImageName;
+    public string resultSongID;
 
     // 결과창에 보일 score, maxCombo 및 alive, early, late, dead 판정을 받은 노트의 개수
     public float resultScore;
@@ -24,7 +23,7 @@ public class ResultContainer : MonoBehaviour
     public int resultLate;
     public int resultDead;
 
-    // 전체 노트의 개수
+    // 결과창에서 사용할 전체 노트의 개수
     public int resultChartNoteCount;
 
     private void Awake()
@@ -42,7 +41,6 @@ public class ResultContainer : MonoBehaviour
 
     void Start()
     {
-        
 
     }
 
@@ -51,15 +49,15 @@ public class ResultContainer : MonoBehaviour
         // PlayManager 오브젝트를 찾음 
         playManager = GameObject.Find("PlayManager");
 
-        // ResultContainer의 변수에 데이터를 담아두고, ResultManager에서 꺼내서 사용
+        // Play씬 밖에서는 실행하지 않음
         if(playManager == null)
         {
             return;
         }
 
-        resultSongName = playManager.GetComponent<playManager>().songName;
+        // ResultContainer의 변수에 데이터를 담아두고, ResultManager에서 ResultContainer에 접근하여 사용
+        resultSongID = playManager.GetComponent<playManager>().songID;
         resultDifficulty = playManager.GetComponent<playManager>().songDifficulty;
-        resultSongImageName = playManager.GetComponent<playManager>().songArtImageName;
         resultScore = playManager.GetComponent<playManager>().score;
         resultMaxCombo = playManager.GetComponent<playManager>().maxCombo;
         resultAlive = playManager.GetComponent<playManager>().alive;
@@ -67,6 +65,5 @@ public class ResultContainer : MonoBehaviour
         resultLate = playManager.GetComponent<playManager>().late;
         resultDead = playManager.GetComponent<playManager>().dead;
         resultChartNoteCount = playManager.GetComponent<playManager>().chartNoteCount;
-
     }
 }
