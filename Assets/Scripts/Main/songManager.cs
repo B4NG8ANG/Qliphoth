@@ -23,13 +23,9 @@ public class songManager
 
     public void Init()
     {
-        Note longNote = new Note("longNote", "1.0", "(300,300,0)", "0", "false", "1.0");
-        Note normalNote = new Note("normalNote", "1.0", "(300,300,0)", "0", "false", "1.0");
-        Note smallNormalNote = new Note("smallNormalNote", "1.0", "(300,300,0)", "0", "false", "1.0");
-
-        Note[] normalChart = new Note[] { longNote };
-        Note[] hardChart = new Note[] { normalNote };
-        Note[] deathChart = new Note[] { smallNormalNote };
+        Note[] normalChart = new Note[] {new Note("longNote", "1.0", "(300,300,0)", "0", "false", "1.0")};
+        Note[] hardChart = new Note[] {new Note("normalNote", "1.0", "(300,300,0)", "0", "false", "1.0")};
+        Note[] deathChart = new Note[] {new Note("smallNormalNote", "1.0", "(300,300,0)", "0", "false", "1.0")};
 
         song = new Song[]{new Song("FractureRay1", "Fracture Ray", 4, 6, 10, normalChart, hardChart, deathChart)};
 
