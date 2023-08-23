@@ -31,7 +31,7 @@ public class songManager
         Note[] hardChart = new Note[] { normalNote };
         Note[] deathChart = new Note[] { smallNormalNote };
 
-        song = new Song{}[("FractureRay1", "Fracture Ray", 4, 6, 10, normalChart, hardChart, deathChart)];
+        song = new Song[]{new Song("FractureRay1", "Fracture Ray", 4, 6, 10, normalChart, hardChart, deathChart)};
 
     }
 }
