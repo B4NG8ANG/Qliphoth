@@ -107,41 +107,44 @@ public class ResultManager : MonoBehaviour
             resultHighScore.SetActive(true);
         }
         
+        
         // 점수별 랭크 설정
+        string RankImgURL = "";
         if(resultScore >= 990000f)
         {
-            resultSongRank.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/RankImageSplus");
+            RankImgURL = "Play/UI/RankImageSplus";
         }
         else if(990000f > resultScore && resultScore >= 980000f)
         {
-            resultSongRank.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/RankImage");
+            RankImgURL = "Play/UI/RankImage";
         }
         else if(980000f > resultScore && resultScore >= 950000f)
         {
-            resultSongRank.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/RankImageAplus");
+            RankImgURL = "Play/UI/RankImageAplus";
         }
         else if(950000f > resultScore && resultScore >= 920000f)
         {
-            resultSongRank.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/RankImageA");
+            RankImgURL = "Play/UI/RankImageA";
         }
         else if(920000f > resultScore && resultScore >= 890000f)
         {
-            resultSongRank.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/RankImageB");
+            RankImgURL = "Play/UI/RankImageB";
         }
-        else if(890000f > resultScore)
+        else
         {
-            resultSongRank.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/RankImageC");
+            RankImgURL = "Play/UI/RankImageC";
         }
+        resultSongRank.GetComponent<Image>().sprite = Resources.Load<Sprite>(RankImgURL);
 
         Debug.Log("SongScore" + songName);
         Debug.Log(resultDifficulty);
 
-        StartCoroutine(UnityWebRequestGET(songName, resultScore));
+        StartCoroutine(UnityWebRequestGET(song.id, resultScore));
     }
 
     // 곡 랭크 이미지랑 곡 달성도 이미지 저장 필요
     IEnumerator UnityWebRequestGET(string songName, float resultScore){
-        string url = "http://175.115.13.86:3000/score";
+        string url = Constants.HOST+"score";
         WWWForm form = new WWWForm();
 
         form.AddField("song_id", songName);
