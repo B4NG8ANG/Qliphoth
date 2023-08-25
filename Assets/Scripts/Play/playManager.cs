@@ -123,7 +123,7 @@ public class playManager : MonoBehaviour
 
         // 이번 곡에 사용할 채보를 chart에 저장하고 총 노트의 개수 계산
         songDifficulty = mainManager.GetComponent<mainManager>().songDifficulty;
-        SetChart(songID);
+        SetChart(song);
         chartNoteCount = chart.Length;
 
         // play 씬 밑에 곡 이름과 난이도 텍스트 설정 (난이도 표시 시 텍스트와 숫자 사이에 빈칸 추가)
@@ -456,23 +456,24 @@ public class playManager : MonoBehaviour
     }
 
     // 곡의 id와 난이도를 이용하여 songManager에서 채보 정보를 가져와서 저장
-    public void SetChart(string songID)
+    public void SetChart(Song song)
     {
         // 난이도가 Normal인 경우
         if(songDifficulty.Contains("Normal"))
         {
-            chart = songManager.Instance.song[int.Parse(songID)].chartNormal;
+            chart = song.chartNormal;
         }
         // 난이도가 Hard 경우
         else if(songDifficulty.Contains("Hard"))
         {
-            chart = songManager.Instance.song[int.Parse(songID)].chartHard;
+            chart = song.chartHard;
         }
         // 난이도가 Death 경우
         else if(songDifficulty.Contains("Death"))
         {
-            chart = songManager.Instance.song[int.Parse(songID)].chartDeath;
+            chart = song.chartDeath;
         }
+
     }
 
 
