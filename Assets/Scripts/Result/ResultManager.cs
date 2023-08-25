@@ -112,7 +112,7 @@ public class ResultManager : MonoBehaviour
             PlayerPrefs.SetString("SongScore" + songName + resultDifficulty, resultScore.ToString("0000000"));
             Debug.Log(float.Parse(PlayerPrefs.GetString("SongScore" + songName + resultDifficulty)));
             resultHighScore.SetActive(true);
-            StartCoroutine(UnityWebRequestGET(song.id+resultDifficulty, resultScore, progress));
+            StartCoroutine(UnityWebRequestGET(song.id, resultDifficulty, resultScore, progress));
         }
         
         
@@ -151,11 +151,18 @@ public class ResultManager : MonoBehaviour
     }
 
     // 곡 랭크 이미지랑 곡 달성도 이미지 저장 필요
-    IEnumerator UnityWebRequestGET(string songid, float resultScore, string progress){
+    IEnumerator UnityWebRequestGET(string songid, string difi, float resultScore, string progress){
+        
+        string difficulty = "";
+        if(difi.Contains("Normal")) difficulty = "Normal";
+        else if(difi.Contains("Hard")) difficulty = "Hard";
+        else difficulty = "Death";
+
+
         string url = Constants.HOST+"score";
         WWWForm form = new WWWForm();
 
-        form.AddField("song_id", songid);
+        form.AddField("song_id", songid+"_"+difficulty);
         form.AddField("user_id", "dlwjddn");
         form.AddField("progress", progress);
         form.AddField("score", resultScore.ToString());
