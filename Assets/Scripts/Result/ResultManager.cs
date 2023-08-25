@@ -73,28 +73,35 @@ public class ResultManager : MonoBehaviour
         int resultChartNoteCount = resultContainer.GetComponent<ResultContainer>().resultChartNoteCount;
 
 
+        string progress = "";
+        string prevProgress = PlayerPrefs.GetString("SongProgress" + songName + resultDifficulty);
         // All Alive, Full Combo, Clear 달성도 이미지 표시 및 곡 선택창으로 데이터 전송
         if(resultAlive == resultChartNoteCount)
         {
             resultSongProgress.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/SongProgressImageAllAlive");
             PlayerPrefs.SetString("SongProgress" + songName + resultDifficulty, resultSongProgress.GetComponent<Image>().sprite.name);
+            progress = "AllAlive";
         }
         else if(!(resultAlive == resultChartNoteCount) && resultMaxCombo == resultChartNoteCount)
         {
             resultSongProgress.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/SongProgressImageFullCombo");
 
-            if(!(PlayerPrefs.GetString("SongProgress" + songName + resultDifficulty) == "SongProgressImageAllAlive"))
+            //이미 ALlAlive이라면 저장X
+            if(!(prevProgress == "SongProgressImageAllAlive"))
             {
                 PlayerPrefs.SetString("SongProgress" + songName + resultDifficulty, resultSongProgress.GetComponent<Image>().sprite.name);
+                progress = "FullCombo";
             }
         }
         else if(!(resultAlive == resultChartNoteCount) && !(resultMaxCombo == resultChartNoteCount))
         {
             resultSongProgress.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/SongProgressImageClear");
 
-            if(!(PlayerPrefs.GetString("SongProgress" + songName + resultDifficulty) == "SongProgressImageAllAlive") && !(PlayerPrefs.GetString("SongProgress" + songName + resultDifficulty) == "SongProgressImageFullCombo"))
+            //이미 ALlAlive이고 풀콤보이면 저장x
+            if(!(prevProgress == "SongProgressImageAllAlive") && !(prevProgress == "SongProgressImageFullCombo"))
             {
                 PlayerPrefs.SetString("SongProgress" + songName + resultDifficulty, resultSongProgress.GetComponent<Image>().sprite.name);
+                progress = "Clear";
             }
         }
 
@@ -105,47 +112,52 @@ public class ResultManager : MonoBehaviour
             PlayerPrefs.SetString("SongScore" + songName + resultDifficulty, resultScore.ToString("0000000"));
             Debug.Log(float.Parse(PlayerPrefs.GetString("SongScore" + songName + resultDifficulty)));
             resultHighScore.SetActive(true);
+            StartCoroutine(UnityWebRequestGET(song.id+resultDifficulty, resultScore, progress));
         }
         
+        
         // 점수별 랭크 설정
+        string RankImgURL = "";
         if(resultScore >= 990000f)
         {
-            resultSongRank.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/RankImageSplus");
+            RankImgURL = "Play/UI/RankImageSplus";
         }
         else if(990000f > resultScore && resultScore >= 980000f)
         {
-            resultSongRank.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/RankImage");
+            RankImgURL = "Play/UI/RankImage";
         }
         else if(980000f > resultScore && resultScore >= 950000f)
         {
-            resultSongRank.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/RankImageAplus");
+            RankImgURL = "Play/UI/RankImageAplus";
         }
         else if(950000f > resultScore && resultScore >= 920000f)
         {
-            resultSongRank.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/RankImageA");
+            RankImgURL = "Play/UI/RankImageA";
         }
         else if(920000f > resultScore && resultScore >= 890000f)
         {
-            resultSongRank.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/RankImageB");
+            RankImgURL = "Play/UI/RankImageB";
         }
-        else if(890000f > resultScore)
+        else
         {
-            resultSongRank.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/RankImageC");
+            RankImgURL = "Play/UI/RankImageC";
         }
+        resultSongRank.GetComponent<Image>().sprite = Resources.Load<Sprite>(RankImgURL);
 
         Debug.Log("SongScore" + songName);
         Debug.Log(resultDifficulty);
 
-        StartCoroutine(UnityWebRequestGET(songName, resultScore));
+        
     }
 
     // 곡 랭크 이미지랑 곡 달성도 이미지 저장 필요
-    IEnumerator UnityWebRequestGET(string songName, float resultScore){
-        string url = "http://175.115.13.86:3000/score";
+    IEnumerator UnityWebRequestGET(string songid, float resultScore, string progress){
+        string url = Constants.HOST+"score";
         WWWForm form = new WWWForm();
 
-        form.AddField("song_id", songName);
+        form.AddField("song_id", songid);
         form.AddField("user_id", "dlwjddn");
+        form.AddField("progress", progress);
         form.AddField("score", resultScore.ToString());
 
         UnityWebRequest www = UnityWebRequest.Post(url, form);  // 보낼 주소와 데이터 입력
