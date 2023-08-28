@@ -76,9 +76,10 @@ public class AuthManager
         auth = FirebaseAuth.DefaultInstance;
 
         //초기화 시 이전 로그인 정보 날림
-        if(auth.CurrentUser != null){
-            logOut();
-        }
+        // if(auth.CurrentUser != null){
+        //     Debug.Log("로그아웃@@@");
+        //     logOut();
+        // }
 
         //계정상태가 바뀔 때 호출되는 eventHandler
         auth.StateChanged += onChanged;
