@@ -21,8 +21,8 @@ public class AuthManager
     private FirebaseAuth auth;
     private FirebaseUser user;
 
-    public string UserId => user.UserId;
-    public string UserName => user.DisplayName;
+    public string UserId => user != null ? user.UserId : null;
+    public string UserName => user != null ? user.DisplayName : null;
     public bool isLogIn => user != null;
     public Action<bool> LoginState;
 
