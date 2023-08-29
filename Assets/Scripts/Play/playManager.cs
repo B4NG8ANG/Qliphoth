@@ -57,6 +57,10 @@ public class playManager : MonoBehaviour
     // 노트가 보일 패널
     public GameObject notePanel;
 
+    // 밝기를 조절하는데 사용하는 이미지, 해당 이미지의 알파값을 조절할 Color 객체
+    public GameObject brightSettingImage;
+    Color brightSettingImageAlpha;
+
     // 노트 생성 시간, 생성 노트 개수(노트 번호)
     float noteCreatTime;
     int noteCount = 0;
@@ -106,6 +110,11 @@ public class playManager : MonoBehaviour
 
         // 동타 노트 생성을 위한 2번째 Update()
         StartCoroutine(CustomUpdate());
+
+        // 밝기 설정 이미지의 투명도를 조절하여 화면 밝기 조절
+        brightSettingImageAlpha = brightSettingImage.GetComponent<Image>().color;
+        brightSettingImageAlpha.a = float.Parse(PlayerPrefs.GetString("BrightAmount"));
+        brightSettingImage.GetComponent<Image>().color = brightSettingImageAlpha;
 
         // mainManager에서 넘어온 곡 id를 이용하여 곡 정보를 불러와 Song 클래스 타입의 song 변수에 저장
         songID = mainManager.GetComponent<mainManager>().songID;

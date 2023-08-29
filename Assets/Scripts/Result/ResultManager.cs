@@ -24,6 +24,10 @@ public class ResultManager : MonoBehaviour
     public GameObject resultSongRank;
     public GameObject resultSongProgress;
 
+    // 밝기를 조절하는데 사용하는 이미지, 해당 이미지의 알파값을 조절할 Color 객체
+    public GameObject brightSettingImage;
+    Color brightSettingImageAlpha;
+
    
     void Start()
     {
@@ -72,9 +76,15 @@ public class ResultManager : MonoBehaviour
         // Dead 판정 개수 표시
         int resultChartNoteCount = resultContainer.GetComponent<ResultContainer>().resultChartNoteCount;
 
+        // 밝기 설정 이미지의 투명도를 조절하여 화면 밝기 조절
+        brightSettingImageAlpha = brightSettingImage.GetComponent<Image>().color;
+        brightSettingImageAlpha.a = float.Parse(PlayerPrefs.GetString("BrightAmount"));
+        brightSettingImage.GetComponent<Image>().color = brightSettingImageAlpha;
 
+        // 데이터 전송에 사용할 변수 선언
         string progress = "";
         string prevProgress = PlayerPrefs.GetString("SongProgress" + songName + resultDifficulty);
+
         // All Alive, Full Combo, Clear 달성도 이미지 표시 및 곡 선택창으로 데이터 전송
         if(resultAlive == resultChartNoteCount)
         {
@@ -86,7 +96,7 @@ public class ResultManager : MonoBehaviour
         {
             resultSongProgress.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/SongProgressImageFullCombo");
 
-            //이미 ALlAlive이라면 저장X
+            //이미 All Alive이라면 저장하지 않음
             if(!(prevProgress == "SongProgressImageAllAlive"))
             {
                 PlayerPrefs.SetString("SongProgress" + songName + resultDifficulty, resultSongProgress.GetComponent<Image>().sprite.name);
@@ -97,7 +107,7 @@ public class ResultManager : MonoBehaviour
         {
             resultSongProgress.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/SongProgressImageClear");
 
-            //이미 ALlAlive이고 풀콤보이면 저장x
+            //이미 All Alive이고 Full Combo이면 저장하지 않음
             if(!(prevProgress == "SongProgressImageAllAlive") && !(prevProgress == "SongProgressImageFullCombo"))
             {
                 PlayerPrefs.SetString("SongProgress" + songName + resultDifficulty, resultSongProgress.GetComponent<Image>().sprite.name);

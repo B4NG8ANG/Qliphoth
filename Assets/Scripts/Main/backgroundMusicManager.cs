@@ -23,7 +23,6 @@ public class backgroundMusicManager : MonoBehaviour
         audioSource.clip = Resources.Load<AudioClip>("Audio/Background/Main/" + backgroundMusic);
         audioSource.Play();
         
-        
     }
 
 
@@ -47,6 +46,5 @@ public class backgroundMusicManager : MonoBehaviour
             }
         }
         
-
     }
 }
