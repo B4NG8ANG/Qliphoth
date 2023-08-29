@@ -22,4 +22,10 @@ public class TestSceneChanger : MonoBehaviour
         //SceneManager.LoadScene("Play");
         SceneChangeEffectManager.instance.FadeToScene("LoginTest");
     }
+
+    public void goToMainScene()
+    {
+        //SceneManager.LoadScene("Play");
+        SceneChangeEffectManager.instance.FadeToScene("Main");
+    }
 }
