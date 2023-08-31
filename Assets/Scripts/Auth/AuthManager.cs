@@ -9,6 +9,7 @@ public class AuthManager
 {
     //싱글톤
     private static AuthManager instance = null;
+    public bool isCheckNickname = false;
 
     public static AuthManager Instance{
         get {
@@ -30,6 +31,7 @@ public class AuthManager
     public void RegisterInDB(string user_id, string nickname){
         StaticCoroutine.DoCoroutine(UnityWebRequestPOST(user_id,nickname));
     }
+
     public async void Create(string email, string password, string nickname){
         // Test();
         if(password.Length < 6){
@@ -65,6 +67,7 @@ public class AuthManager
             });
 
             RegisterInDB(user.UserId, nickname);
+            isCheckNickname = false;
         }
         catch (System.Exception)
         {
@@ -151,6 +154,26 @@ public class AuthManager
         else{
             //TODO: firebase회원 삭제
             Debug.Log(www.error);
+        }
+
+        www.Dispose();
+    }
+
+    public IEnumerator CheckDuplicationNickname(string nickname){
+        string url = Constants.HOST+"nick/"+nickname;
+        WWWForm form = new WWWForm();
+
+        UnityWebRequest www = UnityWebRequest.Get(url);  // 보낼 주소와 데이터 입력
+
+        yield return www.SendWebRequest();
+
+        if(www.error == null){
+            Debug.Log(www.downloadHandler.text);
+            isCheckNickname = true;
+        }
+        else{
+            Debug.Log("닉네임이 중복됨");
+            isCheckNickname = false;
         }
 
         www.Dispose();

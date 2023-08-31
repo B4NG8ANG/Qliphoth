@@ -43,7 +43,13 @@ public class LoginSystem : MonoBehaviour
         string p = password.text;
         string n = nickname.text;
 
-        AuthManager.Instance.Create(e,p,n);
+        if(AuthManager.Instance.isCheckNickname){
+            AuthManager.Instance.Create(e,p,n);
+        }else{
+            //TODO: 닉네임 중복 체크 prompt 띄우기
+            Debug.Log("닉네임 중복 체크 해주세요~~");
+        }
+        
     }
 
     public void LogIn(){
@@ -56,4 +62,13 @@ public class LoginSystem : MonoBehaviour
         AuthManager.Instance.logOut();
     }
 
+    public void CheckNickname(){
+        StaticCoroutine.DoCoroutine(AuthManager.Instance.CheckDuplicationNickname(nickname.text));
+
+    }
+
+    public void ValueChange(){
+        AuthManager.Instance.isCheckNickname = false;
+    }
+    
 }
