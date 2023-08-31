@@ -17,9 +17,20 @@ public class SettingManager : MonoBehaviour
     public float brightAmount;
     public GameObject brightSettingImage;
     public Color brightSettingImageAlpha;
+    public GameObject userName;
     
     void Start()
     {   
+        // 상단 메뉴바에 닉네임 표시
+        if(AuthManager.Instance.isLogIn)
+        {
+            userName.GetComponent<Text>().text = AuthManager.Instance.UserName;
+        }
+        else
+        {
+            userName.GetComponent<Text>().text = "Guest";
+        }
+        
         // 볼륨 초기 값 설정
         if (!(PlayerPrefs.HasKey("VolumeAmount")))
         {

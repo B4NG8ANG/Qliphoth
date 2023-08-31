@@ -8,6 +8,8 @@ public class difficultyManager : MonoBehaviour
     public GameObject clickedNormalDifficultyImage;
     public GameObject clickedHardDifficultyImage;
     public GameObject clickedDeathDifficultyImage;
+    public GameObject rankingManager;
+    public GameObject selectedSongID;
 
     void Start()
     {
@@ -50,6 +52,8 @@ public class difficultyManager : MonoBehaviour
             clickedHardDifficultyImage.SetActive(false);
             clickedDeathDifficultyImage.SetActive(false);
 
+            // 곡 선택창 활성화 시 랭킹 매니저의 코루틴이 실행되도록 설정
+            rankingManager.GetComponent<RankingManager>().StartRank(selectedSongID.GetComponent<Text>().text, "Normal");
         }
         else if(GetComponent<Image>().sprite.name.Contains("Hard"))
         {
@@ -61,6 +65,8 @@ public class difficultyManager : MonoBehaviour
             clickedHardDifficultyImage.SetActive(true);
             clickedDeathDifficultyImage.SetActive(false);
 
+            // 곡 선택창 활성화 시 랭킹 매니저의 코루틴이 실행되도록 설정
+            rankingManager.GetComponent<RankingManager>().StartRank(selectedSongID.GetComponent<Text>().text, "Hard");
         }
         else if(GetComponent<Image>().sprite.name.Contains("Death"))
         {
@@ -71,6 +77,9 @@ public class difficultyManager : MonoBehaviour
             clickedNormalDifficultyImage.SetActive(false);
             clickedHardDifficultyImage.SetActive(false);
             clickedDeathDifficultyImage.SetActive(true);
+
+            // 곡 선택창 활성화 시 랭킹 매니저의 코루틴이 실행되도록 설정
+            rankingManager.GetComponent<RankingManager>().StartRank(selectedSongID.GetComponent<Text>().text, "Death");
         }
         
         // 점수별 랭크 설정
@@ -137,4 +146,5 @@ public class difficultyManager : MonoBehaviour
             songProgress.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play/UI/Transparent");
         }
     }
+
 }

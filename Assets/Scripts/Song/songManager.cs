@@ -88,4 +88,10 @@ public class songManager
 
         return findsong;
     }
+
+    // 곡 난이도가 포함된 ID를 생성
+    public string MakeIdWithDifficulty(string songID, string songDifficulty)
+    {
+        return songID + "_" + songDifficulty;
+    }
 }

@@ -27,6 +27,7 @@ public class songSelectManager : MonoBehaviour
     public GameObject songProgress; // 곡에서 달성한 달성도 (Perfect Alive, Full Alive, Clear, Fail)
     public GameObject songRank; // 곡에서 달성한 랭크 (S+, S, A+, A, B, C)
     public GameObject songIDContainer; // 곡 ID 텍스트
+    
 
     void Start()
     {

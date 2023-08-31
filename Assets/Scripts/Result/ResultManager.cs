@@ -115,7 +115,6 @@ public class ResultManager : MonoBehaviour
             }
         }
 
-
         // Highscore일때만 점수를 갱신 및 Highscore 오브젝트 활성화
         if(!PlayerPrefs.HasKey("SongScore" + songName + resultDifficulty) || resultScore > float.Parse(PlayerPrefs.GetString("SongScore" + songName + resultDifficulty)))
         {
@@ -172,7 +171,7 @@ public class ResultManager : MonoBehaviour
         string url = Constants.HOST+"score";
         WWWForm form = new WWWForm();
 
-        form.AddField("song_id", songid+"_"+difficulty);
+        form.AddField("song_id", songManager.Instance.MakeIdWithDifficulty(songid,difficulty));
         form.AddField("user_id", AuthManager.Instance.UserId);
         form.AddField("progress", progress);
         form.AddField("score", resultScore.ToString());
