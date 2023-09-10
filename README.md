@@ -2,7 +2,7 @@
 2023 동양미래대학교 3학년 졸업작품
 
 ## 프로젝트 소개
-Unity 및 C#으로 제작한 모바일 리듬게임입니다.
+Unity 및 C#으로 제작한 모바일 2D 리듬게임입니다.
 ![2](https://github.com/B4NG8ANG/Qliphoth/assets/50348034/89daa958-63df-4a53-aa31-1ed0a0e73b92)
 
 ![2](https://github.com/B4NG8ANG/Qliphoth/assets/50348034/aafe9817-d8a3-415f-8388-94cc701d8b4c)
