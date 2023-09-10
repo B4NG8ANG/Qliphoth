@@ -20,7 +20,8 @@ Unity 및 C#으로 제작한 모바일 리듬게임입니다.
 - `C#`
 - Server Machine: Raspberry Pie 4
 - Database: Sqlite3
-- Cooperation Tool: Github Desktop
+- Cooperation Tool: Git & Github Desktop
+- UI & Art Design: Photoshop
 
 ## 주요 기능 및 사용 기술
 - 로그인, 회원가입: 구글이 제공하는 Firebase Authentication의 이메일 / 비밀번호를 이용한 사용자 인증기능을 활용하여 구현
