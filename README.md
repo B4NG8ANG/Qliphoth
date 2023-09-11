@@ -6,7 +6,8 @@ Unity 및 C#으로 제작한 모바일 2D 리듬게임입니다.
 
 ![2](https://github.com/B4NG8ANG/Qliphoth/assets/50348034/89daa958-63df-4a53-aa31-1ed0a0e73b92)
 
-![2](https://github.com/B4NG8ANG/Qliphoth/assets/50348034/aafe9817-d8a3-415f-8388-94cc701d8b4c)
+![1](https://github.com/B4NG8ANG/Qliphoth/assets/50348034/880632b4-013c-45d1-b22f-0179583d7a44)
+
 
 ## 개발 기간
 2023.06.01 ~ 현재
