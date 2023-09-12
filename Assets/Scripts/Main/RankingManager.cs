@@ -27,7 +27,8 @@ public class RankingManager : MonoBehaviour
 
     IEnumerator GetAndShowRankData(string songIDWithDifficulty)
     {
-        string url = Constants.HOST+ "score/" + songIDWithDifficulty;
+        Debug.Log(Constants.HOST+ "rank/" + songIDWithDifficulty);
+        string url = Constants.HOST+ "rank/" + songIDWithDifficulty;
         WWWForm form = new WWWForm();
 
         UnityWebRequest www = UnityWebRequest.Get(url);

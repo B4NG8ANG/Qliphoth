@@ -168,7 +168,7 @@ public class ResultManager : MonoBehaviour
         else if(difi.Contains("Hard")) difficulty = "Hard";
         else difficulty = "Death";
         
-        string url = Constants.HOST+"score";
+        string url = Constants.HOST+"rank";
         WWWForm form = new WWWForm();
 
         form.AddField("song_id", songManager.Instance.MakeIdWithDifficulty(songid,difficulty));
