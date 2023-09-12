@@ -71,10 +71,32 @@ public class songManager
             new Note("slideNote", "7.0", "(600,600,0)", "3", "false", "")
         };
 
+        Note[] Conversationswithstrangers1Normal1 = new Note[]{
+            new Note("slideNote", "1.0", "(300,300,0)", "0", "false", ""),
+            new Note("slideNote", "2.0", "(700,700,0)", "1", "false", ""),
+            new Note("slideNote", "5.0", "(600,600,0)", "2", "false", ""),
+            new Note("slideNote", "7.0", "(600,600,0)", "3", "false", "")
+        };
+
+        Note[] Conversationswithstrangers1Hard3 = new Note[]{
+            new Note("slideNote", "1.0", "(300,300,0)", "0", "false", ""),
+            new Note("slideNote", "2.0", "(700,700,0)", "1", "false", ""),
+            new Note("slideNote", "5.0", "(600,600,0)", "2", "false", ""),
+            new Note("slideNote", "7.0", "(600,600,0)", "3", "false", "")
+        };
+
+        Note[] Conversationswithstrangers1Death5 = new Note[]{
+            new Note("slideNote", "1.0", "(300,300,0)", "0", "false", ""),
+            new Note("slideNote", "2.0", "(700,700,0)", "1", "false", ""),
+            new Note("slideNote", "5.0", "(600,600,0)", "2", "false", ""),
+            new Note("slideNote", "7.0", "(600,600,0)", "3", "false", "")
+        };
+
 
         song = new Song[]{
             new Song("0", "Fracture Ray", "Sakuzyo", 4, 6, 10, FractureRay1Normal4, FractureRay1Hard6, FractureRay1Death10),
-            new Song("1", "Cytus II", "Cytus II", 1, 3, 5, CytusII1Normal1, CytusII1Hard3, CytusII1Death5)
+            new Song("1", "Cytus II", "Cytus II", 1, 3, 5, CytusII1Normal1, CytusII1Hard3, CytusII1Death5),
+            new Song("2", "Conversations with strangers", "Caitlin Cook", 1, 3, 5, Conversationswithstrangers1Normal1, Conversationswithstrangers1Hard3, Conversationswithstrangers1Death5)
         };
     }
 
