@@ -35,8 +35,8 @@ public class songManager
         };
 
         Note[] FractureRay1Death10 = new Note[]{
-            new Note("normalNote", "1.0", "(100,300,0)", "0", "false", ""),
-            new Note("smallNormalNote", "2.0", "(300,300,0)", "1", "false", ""),
+            new Note("normalNote", "1.0", "(0,300,0)", "0", "false", ""),
+            new Note("smallNormalNote", "2.0", "(1920,300,0)", "1", "false", ""),
             new Note("slideNote", "3.0", "(100,500,0)", "2", "false", ""),
             new Note("slideNote", "4.0", "(500,500,0)", "3", "false", ""),
             new Note("longNote", "5.0", "(600,500,0)", "4", "false", "1.0"),
@@ -50,8 +50,8 @@ public class songManager
         };
 
         Note[] CytusII1Normal1 = new Note[]{
-            new Note("slideNote", "1.0", "(300,300,0)", "0", "false", ""),
-            new Note("slideNote", "2.0", "(700,700,0)", "1", "false", ""),
+            new Note("slideNote", "1.0", "(0,100,0)", "0", "false", ""),
+            new Note("slideNote", "2.0", "(1920,100,0)", "1", "false", ""),
             new Note("slideNote", "3.0", "(200,200,0)", "2", "false", ""),
             new Note("slideNote", "4.0", "(500,500,0)", "3", "false", "")
         };
