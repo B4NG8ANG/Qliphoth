@@ -16,4 +16,10 @@ public class sceneChanger : MonoBehaviour
     {
         SceneChangeEffectManager.instance.FadeToScene("Setting");
     }
+
+    public void onTitleClick()
+    {
+        //SceneManager.LoadScene("Main");
+        SceneChangeEffectManager.instance.FadeToScene("Main");
+    }
 }

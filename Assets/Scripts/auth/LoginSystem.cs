@@ -67,6 +67,10 @@ public class LoginSystem : MonoBehaviour
         else
         {
             Create();
+
+            loginEmailObject.SetActive(true);
+            loginPasswordObject.SetActive(true);
+            signUpButton.SetActive(false);
         }    
     }
 
@@ -83,8 +87,16 @@ public class LoginSystem : MonoBehaviour
         else
         {
             LogIn();
+            SceneChangeEffectManager.instance.FadeToScene("Main");
         }    
     }
+
+    public void OnLogoutButtonClick()
+    {
+        LogOut();
+        SceneChangeEffectManager.instance.FadeToScene("Title");
+    }
+
 
     public void OnExitButtonClick()
     {
