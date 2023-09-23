@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Threading.Tasks;
 using TMPro;
 
 
@@ -52,7 +53,7 @@ public class LoginSystem : MonoBehaviour
         
     }
 
-    public void OnSignUpButtonClick()
+    public async void OnSignUpButtonClick()
     {
         // SignUp 버튼을 클릭하였을때 Login 버튼이 활성화 되어있다면 회원가입 UI 노출
         if(loginButton.activeSelf)
@@ -66,15 +67,25 @@ public class LoginSystem : MonoBehaviour
         // SignUp 버튼을 클릭하였을때 회원가입 UI가 노출 되어 있었다면 회원가입 실행
         else
         {
-            Create();
+            if(await Create() == 0)
+            {
+                signUpButton.SetActive(false);
+                signUpEmailObject.SetActive(false);
+                signUpPasswordObject.SetActive(false);
+                signUpNicknameObject.SetActive(false);
+                signUpNicknameCheckButtonObject.SetActive(false);
 
-            loginEmailObject.SetActive(true);
-            loginPasswordObject.SetActive(true);
-            signUpButton.SetActive(false);
+                loginButton.SetActive(true);
+                loginEmailObject.SetActive(true);
+                loginPasswordObject.SetActive(true);
+                signUpButton.SetActive(false);
+            }
+            
+
         }    
     }
 
-    public void OnLoginButtonClick()
+    public async void OnLoginButtonClick()
     {
         // Login 버튼을 클릭하였을때 SignUp 버튼이 활성화 되어있다면 로그인 UI 노출
         if(signUpButton.activeSelf)
@@ -86,8 +97,14 @@ public class LoginSystem : MonoBehaviour
         // Login 버튼을 클릭하였을때 로그인 UI가 노출 되어 있었다면 로그인 실행
         else
         {
-            LogIn();
-            SceneChangeEffectManager.instance.FadeToScene("Main");
+            // Login이 정상적으로 되면 Main씬으로 이동
+            if(await LogIn() == 0)
+            {
+                StartCoroutine(songManager.Instance.loginPlayRecordUpdate());
+                SceneChangeEffectManager.instance.FadeToScene("Main");
+            }
+            
+            
         }    
     }
 
@@ -122,23 +139,30 @@ public class LoginSystem : MonoBehaviour
     }
 
 
-    public void Create(){
+    public async Task<int> Create(){
         string e = signUpEmail.text;
         string p = signUpPassword.text;
         string n = signUpNickname.text;
 
-        if(AuthManager.Instance.isCheckNickname){
-            AuthManager.Instance.Create(e,p,n);
-        }else{
+        if(AuthManager.Instance.isCheckNickname)
+        {
+            return await AuthManager.Instance.Create(e,p,n);
+        }
+
+        else
+        {
             //TODO: 닉네임 중복 체크 prompt 띄우기
             Debug.Log("닉네임 중복 체크 해주세요~~");
+
+            return 5;
         }
+
         
     }
 
-    public void LogIn(){
+    public async Task<int> LogIn(){
         // Debug.Log(AuthManager.Instance.UserId);
-        AuthManager.Instance.LogIn(loginEmail.text, loginPassword.text);
+        return await AuthManager.Instance.LogIn(loginEmail.text, loginPassword.text);
     }
 
     public void LogOut(){

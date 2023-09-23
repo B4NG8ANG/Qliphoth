@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class songManager
 {
@@ -24,8 +26,13 @@ public class songManager
         // 각 곡과 난이도에 맞는 채보 저장
         Note[] FractureRay1Normal4 = new Note[]{
             new Note("longNote", "1.0", "(300,300,0)", "0", "false", "1.0"),
-            new Note("longNote", "2.0", "(700,700,0)", "1", "false", "2.0"),
-            new Note("longNote", "5.0", "(600,600,0)", "2", "false", "5.0")
+            new Note("normalNote", "2.1", "(700,700,0)", "1", "false", ""),
+            new Note("normalNote", "2.11", "(800,800,0)", "2", "false", ""),
+            new Note("normalNote", "2.12", "(600,600,0)", "3", "false", ""),
+            new Note("normalNote", "2.13", "(500,500,0)", "4", "false", ""),
+            new Note("normalNote", "2.14", "(400,400,0)", "5", "false", ""),
+            new Note("normalNote", "2.15", "(300,300,0)", "6", "false", ""),
+            new Note("longNote", "5.0", "(600,600,0)", "7", "false", "5.0")
         };
 
         Note[] FractureRay1Hard6 = new Note[]{
@@ -116,4 +123,222 @@ public class songManager
     {
         return songID + "_" + songDifficulty;
     }
+
+
+    // 로그인 시 로컬 기록과 서버 기록을 비교 후 갱신하는 함수
+    public IEnumerator loginPlayRecordUpdate()
+    {
+        // URL 저장
+        Debug.Log(Constants.HOST+ "score/" + AuthManager.Instance.UserId);
+        string url = Constants.HOST+ "score/" + AuthManager.Instance.UserId;
+        
+        // URL에 접속
+        WWWForm form = new WWWForm();
+        UnityWebRequest www = UnityWebRequest.Get(url);
+
+        yield return www.SendWebRequest();
+
+        if(www.error != null)
+        {
+            Debug.Log(www.error);
+            www.Dispose();
+            yield break;
+        }
+        
+        // recordData 배열 안에 서버에 저장되어 있던 기록을 저장
+        Debug.Log(www.downloadHandler.text);
+        Records recordData = JsonUtility.FromJson<Records>(www.downloadHandler.text);
+
+        // 로그인 시에 서버에 저장되어 있던 기록과 로컬에 저장되어 있던 기록을 비교  
+        for(int i = 0; i < song.Length; i++)
+        {
+            for(int j = 0; j < recordData.records.Length; j++)
+            {
+                // 서버에 점수 기록이 있음 (서버에 기록이 없다면 아무 일도 일어나지 않음)
+                if(MakeIdWithDifficulty(song[i].id, "Normal") == recordData.records[j].songID)
+                {
+                    // i) 서버에 점수 기록이 있고, 로컬에도 점수 기록이 있음
+                    if(PlayerPrefs.HasKey("SongScore" + song[i].songName + "Normal" + song[i].songNormalDifficulty))
+                    {
+                        if(recordData.records[j].score >= int.Parse(PlayerPrefs.GetString("SongScore" + song[i].songName + "Normal" + song[i].songNormalDifficulty)))
+                        {
+                            PlayerPrefs.SetString("SongScore" + song[i].songName + "Normal" + song[i].songNormalDifficulty, recordData.records[j].score.ToString("0000000"));
+                        }
+                    }
+
+                    // ii) 서버에 점수 기록이 있고, 로컬에는 점수 기록이 없음
+                    else
+                    {
+                        PlayerPrefs.SetString("SongScore" + song[i].songName + "Normal" + song[i].songNormalDifficulty, recordData.records[j].score.ToString("0000000"));
+                    }
+
+                    // I) 서버에 달성도 기록이 있고, 로컬에도 달성도 기록이 있음
+                    if(PlayerPrefs.HasKey("SongProgress" + song[i].songName + "Normal" + song[i].songNormalDifficulty))
+                    {
+                        if(PlayerPrefs.GetString("SongProgress" + song[i].songName + "Normal" + song[i].songNormalDifficulty) == "SongProgressImageClear")
+                        {
+                            if(recordData.records[j].progress == "FullCombo")
+                            {
+                                PlayerPrefs.SetString("SongProgress" + song[i].songName + "Normal" + song[i].songNormalDifficulty, "SongProgressImageFullCombo");
+                            }
+                            else if(recordData.records[j].progress == "AllAlive")
+                            {
+                                PlayerPrefs.SetString("SongProgress" + song[i].songName + "Normal" + song[i].songNormalDifficulty, "SongProgressImageAllAlive");
+                            }
+                        }
+                        else if(PlayerPrefs.GetString("SongProgress" + song[i].songName + "Normal" + song[i].songNormalDifficulty) == "SongProgressImageFullCombo")
+                        {
+                            if(recordData.records[j].progress == "AllAlive")
+                            {
+                                PlayerPrefs.SetString("SongProgress" + song[i].songName + "Normal" + song[i].songNormalDifficulty, "SongProgressImageAllAlive");
+                            }
+                        }
+                    }
+
+                    // II) 서버에 달성도 기록이 있고, 로컬에는 달성도 기록이 없음
+                    else
+                    {
+                        if(recordData.records[j].progress == "Clear")
+                        {
+                            PlayerPrefs.SetString("SongProgress" + song[i].songName + "Normal" + song[i].songNormalDifficulty, "SongProgressImageClear");
+                        }
+                        else if(recordData.records[j].progress == "FullCombo")
+                        {
+                            PlayerPrefs.SetString("SongProgress" + song[i].songName + "Normal" + song[i].songNormalDifficulty, "SongProgressImageFullCombo");
+                        }
+                        else if(recordData.records[j].progress == "AllAlive")
+                        {
+                            PlayerPrefs.SetString("SongProgress" + song[i].songName + "Normal" + song[i].songNormalDifficulty, "SongProgressImageAllAlive");
+                        }
+                    }
+                }
+
+                // 서버에 기록이 있음 (서버에 기록이 없다면 아무 일도 일어나지 않음)
+                if(MakeIdWithDifficulty(song[i].id, "Hard") == recordData.records[j].songID)
+                {
+                    // i) 서버에 기록이 있고, 로컬에도 기록이 있음
+                    if(PlayerPrefs.HasKey("SongScore" + song[i].songName + "Hard" + song[i].songHardDifficulty))
+                    {
+                        if(recordData.records[j].score >= int.Parse(PlayerPrefs.GetString("SongScore" + song[i].songName + "Hard" + song[i].songHardDifficulty)))
+                        {
+                            PlayerPrefs.SetString("SongScore" + song[i].songName + "Hard" + song[i].songHardDifficulty, recordData.records[j].score.ToString("0000000"));
+                        }
+                    }
+
+                    // ii) 서버에 기록이 있고, 로컬에는 기록이 없음
+                    else
+                    {
+                        PlayerPrefs.SetString("SongScore" + song[i].songName + "Hard" + song[i].songHardDifficulty, recordData.records[j].score.ToString("0000000"));
+                    }
+
+                    // I) 서버에 달성도 기록이 있고, 로컬에도 달성도 기록이 있음
+                    if(PlayerPrefs.HasKey("SongProgress" + song[i].songName + "Hard" + song[i].songHardDifficulty))
+                    {
+                        if(PlayerPrefs.GetString("SongProgress" + song[i].songName + "Hard" + song[i].songHardDifficulty) == "SongProgressImageClear")
+                        {
+                            if(recordData.records[j].progress == "FullCombo")
+                            {
+                                PlayerPrefs.SetString("SongProgress" + song[i].songName + "Hard" + song[i].songHardDifficulty, "SongProgressImageFullCombo");
+                            }
+                            else if(recordData.records[j].progress == "AllAlive")
+                            {
+                                PlayerPrefs.SetString("SongProgress" + song[i].songName + "Hard" + song[i].songHardDifficulty, "SongProgressImageAllAlive");
+                            }
+                        }
+                        else if(PlayerPrefs.GetString("SongProgress" + song[i].songName + "Hard" + song[i].songHardDifficulty) == "SongProgressImageFullCombo")
+                        {
+                            Debug.Log("good1");
+                            if(recordData.records[j].progress == "AllAlive")
+                            {
+                                PlayerPrefs.SetString("SongProgress" + song[i].songName + "Hard" + song[i].songHardDifficulty, "SongProgressImageAllAlive");
+                            }
+                        }
+                    }
+
+                    // II) 서버에 달성도 기록이 있고, 로컬에는 달성도 기록이 없음
+                    else
+                    {
+                        if(recordData.records[j].progress == "Clear")
+                        {
+                            PlayerPrefs.SetString("SongProgress" + song[i].songName + "Hard" + song[i].songHardDifficulty, "SongProgressImageClear");
+                        }
+                        else if(recordData.records[j].progress == "FullCombo")
+                        {
+                            Debug.Log("good2");
+                            PlayerPrefs.SetString("SongProgress" + song[i].songName + "Hard" + song[i].songHardDifficulty, "SongProgressImageFullCombo");
+                        }
+                        else if(recordData.records[j].progress == "AllAlive")
+                        {
+                            PlayerPrefs.SetString("SongProgress" + song[i].songName + "Hard" + song[i].songHardDifficulty, "SongProgressImageAllAlive");
+                        }
+                    }
+                }
+
+                // 서버에 기록이 있음 (서버에 기록이 없다면 아무 일도 일어나지 않음)
+                if(MakeIdWithDifficulty(song[i].id, "Death") == recordData.records[j].songID)
+                {
+                    // i) 서버에 기록이 있고, 로컬에도 기록이 있음
+                    if(PlayerPrefs.HasKey("SongScore" + song[i].songName + "Death" + song[i].songDeathDifficulty))
+                    {
+                        if(recordData.records[j].score >= int.Parse(PlayerPrefs.GetString("SongScore" + song[i].songName + "Death" + song[i].songDeathDifficulty)))
+                        {
+                            PlayerPrefs.SetString("SongScore" + song[i].songName + "Death" + song[i].songDeathDifficulty, recordData.records[j].score.ToString("0000000"));
+                        }
+                    }
+
+                    // ii) 서버에 기록이 있고, 로컬에는 기록이 없음
+                    else
+                    {
+                        PlayerPrefs.SetString("SongScore" + song[i].songName + "Death" + song[i].songDeathDifficulty, recordData.records[j].score.ToString("0000000"));
+                    }
+
+                    // I) 서버에 달성도 기록이 있고, 로컬에도 달성도 기록이 있음
+                    if(PlayerPrefs.HasKey("SongProgress" + song[i].songName + "Death" + song[i].songDeathDifficulty))
+                    {
+                        if(PlayerPrefs.GetString("SongProgress" + song[i].songName + "Death" + song[i].songDeathDifficulty) == "SongProgressImageClear")
+                        {
+                            if(recordData.records[j].progress == "FullCombo")
+                            {
+                                PlayerPrefs.SetString("SongProgress" + song[i].songName + "Death" + song[i].songDeathDifficulty, "SongProgressImageFullCombo");
+                            }
+                            else if(recordData.records[j].progress == "AllAlive")
+                            {
+                                PlayerPrefs.SetString("SongProgress" + song[i].songName + "Death" + song[i].songDeathDifficulty, "SongProgressImageAllAlive");
+                            }
+                        }
+                        else if(PlayerPrefs.GetString("SongProgress" + song[i].songName + "Death" + song[i].songDeathDifficulty) == "SongProgressImageFullCombo")
+                        {
+                            if(recordData.records[j].progress == "AllAlive")
+                            {
+                                PlayerPrefs.SetString("SongProgress" + song[i].songName + "Death" + song[i].songDeathDifficulty, "SongProgressImageAllAlive");
+                            }
+                        }
+                    }
+
+                    // II) 서버에 달성도 기록이 있고, 로컬에는 달성도 기록이 없음
+                    else
+                    {
+                        if(recordData.records[j].progress == "Clear")
+                        {
+                            PlayerPrefs.SetString("SongProgress" + song[i].songName + "Death" + song[i].songDeathDifficulty, "SongProgressImageClear");
+                        }
+                        else if(recordData.records[j].progress == "FullCombo")
+                        {
+                            PlayerPrefs.SetString("SongProgress" + song[i].songName + "Death" + song[i].songDeathDifficulty, "SongProgressImageFullCombo");
+                        }
+                        else if(recordData.records[j].progress == "AllAlive")
+                        {
+                            PlayerPrefs.SetString("SongProgress" + song[i].songName + "Death" + song[i].songDeathDifficulty, "SongProgressImageAllAlive");
+                        }
+                    }
+                }
+            }
+        }
+
+        
+        
+        
+    }
+
+    
 }

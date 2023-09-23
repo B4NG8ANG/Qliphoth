@@ -122,7 +122,11 @@ public class ResultManager : MonoBehaviour
             Debug.Log(float.Parse(PlayerPrefs.GetString("SongScore" + songName + resultDifficulty)));
             resultHighScore.SetActive(true);
 
-            if(AuthManager.Instance.isLogIn) StartCoroutine(UnityWebRequestGET(song.id, resultDifficulty, resultScore, progress));
+            if(AuthManager.Instance.isLogIn)
+            {
+                Debug.Log("로그인 됨");
+                StartCoroutine(UnityWebRequestGET(song.id, resultDifficulty, resultScore, progress));
+            }
         }
         
         
@@ -160,7 +164,7 @@ public class ResultManager : MonoBehaviour
         
     }
 
-    // 곡 랭크 이미지랑 곡 달성도 이미지 저장 필요
+    // 서버에 플레이 기록 저장
     IEnumerator UnityWebRequestGET(string songid, string difi, float resultScore, string progress){
     
         string difficulty = "";

@@ -4,6 +4,7 @@ using UnityEngine;
 using Firebase.Auth;
 using System;
 using UnityEngine.Networking;
+using System.Threading.Tasks;
 
 public class AuthManager
 {
@@ -32,14 +33,15 @@ public class AuthManager
         StaticCoroutine.DoCoroutine(UnityWebRequestPOST(user_id,nickname));
     }
 
-    public async void Create(string email, string password, string nickname){
+    public async Task<int> Create(string email, string password, string nickname){
         // Test();
         if(password.Length < 6){
             Debug.Log("비밀번호를 최소 6자리로 설정 해주세요");
+            return 1;
         }
         if(nickname == ""){ 
             Debug.Log("닉네임을 설정해주세요");
-            return;
+            return 2;
         }
 
         try
@@ -51,20 +53,27 @@ public class AuthManager
                 DisplayName = nickname,
                 // PhotoUrl = new System.Uri("https://example.com/jane-q-user/profile.jpg"),
             };
-            await user.UpdateUserProfileAsync(profile).ContinueWith(task => {
+            int errorCode =  await user.UpdateUserProfileAsync(profile).ContinueWith(task => {
                 if (task.IsCanceled) {
+                    //회원가입이 취소 됐을때
                     Debug.LogError("UpdateUserProfileAsync was canceled.");
-                    return;
+                    return 3;
                 }
                 if (task.IsFaulted) {
+                    // 회원가입이 실패 했을때
                     Debug.LogError("UpdateUserProfileAsync encountered an error: " + task.Exception);
-                    return;
+                    return 4;
                 }
 
                 Debug.Log("User profile updated successfully.");
-                
+                return 0;
                 
             });
+
+            if (errorCode > 0)
+            {
+                return errorCode;
+            }
 
             RegisterInDB(user.UserId, nickname);
             isCheckNickname = false;
@@ -72,8 +81,11 @@ public class AuthManager
         catch (System.Exception)
         {
             Debug.LogError("회원가입을 취소하거나 실패하였습니다");
-            throw;
+            //throw;
+            return 6;
         }
+
+        return 0;
         
     }
     // Update is called once per frame
@@ -118,19 +130,21 @@ public class AuthManager
         auth.SignOut();
     }
 
-    public void LogIn(string email, string password){
-        auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWith(task => {
+    public async Task<int> LogIn(string email, string password){
+        return await auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWith(task => {
             if(task.IsCanceled){
                 Debug.Log("로그인 취소");
-                return;
+                return 1;
             }
             if(task.IsFaulted){
                 Debug.Log("로그인 실패");
-                return;
+                return 1;
             }
 
             AuthResult result = task.Result;
             FirebaseUser newuser = result.User;
+
+            return 0;
         });
     }
 
