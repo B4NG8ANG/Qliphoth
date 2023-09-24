@@ -27,6 +27,18 @@ public class LoginSystem : MonoBehaviour
     public GameObject authPanel;
     public GameObject logoImage;
     public GameObject authButton;
+
+    // 회원가입 경고 텍스트 오브젝트
+    public GameObject signUpWarningText;
+    public GameObject signUpEmailWarningText;
+    public GameObject signUpPasswordWarningText;
+    public GameObject signUpUsernameWarningText;
+
+    // 로그인 경고 텍스트 오브젝트
+    public GameObject loginWarningText;
+    // public GameObject signUpEmailWarningText;
+    // public GameObject signUpPasswordWarningText;
+    // public GameObject signUpUsernameWarningText;
     
     
     // public TMP_Text outputText;
@@ -80,6 +92,60 @@ public class LoginSystem : MonoBehaviour
                 loginPasswordObject.SetActive(true);
                 signUpButton.SetActive(false);
             }
+
+            else if(await Create() == 1)
+            {
+                signUpWarningText.SetActive(false);
+                signUpEmailWarningText.SetActive(false);
+                signUpPasswordWarningText.SetActive(true);
+                signUpUsernameWarningText.SetActive(false);
+                signUpPasswordWarningText.GetComponent<Text>().text = "※ 비밀번호를 최소 6자리로 설정 해주세요.";
+            }
+
+            else if(await Create() == 2)
+            {
+                signUpWarningText.SetActive(false);
+                signUpEmailWarningText.SetActive(false);
+                signUpPasswordWarningText.SetActive(false);
+                signUpUsernameWarningText.SetActive(true);
+                signUpUsernameWarningText.GetComponent<Text>().text = "※ 닉네임을 입력 해주세요.";
+            }
+
+            else if(await Create() == 3)
+            {
+                signUpWarningText.SetActive(true);
+                signUpEmailWarningText.SetActive(false);
+                signUpPasswordWarningText.SetActive(false);
+                signUpUsernameWarningText.SetActive(false);
+                signUpWarningText.GetComponent<Text>().text = "※ 회원가입이 취소 되었습니다.";
+            }
+
+            else if(await Create() == 4)
+            {
+                signUpWarningText.SetActive(true);
+                signUpEmailWarningText.SetActive(false);
+                signUpPasswordWarningText.SetActive(false);
+                signUpUsernameWarningText.SetActive(false);
+                signUpWarningText.GetComponent<Text>().text = "※ 회원가입이 실패 하였습니다.";
+            }
+
+            else if(await Create() == 5)
+            {
+                signUpWarningText.SetActive(false);
+                signUpEmailWarningText.SetActive(false);
+                signUpPasswordWarningText.SetActive(false);
+                signUpUsernameWarningText.SetActive(true);
+                signUpUsernameWarningText.GetComponent<Text>().text = "※ 닉네임 중복 체크 해주세요.";
+            }
+
+            else if(await Create() == 6)
+            {
+                signUpWarningText.SetActive(true);
+                signUpEmailWarningText.SetActive(false);
+                signUpPasswordWarningText.SetActive(false);
+                signUpUsernameWarningText.SetActive(false);
+                signUpWarningText.GetComponent<Text>().text = "※ 회원가입 중 에러가 발생하였습니다.";
+            }
             
 
         }    
@@ -103,8 +169,19 @@ public class LoginSystem : MonoBehaviour
                 StartCoroutine(songManager.Instance.loginPlayRecordUpdate());
                 SceneChangeEffectManager.instance.FadeToScene("Main");
             }
-            
-            
+
+            // 로그인 에러 시 화면에 경고 노출
+            else if(await LogIn() == 1)
+            {
+                loginWarningText.SetActive(true);
+                loginWarningText.GetComponent<Text>().text = "※ 로그인이 취소 되었습니다.";
+            }
+
+            else if(await LogIn() == 2)
+            {
+                loginWarningText.SetActive(true);
+                loginWarningText.GetComponent<Text>().text = "※ 로그인에 실패 하였습니다.";
+            }
         }    
     }
 
@@ -131,6 +208,14 @@ public class LoginSystem : MonoBehaviour
             signUpPasswordObject.SetActive(false);
             signUpNicknameObject.SetActive(false);
             signUpNicknameCheckButtonObject.SetActive(false);
+
+            signUpWarningText.SetActive(false);
+            signUpEmailWarningText.SetActive(false);
+            signUpPasswordWarningText.SetActive(false);
+            signUpUsernameWarningText.SetActive(false);
+
+            loginWarningText.SetActive(false);
+
             loginEmailObject.SetActive(false);
             loginPasswordObject.SetActive(false);
             signUpButton.SetActive(true);

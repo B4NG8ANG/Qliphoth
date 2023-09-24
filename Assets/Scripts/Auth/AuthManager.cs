@@ -36,11 +36,11 @@ public class AuthManager
     public async Task<int> Create(string email, string password, string nickname){
         // Test();
         if(password.Length < 6){
-            Debug.Log("비밀번호를 최소 6자리로 설정 해주세요");
+            Debug.Log("※ 비밀번호를 최소 6자리로 설정 해주세요.");
             return 1;
         }
         if(nickname == ""){ 
-            Debug.Log("닉네임을 설정해주세요");
+            Debug.Log("※ 닉네임을 입력 해주세요.");
             return 2;
         }
 
@@ -138,7 +138,7 @@ public class AuthManager
             }
             if(task.IsFaulted){
                 Debug.Log("로그인 실패");
-                return 1;
+                return 2;
             }
 
             AuthResult result = task.Result;
