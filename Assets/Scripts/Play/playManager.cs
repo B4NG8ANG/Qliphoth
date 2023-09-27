@@ -56,6 +56,7 @@ public class playManager : MonoBehaviour
 
     // 노트가 보일 패널
     public GameObject notePanel;
+    public GameObject canvas;
 
     // 밝기를 조절하는데 사용하는 이미지, 해당 이미지의 알파값을 조절할 Color 객체
     public GameObject brightSettingImage;
@@ -165,6 +166,7 @@ public class playManager : MonoBehaviour
             GameObject normalNotesGameObject= Instantiate(normalNote);
             normalNotes[i] = normalNotesGameObject;
             normalNotesGameObject.transform.SetParent(notePanel.transform, false);
+            //normalNotesGameObject.transform.SetParent(canvas.transform, false);
             normalNotesGameObject.SetActive(false);
         }
         

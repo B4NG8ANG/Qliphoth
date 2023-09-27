@@ -57,10 +57,10 @@ public class songManager
         };
 
         Note[] CytusII1Normal1 = new Note[]{
-            new Note("slideNote", "1.0", "(0,100,0)", "0", "false", ""),
-            new Note("slideNote", "2.0", "(1920,100,0)", "1", "false", ""),
-            new Note("slideNote", "3.0", "(200,200,0)", "2", "false", ""),
-            new Note("slideNote", "4.0", "(500,500,0)", "3", "false", "")
+            new Note("slideNote", "1.0", "(960,540,0)", "0", "false", ""),
+            new Note("slideNote", "2.0", "(960,-540,0)", "1", "false", ""),
+            new Note("slideNote", "3.0", "(-960,540,0)", "2", "false", ""),
+            new Note("slideNote", "4.0", "(-960,-540,0)", "3", "false", "")
         };
 
         Note[] CytusII1Hard3 = new Note[]{

@@ -134,10 +134,12 @@ public class AuthManager
         return await auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWith(task => {
             if(task.IsCanceled){
                 Debug.Log("로그인 취소");
+                Debug.Log(task.Exception);
                 return 1;
             }
             if(task.IsFaulted){
                 Debug.Log("로그인 실패");
+                Debug.Log(task.Exception);
                 return 2;
             }
 
