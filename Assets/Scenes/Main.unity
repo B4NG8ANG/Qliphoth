@@ -1965,6 +1965,7 @@ GameObject:
   - component: {fileID: 403190026}
   - component: {fileID: 403190025}
   - component: {fileID: 403190024}
+  - component: {fileID: 403190027}
   m_Layer: 5
   m_Name: SongSelectButtonConversationswithstrangers
   m_TagString: Untagged
@@ -2047,6 +2048,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 403190022}
   m_CullTransparentMesh: 1
+--- !u!114 &403190027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403190022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0def9c4d9569f4bbd814f5b9f33224, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floatSpeed: 1
+  floatRange: 20
 --- !u!1 &412305625
 GameObject:
   m_ObjectHideFlags: 0
@@ -4011,7 +4026,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 540
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -4705,6 +4720,7 @@ GameObject:
   - component: {fileID: 946016280}
   - component: {fileID: 946016279}
   - component: {fileID: 946016278}
+  - component: {fileID: 946016281}
   m_Layer: 5
   m_Name: SongSelectButtonCytusII
   m_TagString: Untagged
@@ -4787,6 +4803,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 946016276}
   m_CullTransparentMesh: 1
+--- !u!114 &946016281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946016276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0def9c4d9569f4bbd814f5b9f33224, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floatSpeed: 1
+  floatRange: 20
 --- !u!1 &948616898
 GameObject:
   m_ObjectHideFlags: 0
@@ -5665,6 +5695,7 @@ GameObject:
   - component: {fileID: 1121642168}
   - component: {fileID: 1121642167}
   - component: {fileID: 1121642170}
+  - component: {fileID: 1121642171}
   m_Layer: 5
   m_Name: SongSelectButtonFractureRay
   m_TagString: Untagged
@@ -5747,6 +5778,20 @@ MonoBehaviour:
   targetImage: {fileID: 354427909}
   moveSpeed: 1000
   targetX: 0
+--- !u!114 &1121642171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1121642164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0def9c4d9569f4bbd814f5b9f33224, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floatSpeed: 1
+  floatRange: 20
 --- !u!1 &1130410425
 GameObject:
   m_ObjectHideFlags: 0
