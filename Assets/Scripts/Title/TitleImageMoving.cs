@@ -42,7 +42,9 @@ public class TitleImageMoving : MonoBehaviour
     {
         // 타이틀 이미지 오브젝트의 초기 위치를 저장합니다.
         initialPosition = transform.position;
-        startTime = Time.time; // 시작 시간을 기록합니다.
+
+        // 시작 시간을 기록합니다.
+        startTime = Time.time;
         image = backgroundFilterImage.GetComponent<Image>(); // Image 컴포넌트를 참조합니다.
 
         audioSource = GetComponent<AudioSource>();
@@ -55,11 +57,9 @@ public class TitleImageMoving : MonoBehaviour
 
     private IEnumerator MoveAndBlink()
     {
-        float elapsedTime = 0f;
-        while (elapsedTime < floatDuration)
+        while (Time.time - startTime < floatDuration)
         {
-            elapsedTime += Time.deltaTime;
-            float normalizedTime = elapsedTime / floatDuration;
+            float normalizedTime = (Time.time - startTime) / floatDuration;
 
             // Lerp를 사용하여 타이틀 이미지 오브젝트를 움직입니다.
             //Vector3 targetPosition = initialPosition + Vector3.up * 15.0f;
@@ -93,11 +93,13 @@ public class TitleImageMoving : MonoBehaviour
         // imageColor.a = 0.0f;
         // image.color = imageColor;
 
+        yield return new WaitForSeconds(0.0f);
+        
         Color imageColor = Color.white;
         imageColor.a = 0.0f;
         image.color = imageColor;
 
-        yield return new WaitForSeconds(0.0f);
+        transform.position = new Vector3(initialPosition.x, 960, initialPosition.z);
 
         // 로고 이미지와 계정 버튼을 활성화 합니다.
         logoImage.SetActive(true);
