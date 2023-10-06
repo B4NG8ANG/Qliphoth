@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class titleManager : MonoBehaviour
 {
-    private AudioSource audioSource;
+    public AudioSource audioSource;
 
     void Start()
     {

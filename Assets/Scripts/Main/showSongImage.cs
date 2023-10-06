@@ -5,6 +5,10 @@ using System.Collections;
 
 public class showSongImage : MonoBehaviour, IPointerClickHandler
 {
+    // 오디오 소스
+    private AudioSource audioSource;
+    public AudioClip clickSound1;
+
     public Image targetImage; // 이동시킬 대상 이미지
     public float moveSpeed; // 이미지 이동 속도
     public float targetX; // 목표 X 좌표
@@ -26,6 +30,9 @@ public class showSongImage : MonoBehaviour, IPointerClickHandler
         // 곡 이미지 움직이는 함수 호출
         if (!isMoving)
         {
+            audioSource = GetComponent<AudioSource>();
+            audioSource.clip = clickSound1;
+            audioSource.Play();
             StartCoroutine(MoveImage());
         }
     }

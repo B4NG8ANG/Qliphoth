@@ -5,9 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class sceneChanger : MonoBehaviour
 {
+    private AudioSource audioSource;
+    public AudioClip clickSound1;
+
     public void onPlayButtonClick()
     {
         //SceneManager.LoadScene("Play");
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = clickSound1;
+        audioSource.Play();
         SceneChangeEffectManager.instance.FadeToScene("Play");
     }
 

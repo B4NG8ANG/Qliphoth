@@ -26,11 +26,17 @@ public class TitleImageMoving : MonoBehaviour
     public GameObject logoImage;
     public GameObject titleAuthButton;
 
-    // 카운트 변수
-    private int count = 0;
-
     // 타이틀 효과 조작 버튼
-    public GameObject titleControlButton; 
+    public GameObject titleControlButton;
+
+    // 타이틀 매니저의 오디오 소스
+    public GameObject titleManager;
+    private AudioSource titleBackgrounndAudioSource;
+
+    // 타이틀 이미지의 오디오 소스
+    private AudioSource audioSource;
+    public AudioClip clickSound1;
+    
 
     private void Start()
     {
@@ -38,6 +44,11 @@ public class TitleImageMoving : MonoBehaviour
         initialPosition = transform.position;
         startTime = Time.time; // 시작 시간을 기록합니다.
         image = backgroundFilterImage.GetComponent<Image>(); // Image 컴포넌트를 참조합니다.
+
+        audioSource = GetComponent<AudioSource>();
+
+        titleManager = GameObject.Find("titleManager");
+        titleBackgrounndAudioSource = titleManager.GetComponent<AudioSource>();
 
         runningCoroutine = StartCoroutine(MoveAndBlink());
     }
@@ -72,15 +83,21 @@ public class TitleImageMoving : MonoBehaviour
         //yield return new WaitForSeconds(floatDuration);
 
         // 필터 이미지를 하얀색으로 변경합니다.
+        // Color imageColor = Color.white;
+        // image.color = imageColor;
+
+        // // 0.5초 대기 후에 투명도를 0으로 만듭니다.
+        // yield return new WaitForSeconds(0.0f);
+
+        // // 필터 이미지의 투명도를 0으로 설정합니다.
+        // imageColor.a = 0.0f;
+        // image.color = imageColor;
+
         Color imageColor = Color.white;
-        image.color = imageColor;
-
-        // 0.5초 대기 후에 투명도를 0으로 만듭니다.
-        yield return new WaitForSeconds(0.4f);
-
-        // 필터 이미지의 투명도를 0으로 설정합니다.
         imageColor.a = 0.0f;
         image.color = imageColor;
+
+        yield return new WaitForSeconds(0.0f);
 
         // 로고 이미지와 계정 버튼을 활성화 합니다.
         logoImage.SetActive(true);
@@ -103,15 +120,19 @@ public class TitleImageMoving : MonoBehaviour
     {
         if(logoImage.activeSelf && titleAuthButton.activeSelf)
         {
+            audioSource.clip = clickSound1;
+            audioSource.Play();
             SceneChangeEffectManager.instance.FadeToScene("Main");
         }
 
         else
         {
             StopRunningCoroutine();
+            titleBackgrounndAudioSource.time = 12.1f;
             StartCoroutine(BlinkAndFadeOut());
         }
     }
+
 
     // private void Update()
     // {
@@ -139,6 +160,6 @@ public class TitleImageMoving : MonoBehaviour
     //     }
     // }
 
-
+    
 }
 
