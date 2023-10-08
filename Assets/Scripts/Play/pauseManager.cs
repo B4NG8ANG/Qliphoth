@@ -21,7 +21,8 @@ public class pauseManager : MonoBehaviour
     {
         pausePanel.SetActive(false);
         Time.timeScale = 1f;
-        SceneManager.LoadScene("Play");
+        //SceneManager.LoadScene("Play");
+        SceneChangeEffectManager.instance.FadeToScene("Play");
     }
 
     public void onContinueButtonClick()
