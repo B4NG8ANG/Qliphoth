@@ -24,7 +24,7 @@ public class songManager
     public void Init()
     {
         // 각 곡과 난이도에 맞는 채보 저장
-        Note[] FractureRay1Normal4 = new Note[]{
+        Note[] High1Normal4 = new Note[]{
             new Note("longNote", "1.0", "(300,300,0)", "0", "false", "1.0"),
             new Note("normalNote", "2.1", "(700,700,0)", "1", "false", ""),
             new Note("normalNote", "2.11", "(800,800,0)", "2", "false", ""),
@@ -35,13 +35,13 @@ public class songManager
             new Note("longNote", "5.0", "(600,600,0)", "7", "false", "5.0")
         };
 
-        Note[] FractureRay1Hard6 = new Note[]{
+        Note[] High1Hard6 = new Note[]{
             new Note("normalNote", "1.0", "(300,300,0)", "0", "false", ""),
             new Note("longNote", "2.0", "(700,700,0)", "1", "false", "2.0"),
             new Note("normalNote", "5.0", "(600,600,0)", "2", "false", "")
         };
 
-        Note[] FractureRay1Death10 = new Note[]{
+        Note[] High1Death10 = new Note[]{
             new Note("normalNote", "1.0", "(0,300,0)", "0", "false", ""),
             new Note("smallNormalNote", "2.0", "(1920,300,0)", "1", "false", ""),
             new Note("slideNote", "3.0", "(100,500,0)", "2", "false", ""),
@@ -56,14 +56,14 @@ public class songManager
             new Note("slideNote", "11.2", "(1000,700,0)", "12", "false", "")
         };
 
-        Note[] CytusII1Normal1 = new Note[]{
+        Note[] TheLight1Normal1 = new Note[]{
             new Note("slideNote", "1.0", "(960,540,0)", "0", "false", ""),
             new Note("slideNote", "2.0", "(960,-540,0)", "1", "false", ""),
             new Note("slideNote", "3.0", "(-960,540,0)", "2", "false", ""),
             new Note("slideNote", "4.0", "(-960,-540,0)", "3", "false", "")
         };
 
-        Note[] CytusII1Hard3 = new Note[]{
+        Note[] TheLight1Hard3 = new Note[]{
             new Note("smallNormalNote", "1.0", "(300,300,0)", "0", "false", ""),
             new Note("bigNormalNote", "5.0", "(600,600,0)", "1", "false", ""),
             new Note("normalNote", "6.0", "(800,800,0)", "2", "false", ""),
@@ -71,28 +71,91 @@ public class songManager
             new Note("normalNote", "8.0", "(800,600,0)", "4", "false", "")
         };
 
-        Note[] CytusII1Death5 = new Note[]{
+        Note[] TheLight1Death5 = new Note[]{
             new Note("slideNote", "1.0", "(300,300,0)", "0", "false", ""),
             new Note("slideNote", "2.0", "(700,700,0)", "1", "false", ""),
             new Note("slideNote", "5.0", "(600,600,0)", "2", "false", ""),
             new Note("slideNote", "7.0", "(600,600,0)", "3", "false", "")
         };
 
-        Note[] Conversationswithstrangers1Normal1 = new Note[]{
+        Note[] TooHotToHandle1Normal1 = new Note[]{
             new Note("slideNote", "1.0", "(300,300,0)", "0", "false", ""),
             new Note("slideNote", "2.0", "(700,700,0)", "1", "false", ""),
             new Note("slideNote", "5.0", "(600,600,0)", "2", "false", ""),
             new Note("slideNote", "7.0", "(600,600,0)", "3", "false", "")
         };
 
-        Note[] Conversationswithstrangers1Hard3 = new Note[]{
+        Note[] TooHotToHandle1Hard3 = new Note[]{
             new Note("slideNote", "1.0", "(300,300,0)", "0", "false", ""),
             new Note("slideNote", "2.0", "(700,700,0)", "1", "false", ""),
             new Note("slideNote", "5.0", "(600,600,0)", "2", "false", ""),
             new Note("slideNote", "7.0", "(600,600,0)", "3", "false", "")
         };
 
-        Note[] Conversationswithstrangers1Death5 = new Note[]{
+        Note[] TooHotToHandle1Death5 = new Note[]{
+            new Note("slideNote", "1.0", "(300,300,0)", "0", "false", ""),
+            new Note("slideNote", "2.0", "(700,700,0)", "1", "false", ""),
+            new Note("slideNote", "5.0", "(600,600,0)", "2", "false", ""),
+            new Note("slideNote", "7.0", "(600,600,0)", "3", "false", "")
+        };
+
+        Note[] YouDidMeWrong1Normal1 = new Note[]{
+            new Note("slideNote", "1.0", "(300,300,0)", "0", "false", ""),
+            new Note("slideNote", "2.0", "(700,700,0)", "1", "false", ""),
+            new Note("slideNote", "5.0", "(600,600,0)", "2", "false", ""),
+            new Note("slideNote", "7.0", "(600,600,0)", "3", "false", "")
+        };
+
+        Note[] YouDidMeWrong1Hard3 = new Note[]{
+            new Note("slideNote", "1.0", "(300,300,0)", "0", "false", ""),
+            new Note("slideNote", "2.0", "(700,700,0)", "1", "false", ""),
+            new Note("slideNote", "5.0", "(600,600,0)", "2", "false", ""),
+            new Note("slideNote", "7.0", "(600,600,0)", "3", "false", "")
+        };
+
+        Note[] YouDidMeWrong1Death5 = new Note[]{
+            new Note("slideNote", "1.0", "(300,300,0)", "0", "false", ""),
+            new Note("slideNote", "2.0", "(700,700,0)", "1", "false", ""),
+            new Note("slideNote", "5.0", "(600,600,0)", "2", "false", ""),
+            new Note("slideNote", "7.0", "(600,600,0)", "3", "false", "")
+        };
+
+        Note[] ADayatSea1Normal1 = new Note[]{
+            new Note("slideNote", "1.0", "(300,300,0)", "0", "false", ""),
+            new Note("slideNote", "2.0", "(700,700,0)", "1", "false", ""),
+            new Note("slideNote", "5.0", "(600,600,0)", "2", "false", ""),
+            new Note("slideNote", "7.0", "(600,600,0)", "3", "false", "")
+        };
+
+        Note[] ADayatSea1Hard3 = new Note[]{
+            new Note("slideNote", "1.0", "(300,300,0)", "0", "false", ""),
+            new Note("slideNote", "2.0", "(700,700,0)", "1", "false", ""),
+            new Note("slideNote", "5.0", "(600,600,0)", "2", "false", ""),
+            new Note("slideNote", "7.0", "(600,600,0)", "3", "false", "")
+        };
+
+        Note[] ADayatSea1Death5 = new Note[]{
+            new Note("slideNote", "1.0", "(300,300,0)", "0", "false", ""),
+            new Note("slideNote", "2.0", "(700,700,0)", "1", "false", ""),
+            new Note("slideNote", "5.0", "(600,600,0)", "2", "false", ""),
+            new Note("slideNote", "7.0", "(600,600,0)", "3", "false", "")
+        };
+
+        Note[] Muffin1Normal1 = new Note[]{
+            new Note("slideNote", "1.0", "(300,300,0)", "0", "false", ""),
+            new Note("slideNote", "2.0", "(700,700,0)", "1", "false", ""),
+            new Note("slideNote", "5.0", "(600,600,0)", "2", "false", ""),
+            new Note("slideNote", "7.0", "(600,600,0)", "3", "false", "")
+        };
+
+        Note[] Muffin1Hard3 = new Note[]{
+            new Note("slideNote", "1.0", "(300,300,0)", "0", "false", ""),
+            new Note("slideNote", "2.0", "(700,700,0)", "1", "false", ""),
+            new Note("slideNote", "5.0", "(600,600,0)", "2", "false", ""),
+            new Note("slideNote", "7.0", "(600,600,0)", "3", "false", "")
+        };
+
+        Note[] Muffin1Death5 = new Note[]{
             new Note("slideNote", "1.0", "(300,300,0)", "0", "false", ""),
             new Note("slideNote", "2.0", "(700,700,0)", "1", "false", ""),
             new Note("slideNote", "5.0", "(600,600,0)", "2", "false", ""),
@@ -101,9 +164,12 @@ public class songManager
 
 
         song = new Song[]{
-            new Song("0", "Fracture Ray", "Sakuzyo", 4, 6, 10, FractureRay1Normal4, FractureRay1Hard6, FractureRay1Death10),
-            new Song("1", "Cytus II", "Cytus II", 1, 3, 5, CytusII1Normal1, CytusII1Hard3, CytusII1Death5),
-            new Song("2", "Conversations with strangers", "Caitlin Cook", 1, 3, 5, Conversationswithstrangers1Normal1, Conversationswithstrangers1Hard3, Conversationswithstrangers1Death5)
+            new Song("0", "High", "JPB", 4, 6, 10, High1Normal4, High1Hard6, High1Death10),
+            new Song("1", "The Light", "Tetrix Bass Feat. Veela", 1, 3, 5, TheLight1Normal1, TheLight1Hard3, TheLight1Death5),
+            new Song("2", "Too Hot To Handle", "Fiko & BLUK", 1, 3, 5, TooHotToHandle1Normal1, TooHotToHandle1Hard3, TooHotToHandle1Death5),
+            new Song("3", "You Did Me Wrong", "Cajama", 1, 3, 5, YouDidMeWrong1Normal1, YouDidMeWrong1Hard3, YouDidMeWrong1Death5),
+            new Song("4", "A Day at Sea", "Everen Maxwell", 1, 3, 5, ADayatSea1Normal1, ADayatSea1Hard3, ADayatSea1Death5),
+            new Song("5", "Muffin", "Raven & Kreyn", 1, 3, 5,Muffin1Normal1, Muffin1Hard3, Muffin1Death5)
         };
     }
 

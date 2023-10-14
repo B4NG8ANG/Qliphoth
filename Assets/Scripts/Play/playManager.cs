@@ -166,7 +166,6 @@ public class playManager : MonoBehaviour
             GameObject normalNotesGameObject= Instantiate(normalNote);
             normalNotes[i] = normalNotesGameObject;
             normalNotesGameObject.transform.SetParent(notePanel.transform, false);
-            //normalNotesGameObject.transform.SetParent(canvas.transform, false);
             normalNotesGameObject.SetActive(false);
         }
         
