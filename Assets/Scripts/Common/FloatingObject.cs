@@ -10,10 +10,12 @@ public class FloatingObject : MonoBehaviour
     private Vector3 initialPosition;
     private float timeOffset;
 
+    private bool isDown = false;
+    private float distance = 0f;
     private void Start()
     {
         // 오브젝트의 초기 위치를 저장합니다.
-        initialPosition = transform.position;
+        initialPosition = transform.localPosition;
 
         // 랜덤한 시작 시간 오프셋을 생성합니다.
         //timeOffset = Random.Range(0f, 2f * Mathf.PI);
@@ -21,10 +23,21 @@ public class FloatingObject : MonoBehaviour
         timeOffset = 0f;
     }
 
-    private void Update()
-    {
-        // 오브젝트를 위아래로 움직이는 로직을 구현합니다.
-        float newYPosition = initialPosition.y + Mathf.Sin((Time.time + timeOffset) * floatSpeed) * floatRange;
-        transform.position = new Vector3(transform.position.x, newYPosition, transform.position.z);
+    private void FixedUpdate() {
+        
+    
+        //움직이는 속도
+        if(isDown){
+            distance -= 0.01f; //아래로 움직이는 속도 (0.001f)
+        }else{
+            distance += 0.01f; //위로 움직이는 속도 (0.001f)
+        }
+
+        //범위
+        if(distance <= -0.4f) isDown = false; //최대 아래 범위 (0.1f)
+        else if(distance >= 0.4f) isDown = true; //최대 위 범위 (0.1f)
+
+        initialPosition.y = initialPosition.y - distance;
+        transform.transform.localPosition = initialPosition;
     }
 }

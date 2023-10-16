@@ -142,10 +142,17 @@ public class songManager
         };
 
         Note[] Muffin1Normal1 = new Note[]{
-            new Note("slideNote", "1.0", "(300,300,0)", "0", "false", ""),
-            new Note("slideNote", "2.0", "(700,700,0)", "1", "false", ""),
-            new Note("slideNote", "5.0", "(600,600,0)", "2", "false", ""),
-            new Note("slideNote", "7.0", "(600,600,0)", "3", "false", "")
+            new Note("smallNormalNote","1.00","(-454,186,0)","0","false","0.0"),
+            new Note("smallNormalNote","1.36","(-454,186,0)","1","false","0.0"),
+            new Note("normalNote","2.11","(-90,213,0)","2","false","0.0"),
+            new Note("bigNormalNote","3.38","(574,136,0)","3","false","0.0"),
+            new Note("slideNote","4.70","(-690,-69,0)","4","false","0.0"),
+            new Note("slideNote","5.49","(-180,-92,0)","5","false","0.0"),
+            new Note("slideNote","6.16","(499,-142,0)","6","false","0.0"),
+            new Note("longNote","7.79","(-655,268,0)","7","false","2.0"),
+            new Note("longNote","10.11","(49,329,0)","8","false","2.0"),
+            new Note("longNote","12.44","(508,-62,0)","9","false","2.0"),
+            new Note("longNote","14.81","(-537,-219,0)","10","false","5.0")
         };
 
         Note[] Muffin1Hard3 = new Note[]{
