@@ -158,17 +158,17 @@ public class LongNoteJudgementManager : MonoBehaviour, IPointerDownHandler, IPoi
         touchElapsedTime = Time.time - startTime;
         touched = true;
 
-        if(touchElapsedTime < 0.45f)
+        if(touchElapsedTime < 0.4f)
         {
             longNoteJudgement = "Early Choice";
             noteEffectFirst.SetActive(true);
         }
-        else if(touchElapsedTime >= 0.45f && touchElapsedTime <= 0.55f)
+        else if(touchElapsedTime >= 0.4f && touchElapsedTime <= 0.6f)
         {
             longNoteJudgement = "Alive";
             noteEffectFirst.SetActive(true);
         }
-        else if(touchElapsedTime > 0.55f) // && touchElapsedTime <= 0.8f)
+        else if(touchElapsedTime > 0.6f) // && touchElapsedTime <= 0.8f)
         {
             longNoteJudgement = "Late Choice";
             noteEffectFirst.SetActive(true);

@@ -113,7 +113,7 @@ public class SlideNoteJudgementManager : MonoBehaviour, IPointerExitHandler
         touched = true;
         float touchElapsedTime = Time.time - startTime;
 
-        if(touchElapsedTime < 0.45f)
+        if(touchElapsedTime < 0.4f)
         {
             playManagerScript.AddCombo(true);
             playManagerScript.CountJudgement("early");
@@ -122,7 +122,7 @@ public class SlideNoteJudgementManager : MonoBehaviour, IPointerExitHandler
             noteEffect.SetActive(true);
             judgementImageEarly.SetActive(true);
         }
-        else if(touchElapsedTime >= 0.45f && touchElapsedTime <= 0.55f)
+        else if(touchElapsedTime >= 0.4f && touchElapsedTime <= 0.6f)
         {
             playManagerScript.AddCombo(true);
             playManagerScript.CountJudgement("alive");
@@ -131,7 +131,7 @@ public class SlideNoteJudgementManager : MonoBehaviour, IPointerExitHandler
             noteEffect.SetActive(true);
             judgementImageAlive.SetActive(true);
         }
-        else if(touchElapsedTime > 0.55f ) // && touchElapsedTime <= 0.8f)
+        else if(touchElapsedTime > 0.6f ) // && touchElapsedTime <= 0.8f)
         {
             playManagerScript.AddCombo(true);
             playManagerScript.CountJudgement("late");
