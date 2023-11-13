@@ -4,9 +4,16 @@
 ## 프로젝트 소개
 Unity 및 C#으로 제작한 모바일 2D 리듬게임입니다.
 
-![2](https://github.com/B4NG8ANG/Qliphoth/assets/50348034/89daa958-63df-4a53-aa31-1ed0a0e73b92)
+![image](https://github.com/B4NG8ANG/Qliphoth/assets/50348034/37df00bb-e675-43d7-bd5c-8c9008bf4037)
 
-![1](https://github.com/B4NG8ANG/Qliphoth/assets/50348034/880632b4-013c-45d1-b22f-0179583d7a44)
+![image](https://github.com/B4NG8ANG/Qliphoth/assets/50348034/906cee59-bae7-405f-892f-000e54b0ec35)
+
+![qwer](https://github.com/B4NG8ANG/Qliphoth/assets/50348034/cddce575-57bd-4a77-8baf-28023b36eeff)
+
+![image](https://github.com/B4NG8ANG/Qliphoth/assets/50348034/a9d0fe70-5cac-4112-9c2d-8f9f2d5180a5)
+
+![image](https://github.com/B4NG8ANG/Qliphoth/assets/50348034/f6905631-454b-4b95-a8a2-3e6317f46f28)
+
 
 
 ## 개발 기간
@@ -19,7 +26,8 @@ Unity 및 C#으로 제작한 모바일 2D 리듬게임입니다.
 
 ## 개발 환경
 - `Unity`
-- `C#`
+- `C#` `JavaScript`
+- Editor: VS Code
 - Server Machine: Raspberry Pie 4
 - Database: Sqlite3
 - Cooperation Tool: Git & Github Desktop
@@ -32,5 +40,6 @@ Unity 및 C#으로 제작한 모바일 2D 리듬게임입니다.
 - 멀티스레드: 게임 플레이 중 노트 오브젝트가 동시에 2개 이상 나타나야 할 때 이를 정확한 타이밍에 실행 될 수 있도록 코루틴을 사용. 그리고 서버와의 HTTP 통신에도 코루틴을 사용
 - 플레이 기록 저장: 게임 플레이 종료 후 서버와 통신하여 서버에 구동 중인 데이터베이스에 기록 저장
 - 점수 랭킹: 데이터베이스에 저장된 정보를 클라이언트로 받아오기 위해 서버와 HTTP 통신하여 JSON 형식의 유저, 점수 데이터를 받아온 뒤 JsonUtility의 FromJson을 사용하여 클래스로 파싱. 이후 해당 데이터를 클라이언트의 랭킹 창에 표시
-- 플레이 기록 로컬 저장:  PlayerPrefs를 사용하여 곡 이름, 난이도 등의 문자열 조합으로 이루어진 키 값에 플레이어가 받은 점수를 문자열로 매칭시킨 뒤, 클라이언트에서 플레이어가 받은 점수를 표시해야 할 부분에 해당 키를 호출하여 값을 표시 
+- 플레이 기록 로컬 저장:  PlayerPrefs를 사용하여 곡 이름, 난이도 등의 문자열 조합으로 이루어진 키 값에 플레이어가 받은 점수를 문자열로 매칭시킨 뒤, 클라이언트에서 플레이어가 받은 점수를 표시해야 할 부분에 해당 키를 호출하여 값을 표시
+- 패턴 에디터: JavaScript를 이용하여 웹페이지 형식의 패턴 에디터 구현. 노래 재생, 노트 생성, 노트 위치 및 시간 변경 등의 기능 수행 가능. 완성된 패턴은 코드로 추출하여 클라이언트에 삽입 가능
 
